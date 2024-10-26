@@ -1,6 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "app_name": "next-starter",
+  "app_name": "JFP",
   "sign_in": "Zaloguj się",
   "theme_toggle_label": "zmień motyw",
   "my_account": "Moje konto",
@@ -24,5 +24,6 @@
   "nextjs_starter_template_headline": "Next.js starter template",
   "nextjs_starter_template_description": "Szablon startowy Next.js, wyposażony w funkcje takie jak TypeScript, Tailwind CSS, Next-auth, Eslint, Stripe, Paraglide, narzędzia testowe i nie tylko. Rozpocznij swój projekt z wydajnością i stylem.",
   "get_started": "Zacznij",
-  "github": "Github"
+  "github": "Github",
+  "beneficiaries": "Beneficjary"
 }
