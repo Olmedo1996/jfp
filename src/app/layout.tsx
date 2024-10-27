@@ -5,7 +5,6 @@ import { LanguageProvider } from '@inlang/paraglide-next';
 import type { Metadata } from 'next';
 
 import { Footer } from '@/components/footer';
-import { Navbar } from '@/components/navbar/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Toaster } from '@/components/ui/toaster';
@@ -54,7 +53,6 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <html lang={languageTag()} suppressHydrationWarning>
         <body className={cn('min-h-screen font-sans', fonts)}>
           <ThemeProvider attribute="class">
-            <Navbar />
             {children}
             <ThemeSwitcher className="absolute bottom-5 right-5 z-10" />
             <Footer />
