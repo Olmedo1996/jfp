@@ -1,47 +1,70 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import type { NextAuthOptions } from 'next-auth';
-import GitHubProvider from 'next-auth/providers/github';
+import { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { env } from '@/env.mjs';
-import prisma from '@/lib/prisma';
-import { stripeServer } from '@/lib/stripe';
+import { authService } from '@/modules/auth/services/auth.service';
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
-    GitHubProvider({
-      clientId: env.GITHUB_ID,
-      clientSecret: env.GITHUB_SECRET,
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        const data = await authService.login(
+          credentials?.username || '',
+          credentials?.password || ''
+        );
+        if (data?.access) {
+          return {
+            id: data.tutor.id.toString(),
+            name: data.tutor.user.username,
+            accessToken: data.access,
+            refreshToken: data.refresh,
+          };
+        }
+        throw new Error('Invalid credentials');
+      },
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      if (!session.user) return session;
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.refreshToken = user.refreshToken;
+        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 1 día
+      }
 
-      session.user.id = user.id;
-      session.user.stripeCustomerId = user.stripeCustomerId;
-      session.user.isActive = user.isActive;
+      if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
+        return token;
+      }
+
+      // Refrescar token si está expirado
+      try {
+        const refreshed = await authService.refresh(token.refreshToken || '');
+        token.accessToken = refreshed.access;
+        token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000;
+        return token;
+      } catch (error) {
+        console.log(error);
+        token.error = 'RefreshAccessTokenError';
+        return token;
+      }
+    },
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.error = token.error;
 
       return session;
     },
   },
-  events: {
-    createUser: async ({ user }) => {
-      if (!user.email || !user.name) return;
-
-      await stripeServer.customers
-        .create({
-          email: user.email,
-          name: user.name,
-        })
-        .then(async (customer) => {
-          return prisma.user.update({
-            where: { id: user.id },
-            data: {
-              stripeCustomerId: customer.id,
-            },
-          });
-        });
-    },
+  pages: {
+    signIn: '/login',
   },
+  session: {
+    strategy: 'jwt',
+  },
+  debug: true,
 };

@@ -2,14 +2,24 @@ import { DefaultUser } from 'next-auth';
 
 declare module 'next-auth' {
   interface Session {
-    user?: DefaultUser & {
-      id: string;
-      stripeCustomerId: string;
-      isActive: boolean;
+    user: {
+      accessToken?: string;
+      refreshToken?: string;
+      name?: string | null;
     };
+    error?: string;
   }
   interface User extends DefaultUser {
-    stripeCustomerId: string;
-    isActive: boolean;
+    accessToken?: string;
+    refreshToken?: string;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    accessToken?: string;
+    refreshToken?: string;
+    accessTokenExpires?: number;
+    error?: string;
   }
 }
