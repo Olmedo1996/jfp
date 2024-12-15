@@ -1,15 +1,14 @@
-import { BeneficiariesForm } from '@/modules/beneficiaries/ui/beneficiaries-form';
+import { BusinessesForm } from '@/modules/businesses/ui/components/businesses-form';
 
 const Page = () => {
   return (
     <>
-      <BeneficiariesForm></BeneficiariesForm>
+      <BusinessesForm></BusinessesForm>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />
       </div>
-      <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" />
     </>
   );
 };

@@ -25,5 +25,9 @@
     "nextjs_starter_template_description": "Una plantilla inicial de Next.js, repleta de funciones como TypeScript, Tailwind CSS, Next-auth, Eslint, Stripe, Paraglide, herramientas de prueba y más. Impulsa tu proyecto con eficiencia y estilo.",
     "get_started": "Get Started",
     "github": "Github",
-    "beneficiaries": "Beneficiarios"
+    "beneficiaries": "Beneficiarios",
+    "tutors": "Tutores",
+    "businesses": "Empresas",
+    "activities": "Actividades",
+    "attendances": "Asistencia"
 }
