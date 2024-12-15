@@ -1,3 +1,5 @@
+// import { setCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -16,7 +18,22 @@ export const authOptions: NextAuthOptions = {
           credentials?.username || '',
           credentials?.password || ''
         );
+        const cookieStore = await cookies();
         if (data?.access) {
+          // Almacenar tokens en cookies
+          cookieStore.set('access_token', data.access, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24, // 1 día
+          });
+
+          cookieStore.set('refresh_token', data.refresh, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24 * 7, // 7 días
+          });
           return {
             id: data.tutor.id.toString(),
             name: data.tutor.user.username,
@@ -39,10 +56,19 @@ export const authOptions: NextAuthOptions = {
       if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
         return token;
       }
+      const cookieStore = await cookies();
 
       // Refrescar token si está expirado
       try {
         const refreshed = await authService.refresh(token.refreshToken || '');
+        // Actualizar cookies
+        cookieStore.set('access_token', refreshed.access, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+          maxAge: 60 * 60 * 24, // 1 día
+        });
+
         token.accessToken = refreshed.access;
         token.accessTokenExpires = Date.now() + 24 * 60 * 60 * 1000;
         return token;
