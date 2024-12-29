@@ -112,7 +112,7 @@ export function BusinessesForm() {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit">REGISTRAR</Button>
           {/* <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="ruc_ci">RUC/CI</Label>
             <Input
