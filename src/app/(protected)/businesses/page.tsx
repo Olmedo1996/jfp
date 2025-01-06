@@ -15,7 +15,7 @@ const Page = () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1>{m.beneficiaries()}</h1>
+        <h1>{m.businesses()}</h1>
         <Link href={'/businesses/new'}>
           <Button variant={'default'}>NUEVO</Button>
         </Link>
