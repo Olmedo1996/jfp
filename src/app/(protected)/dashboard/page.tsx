@@ -8,10 +8,14 @@ const Page = () => {
   const [tutors, setTutors] = useState([]);
 
   const getTutors = async () => {
-    const response = await api.get('beneficiaries/');
-    const data = await response.data;
-    setTutors(data);
-    return data;
+    try {
+      const response = await api.get('beneficiaries/');
+      const data = await response.data;
+      setTutors(data);
+    } catch (error) {
+      console.log(error);
+      setTutors([]);
+    }
   };
 
   useEffect(() => {

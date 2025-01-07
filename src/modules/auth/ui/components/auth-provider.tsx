@@ -1,18 +1,23 @@
 'use client';
 import React, { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 type AuthProviderProps = {
   children: React.ReactNode;
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { data } = useSession();
+  const session = useSession();
   useEffect(() => {
-    if (data) {
-      console.log(data);
+    console.log(session.data);
+
+    if (
+      session.data?.error === 'TokenExpiredError' ||
+      session.data?.error === 'RefreshAccessTokenError'
+    ) {
+      signOut();
     }
-  });
+  }, [session.data?.error]);
   return <>{children}</>;
 };
 

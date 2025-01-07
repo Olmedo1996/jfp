@@ -21,7 +21,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 
-const ProtectedLayout = ({ children }: PropsWithChildren) => {
+const ProtectedLayout = async ({ children }: PropsWithChildren) => {
   return (
     <Providers>
       <SidebarProvider>

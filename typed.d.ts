@@ -6,12 +6,16 @@ declare module 'next-auth' {
       accessToken?: string;
       refreshToken?: string;
       name?: string | null;
+      email?: string | null;
     };
-    error?: string;
+    error?: 'RefreshAccessTokenError' | 'TokenExpiredError' | string;
   }
+
   interface User extends DefaultUser {
     accessToken?: string;
     refreshToken?: string;
+    accessTokenExpires?: number;
+    email?: string;
   }
 }
 
@@ -20,6 +24,6 @@ declare module 'next-auth/jwt' {
     accessToken?: string;
     refreshToken?: string;
     accessTokenExpires?: number;
-    error?: string;
+    error?: 'RefreshAccessTokenError' | 'TokenExpiredError' | string;
   }
 }
