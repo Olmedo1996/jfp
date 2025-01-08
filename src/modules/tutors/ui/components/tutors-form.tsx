@@ -1,13 +1,9 @@
 'use client';
 
-import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-
-import { BusinessModel } from '../../core/models/business.model';
-import useCreateBusiness from '../hooks/use-create-business';
+import { TutorModel } from '../../core/models/tutor.model';
+import useCreateBusiness from '../hooks/use-create-tutor';
 
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Form,
   FormControl,
@@ -18,19 +14,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
 
 export function TutorsForm() {
   const { methods, handleSubmit } = useCreateBusiness();
 
-  function onSubmit(values: BusinessModel) {
+  function onSubmit(values: TutorModel) {
     handleSubmit(values);
   }
 
@@ -72,7 +62,11 @@ export function TutorsForm() {
               <FormItem>
                 <FormLabel>Correo electrónico</FormLabel>
                 <FormControl>
-                  <Input placeholder="juan.perez@gmail.com" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="juan.perez@gmail.com"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -97,37 +91,9 @@ export function TutorsForm() {
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Fecha de Nacimiento</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={'outline'}
-                        className={cn(
-                          'pl-3 text-left font-normal',
-                          !field.value && 'text-muted-foreground'
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, 'PPP')
-                        ) : (
-                          <span>Seleccione una fecha</span>
-                        )}
-                        <CalendarIcon className="ml-auto size-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date('1900-01-01')
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                <FormControl>
+                  <Input type="date" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -194,7 +160,7 @@ export function TutorsForm() {
           </legend>
           <FormField
             control={methods.control}
-            name="phone"
+            name="username"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
@@ -207,12 +173,25 @@ export function TutorsForm() {
           />
           <FormField
             control={methods.control}
-            name="phone"
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <Input placeholder="************" {...field} />
+                  <Input type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={methods.control}
+            name="password_confirmation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirmar contraseña</FormLabel>
+                <FormControl>
+                  <Input type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
