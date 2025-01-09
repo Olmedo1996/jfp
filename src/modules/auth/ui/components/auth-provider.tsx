@@ -9,8 +9,6 @@ type AuthProviderProps = {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const session = useSession();
   useEffect(() => {
-    console.log(session.data);
-
     if (
       session.data?.error === 'TokenExpiredError' ||
       session.data?.error === 'RefreshAccessTokenError'
