@@ -1,7 +1,7 @@
 import { GenericRequestParams } from '@/interface/request-api-params';
 import { IResponseApiListViewGet } from '@/interface/response-api-get';
 
-export interface Result {
+export interface TutorResult {
   id: number;
   user: User;
   dni: string;
@@ -22,6 +22,6 @@ export interface User {
   last_name: string;
 }
 
-export type ApiTutorResponse = IResponseApiListViewGet<Result>;
+export type ApiTutorResponse = IResponseApiListViewGet<TutorResult>;
 
 export type ApiTutorRequestParams = GenericRequestParams;

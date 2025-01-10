@@ -1,27 +1,24 @@
 'use client';
 
-import React from 'react';
+import { useColumnsTutors } from '../hooks/columns/use-columns-tutors';
+import { useTutorsTable } from '../hooks/table/use-tutors-table';
 
-import { Tutor, useColumnsTutors } from '../hooks/use-columns-tutors';
-
-import { DataTable } from '@/components/tables/data-table';
+import { GenericTable } from '@/components/tables/generic-table';
 
 const TutorsTable = () => {
   const columns = useColumnsTutors();
-
-  const data: Tutor[] = [
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-  ];
+  const { data, isLoading, error, handleSearch } = useTutorsTable();
 
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <GenericTable
+      data={data}
+      columns={columns}
+      isLoading={isLoading}
+      error={error}
+      onSearch={handleSearch}
+      createUrl="/tutors/new"
+      title="Tutores"
+    />
   );
 };
 

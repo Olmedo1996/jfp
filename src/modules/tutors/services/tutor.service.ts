@@ -12,7 +12,7 @@ export const tutorService = {
     return response.data;
   },
 
-  async listView(params: ApiTutorRequestParams): Promise<ApiTutorResponse> {
+  async listView(params?: ApiTutorRequestParams): Promise<ApiTutorResponse> {
     const response = await api.get<ApiTutorResponse>(`tutors/`, { params });
     return response.data;
   },

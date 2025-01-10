@@ -5,6 +5,7 @@ import { LanguageProvider } from '@inlang/paraglide-next';
 import type { Metadata } from 'next';
 
 import { Footer } from '@/components/footer';
+import { TanstackProvider } from '@/components/providers/tanstack-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Toaster } from '@/components/ui/toaster';
@@ -52,12 +53,14 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <LanguageProvider>
       <html lang={languageTag()} suppressHydrationWarning>
         <body className={cn('min-h-screen font-sans', fonts)}>
-          <ThemeProvider attribute="class">
-            {children}
-            <ThemeSwitcher className="absolute bottom-5 right-5 z-10" />
-            <Footer />
-            <Toaster />
-          </ThemeProvider>
+          <TanstackProvider>
+            <ThemeProvider attribute="class">
+              {children}
+              <ThemeSwitcher className="absolute bottom-5 right-5 z-10" />
+              <Footer />
+              <Toaster />
+            </ThemeProvider>
+          </TanstackProvider>
         </body>
       </html>
     </LanguageProvider>
