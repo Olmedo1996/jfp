@@ -42,7 +42,7 @@ const useCreateTutor = () => {
         username: data.username,
       },
     };
-    const response = await tutorService.tutor(params);
+    const response = await tutorService.create(params);
     console.log(response);
   };
 

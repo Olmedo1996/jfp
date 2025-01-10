@@ -1,10 +1,19 @@
 import { ICreateTutor } from '../core/interfaces/tutor.interface';
+import {
+  ApiTutorRequestParams,
+  ApiTutorResponse,
+} from '../core/interfaces/tutor-service.interface';
 
 import { api } from '@/lib/api';
 
 export const tutorService = {
-  async tutor(data: ICreateTutor): Promise<ICreateTutor> {
+  async create(data: ICreateTutor): Promise<ICreateTutor> {
     const response = await api.post<ICreateTutor>(`tutors/`, data);
+    return response.data;
+  },
+
+  async listView(params: ApiTutorRequestParams): Promise<ApiTutorResponse> {
+    const response = await api.get<ApiTutorResponse>(`tutors/`, { params });
     return response.data;
   },
 };
