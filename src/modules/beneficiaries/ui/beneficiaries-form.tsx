@@ -1,6 +1,11 @@
+'use client';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
+/* interface Gender {
+  value: number;
+  label: string;
+} */
 export function BeneficiariesForm() {
   return (
     <>
