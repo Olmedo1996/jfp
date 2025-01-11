@@ -1,10 +1,18 @@
 import { ColumnDef } from '@tanstack/react-table';
+import { MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useRouter } from '@/lib/i18n';
 import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
 import * as m from '@/paraglide/messages';
-
 export function useColumnsTutors(): ColumnDef<TutorResult>[] {
   const router = useRouter();
   return [
@@ -30,18 +38,47 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
     },
     {
       id: 'actions',
-      header: m.tutors_table_actions(),
-      cell: ({ row }) => (
-        <div className="flex gap-2">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => router.push(`/tutors/edit/${row.original.id}`)}
-          >
-            {m.tutors_table_edit()}
-          </Button>
-        </div>
-      ),
+      header: '',
+      cell: ({ row }) => {
+        const tutor = row.original;
+
+        return (
+          <div className="flex gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="size-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreHorizontal className="size-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>
+                  {m.tutors_table_actions()}
+                </DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => router.push(`/tutors/edit/${tutor.id}`)}
+                >
+                  {m.tutors_table_edit()}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() =>
+                    navigator.clipboard.writeText(JSON.stringify(tutor))
+                  }
+                >
+                  {m.tutors_copy_data()}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
+                <DropdownMenuItem>
+                  {m.tutors_view_beneficiary_assignment()}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        );
+      },
     },
   ];
 }

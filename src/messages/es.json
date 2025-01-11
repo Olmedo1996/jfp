@@ -31,6 +31,7 @@
   "attendances": "Asistencia",
 
   "loading": "Cargando...",
+  "delete_data": "Borrar",
 
   "table_next": "Siguiente",
   "table_previous": "Anterior",
@@ -56,5 +57,9 @@
   "tutors_dni": "DNI",
   "tutors_phone": "Teléfono",
   "tutors_specialization": "Especialización",
-  "tutors_search_placeholder": "Buscar tutor..."
+  "tutors_search_placeholder": "Buscar tutor...",
+  "tutors_view_beneficiary_assignment": "Ver beneficiarios asignados",
+  "tutors_view_activity_assignment": "Ver actividades asignadas",
+  "tutors_view_detail": "Ver detalles",
+  "tutors_copy_data": "Copiar datos de tutor"
 }
