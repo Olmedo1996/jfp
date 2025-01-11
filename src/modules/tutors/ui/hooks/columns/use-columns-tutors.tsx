@@ -1,10 +1,12 @@
 import { ColumnDef } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
+import { useRouter } from '@/lib/i18n';
 import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
 import * as m from '@/paraglide/messages';
 
 export function useColumnsTutors(): ColumnDef<TutorResult>[] {
+  const router = useRouter();
   return [
     {
       accessorKey: 'full_name',
@@ -29,9 +31,13 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
     {
       id: 'actions',
       header: m.tutors_table_actions(),
-      cell: () => (
+      cell: ({ row }) => (
         <div className="flex gap-2">
-          <Button size="sm" variant="outline">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => router.push(`/tutors/edit/${row.original.id}`)}
+          >
             {m.tutors_table_edit()}
           </Button>
         </div>

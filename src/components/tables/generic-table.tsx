@@ -1,11 +1,11 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { useRouter } from 'next/navigation';
 
 import { DataTable } from '@/components/tables/data-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useRouter } from '@/lib/i18n';
 import * as m from '@/paraglide/messages';
 import { PaginatedResponse } from '@/types/table.types';
 
