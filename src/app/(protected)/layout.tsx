@@ -4,16 +4,9 @@ import { PropsWithChildren } from 'react';
 
 import Providers from '../provider';
 
+import CustomBreadcrumb from '@/components/breadcrumb-app/breadcrumb';
 import { LanguageSwitcher } from '@/components/navbar/language-switcher';
 import { AppSidebar } from '@/components/sidebar/app-sidebar';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { Separator } from '@/components/ui/separator';
 import {
   SidebarInset,
@@ -31,19 +24,7 @@ const ProtectedLayout = async ({ children }: PropsWithChildren) => {
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">
-                      Building Your Application
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              <CustomBreadcrumb />
             </div>
             <LanguageSwitcher />
           </header>
