@@ -3,17 +3,16 @@
 import * as React from 'react';
 import {
   Apple,
-  AudioWaveform,
   BookOpen,
   Bot,
   Briefcase,
   CalendarPlus,
-  Command,
-  GalleryVerticalEnd,
   Settings2,
   SquareTerminal,
   Users,
 } from 'lucide-react';
+
+import JfpIcon from '../custom-icon/jfp-icon';
 
 import { NavMain } from '@/components/navbar/nav-main';
 import { NavProjects } from '@/components/navbar/nav-projects';
@@ -38,19 +37,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     teams: [
       {
-        name: 'Acme Inc',
-        logo: GalleryVerticalEnd,
-        plan: 'Enterprise',
-      },
-      {
-        name: 'Acme Corp.',
-        logo: AudioWaveform,
-        plan: 'Startup',
-      },
-      {
-        name: 'Evil Corp.',
-        logo: Command,
-        plan: 'Free',
+        name: 'JFP',
+        logo: JfpIcon,
+        plan: 'Jóvenes en formación profesional',
       },
     ],
     navMain: [
