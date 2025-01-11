@@ -31,6 +31,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import { useRouter } from '@/lib/i18n';
 
 export function NavUser({
   user,
@@ -45,11 +46,14 @@ export function NavUser({
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const session = useSession();
+  const router = useRouter();
 
-  const handleLogout = async () => {
+  const handleLogout = async (e: React.MouseEvent) => {
+    e.preventDefault();
     try {
       setIsLoading(true);
-      await signOut({ redirect: true, callbackUrl: '/login' });
+      await signOut({ redirect: false, callbackUrl: '/login' });
+      await router.push('/login');
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
@@ -60,7 +64,11 @@ export function NavUser({
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+        <DropdownMenu
+          open={isDropdownOpen}
+          onOpenChange={setIsDropdownOpen}
+          modal={false}
+        >
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"

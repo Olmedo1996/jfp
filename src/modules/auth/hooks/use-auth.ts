@@ -1,11 +1,19 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-import { LoginSchemaType } from '../core/schema/login.schema';
+import { loginSchema, LoginSchemaType } from '../core/schema/login.schema';
+
+import { useRouter } from '@/lib/i18n';
 
 export const useAuth = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
 
   const login = async (credentials: LoginSchemaType) => {
     setIsLoading(true);
@@ -19,19 +27,29 @@ export const useAuth = () => {
       });
 
       if (result?.error) {
-        setError(result.error);
-        return false;
+        setError('Credenciales inválidas');
+        setIsLoading(false);
+        return;
       }
 
-      return true;
+      router.push(callbackUrl);
+      router.refresh();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      setError('An unexpected error occurred');
-      return false;
-    } finally {
+      setError('Ocurrió un error al intentar iniciar sesión');
       setIsLoading(false);
-    }
+    } /* finally {
+      setIsLoading(false);
+    } */
   };
 
-  return { login, isLoading, error };
+  const methods = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  return { methods, login, isLoading, error };
 };
