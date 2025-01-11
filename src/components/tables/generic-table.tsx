@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { DataTable } from '@/components/tables/data-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import * as m from '@/paraglide/messages';
 import { PaginatedResponse } from '@/types/table.types';
 
 interface GenericTableProps<TData> {
@@ -20,6 +21,7 @@ interface GenericTableProps<TData> {
   pageSize?: number;
   createUrl?: string;
   title: string;
+  searchPlaceholder?: string;
 }
 
 export function GenericTable<TData>({
@@ -34,6 +36,7 @@ export function GenericTable<TData>({
   pageSize = 10,
   createUrl,
   title,
+  searchPlaceholder = m.table_search(),
 }: GenericTableProps<TData>) {
   const router = useRouter();
   const pageCount = data ? Math.ceil(data.count / pageSize) : 0;
@@ -48,13 +51,15 @@ export function GenericTable<TData>({
         <div className="flex gap-4">
           {onSearch && (
             <Input
-              placeholder="Buscar..."
+              placeholder={searchPlaceholder}
               onChange={(e) => onSearch(e.target.value)}
               className="max-w-xs"
             />
           )}
           {createUrl && (
-            <Button onClick={() => router.push(createUrl)}>Crear Nuevo</Button>
+            <Button onClick={() => router.push(createUrl)}>
+              {m.table_create_new()}
+            </Button>
           )}
         </div>
       </div>

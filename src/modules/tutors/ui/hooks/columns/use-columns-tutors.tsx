@@ -2,36 +2,37 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
+import * as m from '@/paraglide/messages';
 
 export function useColumnsTutors(): ColumnDef<TutorResult>[] {
   return [
     {
       accessorKey: 'full_name',
-      header: 'Nombre Completo',
+      header: m.tutors_full_name(),
     },
     {
       accessorKey: 'dni',
-      header: 'DNI',
+      header: m.tutors_dni(),
     },
     {
       accessorKey: 'phone',
-      header: 'Teléfono',
+      header: m.tutors_phone(),
     },
     {
       accessorKey: 'user.email',
-      header: 'Email',
+      header: m.tutors_table_email(),
     },
     {
       accessorKey: 'specialization',
-      header: 'Especialización',
+      header: m.tutors_specialization(),
     },
     {
       id: 'actions',
-      header: 'Acciones',
+      header: m.tutors_table_actions(),
       cell: () => (
         <div className="flex gap-2">
           <Button size="sm" variant="outline">
-            Editar
+            {m.tutors_table_edit()}
           </Button>
         </div>
       ),

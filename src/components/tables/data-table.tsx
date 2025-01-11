@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import * as m from '@/paraglide/messages';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -77,7 +78,7 @@ export function DataTable<TData, TValue>({
                 colSpan={columns.length}
                 className="h-24 animate-pulse text-center"
               >
-                Cargando...
+                {m.loading()}
               </TableCell>
             </TableRow>
           </TableBody>
@@ -119,7 +120,7 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No se encontraron resultados.
+                {m.table_not_found()}
               </TableCell>
             </TableRow>
           )}
@@ -134,12 +135,12 @@ export function DataTable<TData, TValue>({
           >
             {[10, 20, 30, 40, 50].map((size) => (
               <option key={size} value={size}>
-                {size} por página
+                {size} {m.table_per_page()}
               </option>
             ))}
           </select>
           <span className="text-sm text-gray-500">
-            Página {currentPage} de {pageCount}
+            {m.table_page()} {currentPage} {m.table_of()} {pageCount}
           </span>
         </div>
         <div className="flex items-center space-x-2">
@@ -149,7 +150,7 @@ export function DataTable<TData, TValue>({
             onClick={() => onPageChange?.(currentPage - 1)}
             disabled={currentPage <= 1}
           >
-            Anterior
+            {m.table_previous()}
           </Button>
           <Button
             variant="outline"
@@ -157,7 +158,7 @@ export function DataTable<TData, TValue>({
             onClick={() => onPageChange?.(currentPage + 1)}
             disabled={currentPage >= pageCount}
           >
-            Siguiente
+            {m.table_next()}
           </Button>
         </div>
       </div>
