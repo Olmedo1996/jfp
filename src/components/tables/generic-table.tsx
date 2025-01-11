@@ -1,3 +1,5 @@
+'use client';
+
 import { ColumnDef } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
 
@@ -12,6 +14,10 @@ interface GenericTableProps<TData> {
   isLoading: boolean;
   error: Error | null;
   onSearch?: (value: string) => void;
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  currentPage?: number;
+  pageSize?: number;
   createUrl?: string;
   title: string;
 }
@@ -22,13 +28,16 @@ export function GenericTable<TData>({
   isLoading,
   error,
   onSearch,
+  onPageChange,
+  onPageSizeChange,
+  currentPage = 1,
+  pageSize = 10,
   createUrl,
   title,
 }: GenericTableProps<TData>) {
   const router = useRouter();
+  const pageCount = data ? Math.ceil(data.count / pageSize) : 0;
 
-  if (isLoading)
-    return <div className="flex justify-center p-4">Loading...</div>;
   if (error)
     return <div className="p-4 text-red-500">Error: {error.message}</div>;
 
@@ -53,7 +62,12 @@ export function GenericTable<TData>({
       <DataTable
         columns={columns}
         data={data?.results || []}
-        // Aquí puedes agregar más props para paginación si tu DataTable los soporta
+        pageCount={pageCount}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChange={onPageChange}
+        onPageSizeChange={onPageSizeChange}
+        isLoading={isLoading}
       />
     </div>
   );

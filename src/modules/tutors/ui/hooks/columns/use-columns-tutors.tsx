@@ -1,31 +1,40 @@
-'use client';
-
 import { ColumnDef } from '@tanstack/react-table';
 
-export interface Tutor {
-  id: number;
-  full_name: string;
-  specialization: string;
-  phone: string;
-  is_active: boolean;
-}
+import { Button } from '@/components/ui/button';
+import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
 
-export const useColumnsTutors = (): ColumnDef<Tutor>[] => [
-  {
-    accessorKey: 'full_name',
-    header: 'Full Name',
-  },
-  {
-    accessorKey: 'specialization',
-    header: 'Specialization',
-  },
-  {
-    accessorKey: 'phone',
-    header: 'Phone',
-  },
-  {
-    accessorKey: 'is_active',
-    header: 'Active',
-    cell: ({ row }) => (row.original.is_active ? 'Yes' : 'No'),
-  },
-];
+export function useColumnsTutors(): ColumnDef<TutorResult>[] {
+  return [
+    {
+      accessorKey: 'full_name',
+      header: 'Nombre Completo',
+    },
+    {
+      accessorKey: 'dni',
+      header: 'DNI',
+    },
+    {
+      accessorKey: 'phone',
+      header: 'Teléfono',
+    },
+    {
+      accessorKey: 'user.email',
+      header: 'Email',
+    },
+    {
+      accessorKey: 'specialization',
+      header: 'Especialización',
+    },
+    {
+      id: 'actions',
+      header: 'Acciones',
+      cell: () => (
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline">
+            Editar
+          </Button>
+        </div>
+      ),
+    },
+  ];
+}

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import debounce from 'lodash/debounce';
 
 import {
   PaginatedResponse,
@@ -22,8 +23,18 @@ export function useGenericTable<TData>({
     queryFn: () => fetchData(params),
   });
 
+  const debounceSearch = useRef(
+    debounce((search: string) => {
+      setParams((prev) => ({ ...prev, search, page: 1 }));
+    }, 500)
+  );
+  const debouncedSearch = useCallback(
+    (search: string) => debounceSearch.current(search),
+    [debounceSearch]
+  );
+
   const handleSearch = (search: string) => {
-    setParams((prev) => ({ ...prev, search, page: 1 }));
+    debouncedSearch(search);
   };
 
   const handlePageChange = (page: number) => {

@@ -5,9 +5,17 @@ import { useTutorsTable } from '../hooks/table/use-tutors-table';
 
 import { GenericTable } from '@/components/tables/generic-table';
 
-const TutorsTable = () => {
+export function TutorsTable() {
   const columns = useColumnsTutors();
-  const { data, isLoading, error, handleSearch } = useTutorsTable();
+  const {
+    data,
+    isLoading,
+    error,
+    handleSearch,
+    handlePageChange,
+    handlePageSizeChange,
+    params,
+  } = useTutorsTable();
 
   return (
     <GenericTable
@@ -16,10 +24,12 @@ const TutorsTable = () => {
       isLoading={isLoading}
       error={error}
       onSearch={handleSearch}
+      onPageChange={handlePageChange}
+      onPageSizeChange={handlePageSizeChange}
+      currentPage={params.page}
+      pageSize={params.pageSize}
       createUrl="/tutors/new"
       title="Tutores"
     />
   );
-};
-
-export default TutorsTable;
+}
