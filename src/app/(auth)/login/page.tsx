@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { AlertCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
+import JfpColorIcon from '@/components/custom-icon/jfp-color-icon';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,12 +19,14 @@ import { Input } from '@/components/ui/input';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(event);
     setError(null);
     setLoading(true);
 
@@ -37,79 +40,87 @@ export default function LoginPage() {
         password,
         redirect: false,
       });
+
       if (result?.error) {
         setError('Credenciales inválidas');
+        setLoading(false);
         return;
       }
 
-      router.push('/dashboard');
+      await router.push(callbackUrl);
       router.refresh();
     } catch (error) {
       console.error(error);
       setError('Ocurrió un error al intentar iniciar sesión');
-    } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Iniciar Sesión</CardTitle>
-          <CardDescription>
-            Ingresa tus credenciales para acceder
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="size-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
+      <div className="relative w-full max-w-md">
+        {/* El icono está posicionado arriba de la tarjeta */}
+        <JfpColorIcon className="absolute left-1/2 top-[-150px] w-56 -translate-x-1/2" />
 
-            <div className="space-y-2">
-              <label
-                htmlFor="username"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Usuario
-              </label>
-              <Input
-                id="username"
-                name="username"
-                type="text"
-                required
-                placeholder="Ingresa tu usuario"
-                disabled={loading}
-              />
-            </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Iniciar Sesión</CardTitle>
+            <CardDescription>
+              Ingresa tus credenciales para acceder
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertCircle className="size-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
 
-            <div className="space-y-2">
-              <label
-                htmlFor="password"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Contraseña
-              </label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                placeholder="Ingresa tu contraseña"
-                disabled={loading}
-              />
-            </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="username"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Usuario
+                </label>
+                <Input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  placeholder="Ingresa tu usuario"
+                  disabled={loading}
+                  autoComplete="username"
+                />
+              </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+              <div className="space-y-2">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Contraseña
+                </label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  placeholder="Ingresa tu contraseña"
+                  disabled={loading}
+                  autoComplete="current-password"
+                />
+              </div>
+
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
