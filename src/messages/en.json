@@ -26,7 +26,6 @@
   "get_started": "Get Started",
   "github": "Github",
   "beneficiaries": "Beneficiaries",
-  "businesses": "Businesses",
   "activities": "Activities",
   "attendances": "Attendances",
 
@@ -61,5 +60,22 @@
   "tutors_view_beneficiary_assignment": "View assigned beneficiaries",
   "tutors_view_activity_assignment": "View Activity Assignment",
   "tutors_view_detail": "View Detail",
-  "tutors_copy_data": "Copy tutor data"
+  "tutors_copy_data": "Copy tutor data",
+
+  "businesses": "Businesses",
+  "businesses_title": "Businesses",
+  "businesses_table_name": "Name",
+  "businesses_table_ruc_ci": "RUC/CI",
+  "businesses_phone": "Phone",
+  "businesses_address": "Address",
+  "businesses_description": "Description",
+  "businesses_is_active": "Status",
+  "businesses_table_actions": "Actions",
+  "businesses_table_edit": "Edit",
+  "businesses_table_delete": "Delete",
+  "businesses_specialization": "Specialization",
+  "businesses_search_placeholder": "Search business...",
+  "businesses_view_beneficiary_assignment": "View assigned beneficiaries",
+  "businesses_view_detail": "View details",
+  "businesses_copy_data": "Copy business data"
 }

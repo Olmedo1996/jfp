@@ -26,7 +26,6 @@
   "get_started": "Get Started",
   "github": "Github",
   "beneficiaries": "Beneficiarios",
-  "businesses": "Empresas",
   "activities": "Actividades",
   "attendances": "Asistencia",
 
@@ -61,5 +60,22 @@
   "tutors_view_beneficiary_assignment": "Ver beneficiarios asignados",
   "tutors_view_activity_assignment": "Ver actividades asignadas",
   "tutors_view_detail": "Ver detalles",
-  "tutors_copy_data": "Copiar datos de tutor"
+  "tutors_copy_data": "Copiar datos de tutor",
+
+  "businesses": "Empresas",
+  "businesses_title": "Empresas",
+  "businesses_table_name": "Nombre",
+  "businesses_table_ruc_ci": "RUC/CI",
+  "businesses_phone": "Teléfono",
+  "businesses_address": "Dirección",
+  "businesses_description": "Descripción",
+  "businesses_is_active": "Estado",
+  "businesses_table_actions": "Acciones",
+  "businesses_table_edit": "Editar",
+  "businesses_table_delete": "Borrar",
+  "businesses_specialization": "Especialización",
+  "businesses_search_placeholder":"Buscar empresa..",
+  "businesses_view_beneficiary_assignment": "Ver beneficiarios asignados",
+  "businesses_view_detail": "Ver detalles",
+  "businesses_copy_data": "Copiar datos de empresa"
 }
