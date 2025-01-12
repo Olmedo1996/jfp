@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
       <DataTableSkeletonLoading<TData>
         table={table}
         columnsLength={columns.length}
-        rowsToShow={pageSize}
+        rowsToShow={5}
       />
     );
   }
