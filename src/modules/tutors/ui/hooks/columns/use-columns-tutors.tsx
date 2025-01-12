@@ -18,6 +18,7 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
   return [
     {
       accessorKey: 'full_name',
+      size: 200,
       // header: m.tutors_full_name(),
       header: ({ column }) => {
         return (

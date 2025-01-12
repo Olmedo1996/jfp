@@ -5,6 +5,7 @@ import { AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/use-auth';
 
 import JfpColorIcon from '@/components/custom-icon/jfp-color-icon';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
@@ -73,7 +74,14 @@ const Login = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Iniciar Sesión</CardTitle>
+            <CardTitle>
+              <div className="flex justify-between">
+                <h1 className="text-2xl font-bold leading-tight tracking-tight">
+                  Iniciar Sesión
+                </h1>
+                <ThemeSwitcher />
+              </div>
+            </CardTitle>
             <CardDescription>
               Ingresa tus credenciales para acceder
             </CardDescription>

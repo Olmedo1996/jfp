@@ -4,10 +4,9 @@ import { PropsWithChildren } from 'react';
 import { LanguageProvider } from '@inlang/paraglide-next';
 import type { Metadata } from 'next';
 
-import { Footer } from '@/components/footer';
+/* import { Footer } from '@/components/footer'; */
 import { TanstackProvider } from '@/components/providers/tanstack-provider';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Toaster } from '@/components/ui/toaster';
 import { siteConfig } from '@/lib/constant';
 import { fonts } from '@/lib/fonts';
@@ -56,8 +55,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           <TanstackProvider>
             <ThemeProvider attribute="class">
               {children}
-              <ThemeSwitcher className="absolute bottom-5 right-5 z-10" />
-              <Footer />
+              {/* <Footer /> */}
               <Toaster />
             </ThemeProvider>
           </TanstackProvider>
