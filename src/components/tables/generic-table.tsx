@@ -47,7 +47,7 @@ export function GenericTable<TData>({
     return <div className="p-4 text-red-500">Error: {error.message}</div>;
 
   return (
-    <div className="space-y-4 p-2">
+    <div className="h-[calc(100vh-10rem)] space-y-4 p-2">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{title}</h1>
         <div className="flex gap-4">
