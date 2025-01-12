@@ -9,7 +9,14 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { Button } from '../ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { CustomPagination } from './pagination';
 
 import {
   Table,
@@ -130,6 +137,38 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border">
+      <div className="flex items-center justify-between p-4">
+        <div className="flex items-center space-x-2">
+          <Select
+            value={`${pageSize}`}
+            onValueChange={(value) => onPageSizeChange?.(Number(value))}
+          >
+            <SelectTrigger className="w-[70px]">
+              <SelectValue placeholder={table.getState().pagination.pageSize} />
+            </SelectTrigger>
+            <SelectContent side="top">
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <SelectItem key={pageSize} value={`${pageSize}`}>
+                  {pageSize}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <span className="text-sm text-gray-500">
+            {m.table_page()} {currentPage} {m.table_of()} {pageCount}
+          </span>
+        </div>
+        <div className="flex items-center space-x-2">
+          {onPageChange && (
+            <CustomPagination
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalItems={pageCount * pageSize} // Asumiendo que pageCount es el número total de páginas
+              onPageChange={onPageChange}
+            />
+          )}
+        </div>
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -167,42 +206,6 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-between p-4">
-        <div className="flex items-center space-x-2">
-          <select
-            className="rounded border p-1"
-            value={pageSize}
-            onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
-          >
-            {[10, 20, 30, 40, 50].map((size) => (
-              <option key={size} value={size}>
-                {size} {m.table_per_page()}
-              </option>
-            ))}
-          </select>
-          <span className="text-sm text-gray-500">
-            {m.table_page()} {currentPage} {m.table_of()} {pageCount}
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange?.(currentPage - 1)}
-            disabled={currentPage <= 1}
-          >
-            {m.table_previous()}
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onPageChange?.(currentPage + 1)}
-            disabled={currentPage >= pageCount}
-          >
-            {m.table_next()}
-          </Button>
-        </div>
-      </div>
     </div>
   );
 }
