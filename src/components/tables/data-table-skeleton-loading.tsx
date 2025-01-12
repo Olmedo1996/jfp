@@ -25,18 +25,18 @@ const DataTableSkeletonLoading = <TData,>({
       {/* Skeleton for pagination controls */}
       <div className="flex items-center justify-between p-4 py-8">
         <div className="flex items-center space-x-2">
-          <div className="h-8 w-[70px] animate-pulse rounded bg-gray-200" />
-          <div className="h-4 w-32 animate-pulse rounded bg-gray-200" />
+          <div className="bg-sidebar-accent h-8 w-[70px] animate-pulse rounded" />
+          <div className="bg-sidebar-accent h-4 w-32 animate-pulse rounded" />
         </div>
         <div className="flex items-center space-x-2">
-          <div className="h-8 w-64 animate-pulse rounded bg-gray-200" />
+          <div className="bg-sidebar-accent h-8 w-64 animate-pulse rounded" />
         </div>
       </div>
 
       <div className="relative flex-1">
         <div className="absolute inset-0 flex flex-col">
           {/* Header */}
-          <div className="bg-white">
+          <div className="bg-sidebar-accent">
             <Table>
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -67,7 +67,7 @@ const DataTableSkeletonLoading = <TData,>({
                       (_, cellIndex) => (
                         <TableCell key={cellIndex} className="p-5">
                           <div
-                            className="h-4 animate-pulse rounded bg-gray-200"
+                            className="bg-sidebar-accent h-4 animate-pulse rounded"
                             style={{
                               width: `${Math.floor(Math.random() * 50 + 50)}%`,
                             }}
