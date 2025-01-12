@@ -45,11 +45,16 @@ export function useGenericTable<TData>({
     setParams((prev) => ({ ...prev, pageSize, page: 1 }));
   };
 
+  const handleOrderingChange = (ordering: string) => {
+    setParams((prev) => ({ ...prev, ordering }));
+  };
+
   return {
     ...query,
     params,
     handleSearch,
     handlePageChange,
     handlePageSizeChange,
+    handleOrderingChange,
   };
 }

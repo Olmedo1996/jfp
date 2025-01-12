@@ -17,6 +17,7 @@ interface GenericTableProps<TData> {
   onSearch?: (value: string) => void;
   onPageChange?: (page: number) => void;
   onPageSizeChange?: (pageSize: number) => void;
+  onOrderingChange?: (ordering: string) => void;
   currentPage?: number;
   pageSize?: number;
   createUrl?: string;
@@ -32,6 +33,7 @@ export function GenericTable<TData>({
   onSearch,
   onPageChange,
   onPageSizeChange,
+  onOrderingChange,
   currentPage = 1,
   pageSize = 10,
   createUrl,
@@ -72,6 +74,7 @@ export function GenericTable<TData>({
         pageSize={pageSize}
         onPageChange={onPageChange}
         onPageSizeChange={onPageSizeChange}
+        onOrderingChange={onOrderingChange}
         isLoading={isLoading}
       />
     </div>

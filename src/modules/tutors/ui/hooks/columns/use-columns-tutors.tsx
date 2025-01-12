@@ -1,5 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,11 +18,33 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
   return [
     {
       accessorKey: 'full_name',
-      header: m.tutors_full_name(),
+      // header: m.tutors_full_name(),
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {m.tutors_full_name()}
+            <ArrowUpDown />
+          </Button>
+        );
+      },
     },
     {
       accessorKey: 'dni',
-      header: m.tutors_dni(),
+      // header: m.tutors_dni(),
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            {m.tutors_dni()}
+            <ArrowUpDown />
+          </Button>
+        );
+      },
     },
     {
       accessorKey: 'phone',

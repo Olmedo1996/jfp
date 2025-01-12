@@ -1,7 +1,11 @@
+import { useCallback, useState } from 'react';
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
+  OnChangeFn,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 
@@ -25,6 +29,7 @@ interface DataTableProps<TData, TValue> {
   pageSize?: number;
   onPageChange?: (page: number) => void;
   onPageSizeChange?: (pageSize: number) => void;
+  onOrderingChange?: (ordering: string) => void;
   isLoading?: boolean;
 }
 
@@ -36,20 +41,56 @@ export function DataTable<TData, TValue>({
   pageSize = 10,
   onPageChange,
   onPageSizeChange,
+  onOrderingChange,
   isLoading = false,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [lastOrdering, setLastOrdering] = useState<string>('');
+
+  const handleSortingChange: OnChangeFn<SortingState> = useCallback(
+    (updatedSorting) => {
+      const newSorting =
+        typeof updatedSorting === 'function'
+          ? updatedSorting(sorting)
+          : updatedSorting;
+
+      setSorting(newSorting);
+
+      if (newSorting.length > 0) {
+        console.log(newSorting[0]);
+        const column = newSorting[0];
+        const newOrderingValue = column.desc ? `-${column.id}` : column.id;
+        console.log({ newOrderingValue, lastOrdering });
+        if (newOrderingValue !== lastOrdering) {
+          setLastOrdering(newOrderingValue);
+          onOrderingChange?.(newOrderingValue);
+        }
+      } else if (lastOrdering !== '') {
+        setLastOrdering('');
+        onOrderingChange?.('');
+      }
+    },
+    [onOrderingChange, lastOrdering, sorting]
+  );
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     manualPagination: true,
+    onSortingChange: handleSortingChange,
+    manualSorting: true,
     pageCount: pageCount,
     state: {
       pagination: {
         pageIndex: currentPage - 1,
         pageSize,
       },
+      sorting,
     },
+    enableSortingRemoval: true,
+    sortDescFirst: false,
   });
 
   if (isLoading) {

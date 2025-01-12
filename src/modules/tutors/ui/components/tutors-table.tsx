@@ -15,6 +15,7 @@ export function TutorsTable() {
     handleSearch,
     handlePageChange,
     handlePageSizeChange,
+    handleOrderingChange,
     params,
   } = useTutorsTable();
 
@@ -27,6 +28,7 @@ export function TutorsTable() {
       onSearch={handleSearch}
       onPageChange={handlePageChange}
       onPageSizeChange={handlePageSizeChange}
+      onOrderingChange={handleOrderingChange}
       currentPage={params.page}
       pageSize={params.pageSize}
       createUrl="/tutors/new"
