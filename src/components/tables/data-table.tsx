@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { ScrollArea } from '../ui/scroll-area';
+import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 import {
   Select,
   SelectContent,
@@ -114,28 +114,34 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col rounded-md border">
-      <div className="flex items-center justify-between p-4">
-        <div className="flex items-center space-x-2">
-          <Select
-            value={`${pageSize}`}
-            onValueChange={(value) => onPageSizeChange?.(Number(value))}
-          >
-            <SelectTrigger className="w-[70px]">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+      <div className="flex flex-col space-y-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+        {/* Selector de tamaño de página y texto informativo */}
+        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
+          <div className="flex items-center space-x-2">
+            <Select
+              value={`${pageSize}`}
+              onValueChange={(value) => onPageSizeChange?.(Number(value))}
+            >
+              <SelectTrigger className="w-[90px]">
+                <SelectValue placeholder={pageSize} />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {[10, 20, 30, 40, 50].map((size) => (
+                  <SelectItem key={size} value={`${size}`}>
+                    {size} {m.table_per_page()}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <span className="text-sm text-gray-500">
             {m.table_page()} {currentPage} {m.table_of()} {pageCount}
           </span>
         </div>
-        <div className="flex items-center space-x-2">
+
+        {/* Paginación */}
+        <div className="flex justify-center sm:justify-end">
           {onPageChange && (
             <CustomPagination
               currentPage={currentPage}
@@ -147,9 +153,9 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
       <div className="flex-1 overflow-hidden">
-        <ScrollArea className="max-h-[calc(100vh-16rem)] overflow-y-auto">
+        <ScrollArea className="relative grid size-full h-[calc(100vh-16rem)] grid-cols-1 overflow-auto">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-secondary sticky top-0">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -191,6 +197,8 @@ export function DataTable<TData, TValue>({
               )}
             </TableBody>
           </Table>
+          <ScrollBar orientation="horizontal" />
+          <ScrollBar orientation="vertical" />
         </ScrollArea>
       </div>
     </div>

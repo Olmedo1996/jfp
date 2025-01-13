@@ -1,6 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
+import TruncatedCell from '@/components/tables/truncated-cell';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -56,8 +57,9 @@ export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
     },
     {
       accessorKey: 'notes',
-      size: 200,
+      size: 100,
       header: m.beneficiaries_header_notes(),
+      cell: ({ row }) => <TruncatedCell content={row.original.notes} />,
     },
     {
       id: 'actions',
