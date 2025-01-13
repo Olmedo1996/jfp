@@ -32,6 +32,9 @@
   "delete_data": "Eliminar",
   "edit": "Editar",
   "actions": "Acciones",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
 
   "table_next": "Siguiente",
   "table_previous": "Anterior",
@@ -74,6 +77,7 @@
   "businesses_view_detail": "Ver detalles",
   "businesses_copy_data": "Copiar datos de la empresa",
 
+  "new_beneficiary": "Nuevo beneficiario",
   "beneficiaries": "Beneficiarios",
   "beneficiaries_title": "Beneficiarios",
   "beneficiaries_header_email": "Correo electrónico",
