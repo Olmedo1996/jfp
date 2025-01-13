@@ -58,13 +58,11 @@ export function useColumnsBusinesses(): ColumnDef<BusinessResult>[] {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>
-                  {m.businesses_table_actions()}
-                </DropdownMenuLabel>
+                <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
                 <DropdownMenuItem
-                  onClick={() => router.push(`/tutors/edit/${tutor.id}`)}
+                  onClick={() => router.push(`/businesses/edit/${tutor.id}`)}
                 >
-                  {m.businesses_table_edit()}
+                  {m.edit()}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() =>

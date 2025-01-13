@@ -1,9 +1,9 @@
-import { BeneficiariesForm } from '@/modules/beneficiaries/ui/beneficiaries-form';
+import BeneficiariesTable from '@/modules/beneficiaries/ui/components/beneficiaries-table';
 
 const Page = () => {
   return (
     <>
-      <BeneficiariesForm></BeneficiariesForm>
+      <BeneficiariesTable />
     </>
   );
 };
