@@ -114,15 +114,15 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col rounded-md border">
-      <div className="flex flex-col space-y-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+      <div className="flex flex-col space-y-2 p-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 md:space-y-0 md:p-4">
         {/* Selector de tamaño de página y texto informativo */}
-        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
-          <div className="flex items-center space-x-2">
+        <div className="hidden flex-col items-center space-x-2 space-y-2 sm:flex sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
+          <div className="">
             <Select
               value={`${pageSize}`}
               onValueChange={(value) => onPageSizeChange?.(Number(value))}
             >
-              <SelectTrigger className="w-[90px]">
+              <SelectTrigger className="">
                 <SelectValue placeholder={pageSize} />
               </SelectTrigger>
               <SelectContent side="top">
@@ -134,8 +134,7 @@ export function DataTable<TData, TValue>({
               </SelectContent>
             </Select>
           </div>
-
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500 ">
             {m.table_page()} {currentPage} {m.table_of()} {pageCount}
           </span>
         </div>

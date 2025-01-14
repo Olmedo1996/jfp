@@ -102,7 +102,7 @@ export function CustomPagination({
             <PaginationNext
               content={m.table_next()}
               onClick={() =>
-                currentPage < totalPages && onPageChange(totalPages)
+                currentPage < totalPages && onPageChange(currentPage + 1)
               }
               className={
                 currentPage >= totalPages
