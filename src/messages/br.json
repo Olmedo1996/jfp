@@ -35,6 +35,7 @@
   "save": "Salvar",
   "cancel": "Cancelar",
   "confirm": "Confirmar",
+  "save_and_continue": "Salvar e continuar",
 
   "table_next": "Próximo",
   "table_previous": "Anterior",
@@ -63,6 +64,8 @@
   "tutors_view_detail": "Ver detalhes",
   "tutors_copy_data": "Copiar dados do tutor",
 
+  "business": "Empresa",
+  "new_business": "Nova empresa",
   "businesses": "Empresas",
   "businesses_title": "Empresas",
   "businesses_table_name": "Nome",

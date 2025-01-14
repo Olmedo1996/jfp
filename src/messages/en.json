@@ -35,6 +35,8 @@
   "save": "Save",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "save_and_continue": "Save and continue",
+  "success_create": "Successfully created",
 
   "table_next": "Next",
   "table_previous": "Previous",
@@ -63,6 +65,8 @@
   "tutors_view_detail": "View Detail",
   "tutors_copy_data": "Copy tutor data",
 
+  "business": "Business",
+  "new_business": "New Business",
   "businesses": "Businesses",
   "businesses_title": "Businesses",
   "businesses_table_name": "Name",
