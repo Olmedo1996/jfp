@@ -1,3 +1,5 @@
+import { ICreateBeneficiary } from '../core/interfaces/beneficiaries.interface';
+
 import { api } from '@/lib/api';
 import {
   ApiBeneficiariesRequestParams,
@@ -9,6 +11,10 @@ export const beneficiariesService = {
     const response = await api.post<ICreateTutor>(`tutors/`, data);
     return response.data;
   }, */
+  async beneficiaries(data: ICreateBeneficiary): Promise<ICreateBeneficiary> {
+    const response = await api.post<ICreateBeneficiary>(`beneficiaries/`, data);
+    return response.data;
+  },
 
   async listView(
     params?: ApiBeneficiariesRequestParams
