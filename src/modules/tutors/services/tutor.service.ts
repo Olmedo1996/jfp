@@ -8,8 +8,13 @@ import { api } from '@/lib/api';
 
 export const tutorService = {
   async create(data: ICreateTutor): Promise<ICreateTutor> {
-    const response = await api.post<ICreateTutor>(`tutors/`, data);
-    return response.data;
+    try {
+      const response = await api.post<ICreateTutor>(`tutors/`, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating business:', error);
+      throw error;
+    }
   },
 
   async listView(params?: ApiTutorRequestParams): Promise<ApiTutorResponse> {

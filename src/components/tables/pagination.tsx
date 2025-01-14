@@ -68,7 +68,7 @@ export function CustomPagination({
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              onClick={() => currentPage > 1 && onPageChange(1)}
+              onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
               content={m.table_previous()}
               className={
                 currentPage <= 1

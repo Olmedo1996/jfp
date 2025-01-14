@@ -6,7 +6,12 @@ import { TutorModel } from '../../core/models/tutor.model';
 import { tutorSchema } from '../../core/schemas/tutor.schema';
 import { tutorService } from '../../services/tutor.service';
 
+import { useRouter } from '@/lib/i18n';
+import { showSuccessToast } from '@/utils/toast-messages';
+
 const useCreateTutor = () => {
+  const router = useRouter();
+
   const methods = useForm<TutorModel>({
     resolver: zodResolver(tutorSchema),
     defaultValues: {
@@ -42,8 +47,15 @@ const useCreateTutor = () => {
         username: data.username,
       },
     };
-    const response = await tutorService.create(params);
-    console.log(response);
+    try {
+      const result = await tutorService.create(params);
+      if (result) {
+        showSuccessToast('Tutor creado', 'create');
+        router.push('/tutors');
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
   };
 
   return { methods, handleSubmit };
