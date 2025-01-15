@@ -47,15 +47,15 @@ export function GenericTable<TData>({
     return <div className="p-4 text-red-500">Error: {error.message}</div>;
 
   return (
-    <div className="h-[calc(100vh-10rem)] space-y-4 p-2">
-      <div className="flex items-center justify-between">
+    <div className="flex h-[calc(100vh-10rem)] flex-col gap-2">
+      <div className="flex flex-col items-start justify-between space-y-2 md:flex-row md:items-center md:space-y-0">
         <h1 className="text-2xl font-bold">{title}</h1>
-        <div className="flex gap-4">
+        <div className="flex w-full justify-between gap-4 md:w-auto">
           {onSearch && (
             <Input
               placeholder={searchPlaceholder}
               onChange={(e) => onSearch(e.target.value)}
-              className="max-w-xs"
+              className="w-full md:w-auto"
             />
           )}
           {createUrl && (
