@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { ICreateTutor } from '../../core/interfaces/tutor.interface';
-import { TutorModel } from '../../core/models/tutor.model';
-import { tutorSchema } from '../../core/schemas/tutor.schema';
-import { tutorService } from '../../services/tutor.service';
-
 import { useRouter } from '@/lib/i18n';
+import { TutorModel } from '@/modules/tutors//core/models/tutor.model';
+import { ETutorsRoute } from '@/modules/tutors/constants';
+import { ICreateTutor } from '@/modules/tutors/core/interfaces/tutor.interface';
+import { tutorSchema } from '@/modules/tutors/core/schemas/tutor.schema';
+import { tutorService } from '@/modules/tutors/services/tutor.service';
 import { showSuccessToast } from '@/utils/toast-messages';
 
 const useCreateTutor = () => {
@@ -51,7 +51,7 @@ const useCreateTutor = () => {
       const result = await tutorService.create(params);
       if (result) {
         showSuccessToast('Tutor creado', 'create');
-        router.push('/tutors');
+        router.push(ETutorsRoute.list);
       }
     } catch (error) {
       console.error('Unexpected error:', error);

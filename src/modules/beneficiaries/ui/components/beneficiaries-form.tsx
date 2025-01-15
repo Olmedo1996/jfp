@@ -1,8 +1,10 @@
 'use client';
 
+import { EBeneficiaryRoute } from '../../constants';
 import { BeneficiaryModel } from '../../core/models/beneficiary.model';
 import useCreateBeneficiary from '../hooks/use-create-beneficiaries';
 
+import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -21,6 +23,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import * as m from '@/paraglide/messages';
 /* interface Gender {
   value: number;
   label: string;
@@ -36,6 +39,10 @@ export function BeneficiariesForm() {
     <>
       <Form {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-8">
+          <SaveHeaderForm
+            title={m.new_beneficiary()}
+            backUrl={EBeneficiaryRoute.list}
+          />
           <FormField
             control={methods.control}
             name="first_name"

@@ -1,5 +1,6 @@
 'use client';
 
+import { EBusinessRoute } from '../../constants';
 import { useColumnsBusinesses } from '../hooks/columns/use-columns-businesses';
 import { useBusinessTable } from '../hooks/table/use-business-table';
 
@@ -29,7 +30,7 @@ export function BusinessTable() {
       onPageSizeChange={handlePageSizeChange}
       currentPage={params.page}
       pageSize={params.pageSize}
-      createUrl="/businesses/new"
+      createUrl={EBusinessRoute.new}
       title={m.businesses()}
       searchPlaceholder={m.businesses_search_placeholder()}
     />

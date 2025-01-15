@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useRouter } from '@/lib/i18n';
+import { ETutorsRoute } from '@/modules/tutors/constants';
 import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
 import * as m from '@/paraglide/messages';
 export function useColumnsTutors(): ColumnDef<TutorResult>[] {
@@ -77,7 +78,9 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
                 <DropdownMenuItem
-                  onClick={() => router.push(`/tutors/edit/${tutor.id}`)}
+                  onClick={() =>
+                    router.push(`${ETutorsRoute.edit}/${tutor.id}`)
+                  }
                 >
                   {m.edit()}
                 </DropdownMenuItem>
