@@ -20,13 +20,14 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { useInfiniteList } from '@/hooks/use-infinite-list';
+import { ISelectOption } from '@/interface/select-option';
 import { cn } from '@/lib/utils';
-import { SelectOption } from '@/services/selectors.service';
+// import { ISelectOption } from '@/services/selectors.service';
 
 interface InfiniteSelectProps {
   apiEndpoint: string;
-  value?: SelectOption | null;
-  onChange?: (value: SelectOption | null) => void;
+  value?: ISelectOption<number> | null;
+  onChange?: (value: ISelectOption<number> | null) => void;
   placeholder?: string;
   searchPlaceholder?: string;
   noResultsMessage?: string;
@@ -141,8 +142,8 @@ const ErrorMessage = ({ error }: { error: Error }) => (
 );
 
 interface SelectOptionsProps {
-  items: SelectOption[];
-  selectedValue?: SelectOption | null;
+  items: ISelectOption<number>[];
+  selectedValue?: ISelectOption<number> | null;
   onSelect: (value: string) => void;
   observerRef: (node?: Element | null) => void;
 }

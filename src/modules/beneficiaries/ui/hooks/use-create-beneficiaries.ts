@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { BeneficiaryModel } from '../../core/models/beneficiary.model';
 import { beneficiarySchema } from '../../core/schemas/beneficiary.schema';
-import { beneficiariesService } from '../../services/beneficiaries.service';
+// import { beneficiariesService } from '../../services/beneficiaries.service';
 
 const useCreateBeneficiary = () => {
   const methods = useForm<BeneficiaryModel>({
@@ -17,14 +17,14 @@ const useCreateBeneficiary = () => {
       birth_date: '',
       children_count: 0,
       notes: '',
-      education_level: 0,
-      gender: 0,
+      education_level: undefined,
+      gender: undefined,
     },
   });
 
   const handleSubmit = async (data: BeneficiaryModel) => {
-    const response = await beneficiariesService.beneficiaries(data);
-    console.log(response);
+    // const response = await beneficiariesService.beneficiaries(data);
+    console.log(data);
   };
 
   return { methods, handleSubmit };

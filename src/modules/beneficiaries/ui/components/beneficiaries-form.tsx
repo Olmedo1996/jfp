@@ -5,6 +5,7 @@ import { BeneficiaryModel } from '../../core/models/beneficiary.model';
 import useCreateBeneficiary from '../hooks/use-create-beneficiaries';
 
 import SaveHeaderForm from '@/components/forms/save-header-form';
+import { InfiniteSelect } from '@/components/selector/infinite-select';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,19 +16,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import * as m from '@/paraglide/messages';
-/* interface Gender {
-  value: number;
-  label: string;
-} */
+
 export function BeneficiariesForm() {
   const { methods, handleSubmit } = useCreateBeneficiary();
 
@@ -101,25 +92,18 @@ export function BeneficiariesForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Género</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  // defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Seleccione un género" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-                {/* <FormDescription>
-                  You can manage email addresses in your{' '}
-                  <Link href="/examples/forms">email settings</Link>.
-                </FormDescription> */}
+
+                <FormControl>
+                  <InfiniteSelect
+                    apiEndpoint="genders"
+                    placeholder="Seleccione un género"
+                    searchPlaceholder="Buscar Género"
+                    value={field.value}
+                    onChange={field.onChange}
+                    pageSize={20}
+                    ordering="-created_at"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -130,25 +114,17 @@ export function BeneficiariesForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nivel de Educación</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  // defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Seleccione el nivel de educación" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-                {/* <FormDescription>
-                  You can manage email addresses in your{' '}
-                  <Link href="/examples/forms">email settings</Link>.
-                </FormDescription> */}
+                <FormControl>
+                  <InfiniteSelect
+                    apiEndpoint="educations"
+                    placeholder="Seleccione un nivel de educación"
+                    searchPlaceholder="Buscar Nivel de Educación"
+                    value={field.value}
+                    onChange={field.onChange}
+                    pageSize={20}
+                    ordering="-created_at"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

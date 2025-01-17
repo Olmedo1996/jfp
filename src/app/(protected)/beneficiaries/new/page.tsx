@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { BeneficiariesForm } from '@/modules/beneficiaries/ui/components/beneficiaries-form';
 
-const NewTutor = () => {
+const NewBeneficiary = () => {
   return (
     <>
       <BeneficiariesForm />
@@ -10,4 +8,4 @@ const NewTutor = () => {
   );
 };
 
-export default NewTutor;
+export default NewBeneficiary;
