@@ -90,7 +90,7 @@ export function InfiniteSelect({
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full min-w-80 p-0">
+      <PopoverContent className="w-full min-w-96 p-0" align="start">
         <Command shouldFilter={false}>
           <CommandInput
             value={searchInput}

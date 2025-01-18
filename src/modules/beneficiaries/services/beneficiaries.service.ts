@@ -11,9 +11,18 @@ export const beneficiariesService = {
     const response = await api.post<ICreateTutor>(`tutors/`, data);
     return response.data;
   }, */
-  async beneficiaries(data: ICreateBeneficiary): Promise<ICreateBeneficiary> {
-    const response = await api.post<ICreateBeneficiary>(`beneficiaries/`, data);
-    return response.data;
+  async create(data: ICreateBeneficiary): Promise<ICreateBeneficiary> {
+    try {
+      const response = await api.post<ICreateBeneficiary>(
+        `beneficiaries/`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error creating business:', error);
+      // El error ya será manejado por el interceptor
+      throw error;
+    }
   },
 
   async listView(

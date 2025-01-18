@@ -8,9 +8,8 @@ import { businessSchema } from '../../core/schemas/business.schema';
 import { businessService } from '../../services/business.service';
 
 import { useRouter } from '@/lib/i18n';
+import { TSaveAction } from '@/types/form.types';
 import { showSuccessToast } from '@/utils/toast-messages';
-
-type SaveAction = 'save' | 'save-and-continue';
 
 const useCreateBusiness = () => {
   const router = useRouter();
@@ -29,7 +28,7 @@ const useCreateBusiness = () => {
 
   const handleSubmit = async (
     data: BusinessModel,
-    action: SaveAction = 'save'
+    action: TSaveAction = 'save'
   ) => {
     try {
       const result = await businessService.create(data);

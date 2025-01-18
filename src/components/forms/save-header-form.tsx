@@ -29,8 +29,8 @@ const SaveHeaderForm = ({
 }: SaveHeaderFormProps) => {
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col">
+      <div className="mb-2 flex items-center justify-between">
+        <div className="invisible flex flex-col md:visible">
           <h1 className="text-2xl font-bold">{title}</h1>
           <p className="text-muted-foreground text-sm">{description}</p>
         </div>

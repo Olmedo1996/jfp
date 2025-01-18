@@ -5,7 +5,7 @@ export interface ICreateBeneficiary {
   phone: string;
   email: string;
   birth_date: string;
-  children_count: number;
+  children_count: number | null;
   notes: string;
   education_level: number;
   gender: number;

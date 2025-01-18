@@ -37,7 +37,7 @@ export const beneficiarySchema = z.object({
 
   birth_date: z.string().min(1, { message: messageRequired }),
 
-  children_count: z.number().default(0).optional(),
+  children_count: z.number().default(0),
 
   notes: z
     .string()
