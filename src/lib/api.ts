@@ -59,7 +59,7 @@ const createAxiosInstance = (tokens?: Tokens) => {
         } catch (refreshError) {
           deleteCookie('access_token');
           deleteCookie('refresh_token');
-          window.location.href = '/login';
+          // window.location.href = '/login';
           return Promise.reject(refreshError);
         }
       }

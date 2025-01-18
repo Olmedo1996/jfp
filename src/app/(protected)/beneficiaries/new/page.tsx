@@ -1,9 +1,9 @@
-import { BeneficiariesForm } from '@/modules/beneficiaries/ui/components/beneficiaries-form';
+import { CreateBeneficiariesForm } from '@/modules/beneficiaries/ui/components/beneficiaries-create-form';
 
 const NewBeneficiary = () => {
   return (
     <>
-      <BeneficiariesForm />
+      <CreateBeneficiariesForm />
     </>
   );
 };

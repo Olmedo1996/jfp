@@ -11,7 +11,7 @@ import { PersonalInformationForm } from '@/modules/beneficiaries/ui/components/f
 import useCreateBeneficiary from '@/modules/beneficiaries/ui/hooks/form/use-create-beneficiaries';
 import * as m from '@/paraglide/messages';
 
-export function BeneficiariesForm() {
+export function CreateBeneficiariesForm() {
   const { methods, handleSubmit } = useCreateBeneficiary();
 
   function onSubmit(values: BeneficiaryModel) {
