@@ -1,15 +1,14 @@
 'use client';
 
-import { EBeneficiaryRoute } from '../../constants';
-import { BeneficiaryModel } from '../../core/models/beneficiary.model';
-import useCreateBeneficiary from '../hooks/use-create-beneficiaries';
-import { AdditionalInformationForm } from './forms/additional-information-form';
-import { ContactDetailsForm } from './forms/contact-details-form';
-import { PersonalInformationForm } from './forms/personal-information-form';
-
 import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
+import { EBeneficiaryRoute } from '@/modules/beneficiaries/constants';
+import { BeneficiaryModel } from '@/modules/beneficiaries/core/models/beneficiary.model';
+import { AdditionalInformationForm } from '@/modules/beneficiaries/ui/components/forms/additional-information-form';
+import { ContactDetailsForm } from '@/modules/beneficiaries/ui/components/forms/contact-details-form';
+import { PersonalInformationForm } from '@/modules/beneficiaries/ui/components/forms/personal-information-form';
+import useCreateBeneficiary from '@/modules/beneficiaries/ui/hooks/form/use-create-beneficiaries';
 import * as m from '@/paraglide/messages';
 
 export function BeneficiariesForm() {

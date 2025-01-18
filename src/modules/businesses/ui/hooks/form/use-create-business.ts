@@ -2,10 +2,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { EBusinessRoute } from '../../constants';
-import { BusinessModel } from '../../core/models/business.model';
-import { businessSchema } from '../../core/schemas/business.schema';
-import { businessService } from '../../services/business.service';
+import { EBusinessRoute } from '../../../constants';
+import { BusinessModel } from '../../../core/models/business.model';
+import { businessSchema } from '../../../core/schemas/business.schema';
+import { businessService } from '../../../services/business.service';
 
 import { useRouter } from '@/lib/i18n';
 import { TSaveAction } from '@/types/form.types';
