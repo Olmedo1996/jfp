@@ -1,22 +1,16 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
+
+import { ActionsCell } from '../../components/actions-cell';
 
 import TruncatedCell from '@/components/tables/truncated-cell';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
+// import { useRouter } from '@/lib/i18n';
 import { BeneficiaryResult } from '@/modules/beneficiaries/core/interfaces/beneficiaries-service.interface';
 import * as m from '@/paraglide/messages';
 
 export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
-  const router = useRouter();
+  // const router = useRouter();
   return [
     {
       accessorKey: 'full_name',
@@ -64,41 +58,7 @@ export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
     {
       id: 'actions',
       header: '',
-      cell: ({ row }) => {
-        const tutor = row.original;
-
-        return (
-          <div className="flex gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="size-8 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="size-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
-                <DropdownMenuItem
-                  onClick={() => router.push(`/beneficiaries/edit/${tutor.id}`)}
-                >
-                  {m.edit()}
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() =>
-                    navigator.clipboard.writeText(JSON.stringify(tutor))
-                  }
-                >
-                  {m.tutors_copy_data()}
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        );
-      },
+      cell: ({ row }) => <ActionsCell beneficiary={row.original} />,
     },
   ];
 }

@@ -16,6 +16,7 @@ export interface BeneficiaryResult {
   gender: ISelectOption<number>;
   created_at: Date;
   updated_at: Date;
+  full_name?: string;
 }
 
 export type ApiBeneficiariesResponse =

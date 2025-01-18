@@ -43,6 +43,15 @@ export const beneficiariesService = {
     }
   },
 
+  async delete(id: number): Promise<void> {
+    try {
+      await api.delete(`beneficiaries/${id}/`);
+    } catch (error) {
+      console.error('Error deleting beneficiary:', error);
+      throw error;
+    }
+  },
+
   async listView(
     params?: ApiBeneficiariesRequestParams
   ): Promise<ApiBeneficiariesResponse> {
