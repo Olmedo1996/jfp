@@ -12,9 +12,9 @@ export const showSuccessToast = (
   };
 
   const colors = {
-    create: 'bg-green-500 text-zinc-800 dark:bg-green-600 dark:text-white',
-    update: 'bg-yellow-500 text-zinc-800 dark:bg-yellow-600 dark:text-white',
-    delete: 'bg-red-500 text-zinc-800 dark:bg-red-600 dark:text-white',
+    create: 'border-l-8 border-green-500 text-zinc-800',
+    update: 'border-l-8 border-green-500 text-zinc-800',
+    delete: 'border-l-8 border-green-500 text-zinc-800',
   };
 
   toast({

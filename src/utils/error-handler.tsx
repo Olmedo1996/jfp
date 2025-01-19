@@ -32,38 +32,39 @@ export const handleApiError = (error: AxiosError) => {
       break;
     case 401:
       toast({
-        variant: 'destructive',
+        // variant: 'destructive',
         title: 'Error de autenticación',
+        className: 'border-l-8 border-red-500 text-zinc-80',
         description:
           'Tu sesión ha expirado o no tienes permisos. Por favor, inicia sesión nuevamente.',
       });
       break;
     case 403:
       toast({
-        variant: 'destructive',
         title: 'Acceso denegado',
+        className: 'border-l-8 border-red-500 text-zinc-80',
         description: 'No tienes permisos para realizar esta acción.',
       });
       break;
     case 404:
       toast({
-        variant: 'destructive',
         title: 'No encontrado',
+        className: 'border-l-8 border-red-500 text-zinc-80',
         description: data.detail || 'El recurso solicitado no existe.',
       });
       break;
     case 500:
       toast({
-        variant: 'destructive',
         title: 'Error del servidor',
+        className: 'border-l-8 border-red-500 text-zinc-80',
         description:
           'Ha ocurrido un error en el servidor. Por favor, intenta más tarde.',
       });
       break;
     default:
       toast({
-        variant: 'destructive',
         title: 'Error',
+        className: 'border-l-8 border-red-500 text-zinc-80',
         description: 'Ha ocurrido un error inesperado.',
       });
   }
@@ -88,8 +89,8 @@ const handleValidationErrors = (errors: ValidationError) => {
 
   // Muestra todos los errores de validación en un solo toast
   toast({
-    variant: 'destructive',
     title: 'Error de validación',
+    className: 'border-l-8 border-red-500 text-zinc-80',
     description: (
       <ul className="list-disc pl-4">
         {errorMessages.map((msg, index) => (
