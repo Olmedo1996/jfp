@@ -44,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
     navMain: [
       {
-        title: 'Playground',
+        title: 'Beneficiario',
         url: '#',
         icon: SquareTerminal,
         isActive: true,
