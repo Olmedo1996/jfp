@@ -28,6 +28,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
   const form = useForm<FamilyMemberFormData>({
     resolver: zodResolver(familyMemberSchema),
     defaultValues: {
+      beneficiary: beneficiaryId,
       first_name: '',
       last_name: '',
       birth_date: '',
@@ -46,7 +47,6 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
 
   return (
     <div className="space-y-6">
-      {JSON.stringify(form.formState.errors)}
       <div className="rounded-lg border p-6">
         <h2 className="mb-4 text-xl font-semibold">Add Family Member</h2>
         <Form {...form}>
