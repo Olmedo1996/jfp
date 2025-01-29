@@ -14,6 +14,7 @@ type SaveHeaderFormProps = {
   saveAndContinue?: boolean;
   backUrl?: string;
   loading?: boolean;
+  hideSaveButton?: boolean;
   onSaveTypeChange?: (action: SaveAction) => void;
 };
 
@@ -25,6 +26,7 @@ const SaveHeaderForm = ({
   saveAndContinue,
   backUrl = '/',
   loading = false,
+  hideSaveButton = false,
   onSaveTypeChange,
 }: SaveHeaderFormProps) => {
   return (
@@ -38,13 +40,15 @@ const SaveHeaderForm = ({
           <Button asChild variant={'secondary'} disabled={loading}>
             <Link href={backUrl}>{cancelButtonLabel || m.cancel()}</Link>
           </Button>
-          <Button
-            type="submit"
-            disabled={loading}
-            onClick={() => onSaveTypeChange?.('save')}
-          >
-            {saveButtonLabel || m.save()}
-          </Button>
+          {!hideSaveButton && (
+            <Button
+              type="submit"
+              disabled={loading}
+              onClick={() => onSaveTypeChange?.('save')}
+            >
+              {saveButtonLabel || m.save()}
+            </Button>
+          )}
           {saveAndContinue && (
             <Button
               type="submit"

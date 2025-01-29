@@ -49,9 +49,16 @@ export function ActionsCell({ beneficiary }: ActionsCellProps) {
               navigator.clipboard.writeText(JSON.stringify(beneficiary))
             }
           >
-            {m.tutors_copy_data()}
+            {`Copiar datos del beneficiario`}
           </DropdownMenuItem>
+          {/* Beneficiary family */}
           <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(`/beneficiaries/${beneficiary.id}/family`)
+            }
+          >{`Familiares`}</DropdownMenuItem>
+
           <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DeleteBeneficiaryButton

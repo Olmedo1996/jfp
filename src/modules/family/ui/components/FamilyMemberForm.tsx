@@ -45,13 +45,17 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
     form.reset();
   };
 
+  const onReset = () => {
+    form.reset();
+  };
+
   return (
     <div className="space-y-6">
       <div className="rounded-lg border p-6">
         <h2 className="mb-4 text-xl font-semibold">Add Family Member</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormField
                 control={form.control}
                 name="first_name"
@@ -118,9 +122,19 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isPending}>
-              {isPending ? 'Adding...' : 'Add Family Member'}
-            </Button>
+            <div className="flex flex-row gap-4">
+              <Button type="submit" disabled={isPending}>
+                {isPending ? 'Agregando...' : 'Agregar'}
+              </Button>
+              <Button
+                type="reset"
+                variant="secondary"
+                disabled={isPending}
+                onClick={onReset}
+              >
+                {'Limpiar'}
+              </Button>
+            </div>
           </form>
         </Form>
       </div>

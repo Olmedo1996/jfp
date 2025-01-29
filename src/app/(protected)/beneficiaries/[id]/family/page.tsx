@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import HeaderClientComponent from '../../_components/header-component';
+
 import { beneficiariesService } from '@/modules/beneficiaries/services/beneficiaries.service';
 import { FamilyMemberForm } from '@/modules/family/ui/components/FamilyMemberForm';
 
@@ -17,9 +19,9 @@ export default async function FamilyMemberPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto py-6">
-      <h1 className="mb-6 text-2xl font-bold">Family Members</h1>
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div className="">
+      <HeaderClientComponent />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="rounded-lg border p-6">
           <h2 className="mb-4 text-xl font-semibold">
             Beneficiary Information
@@ -37,7 +39,9 @@ export default async function FamilyMemberPage({ params }: PageProps) {
             </p>
           </div>
         </div>
-        <FamilyMemberForm beneficiaryId={parseInt(params.id)} />
+        <div className="lg:col-span-2">
+          <FamilyMemberForm beneficiaryId={parseInt(params.id)} />
+        </div>
       </div>
     </div>
   );
