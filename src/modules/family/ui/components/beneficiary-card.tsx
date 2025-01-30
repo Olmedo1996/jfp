@@ -7,7 +7,9 @@ interface BeneficiaryCardProps {
 export function BeneficiaryCard({ beneficiary }: BeneficiaryCardProps) {
   return (
     <div className="bg-card rounded-lg border p-6 shadow-sm">
-      <h2 className="mb-4 text-xl font-semibold">Beneficiary Information</h2>
+      <h2 className="mb-4 text-xl font-semibold">
+        Información del beneficiario
+      </h2>
       <div className="space-y-3">
         {[
           {

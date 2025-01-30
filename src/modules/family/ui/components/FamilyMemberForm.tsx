@@ -52,7 +52,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
   return (
     <div className="space-y-6">
       <div className="rounded-lg border p-6">
-        <h2 className="mb-4 text-xl font-semibold">Add Family Member</h2>
+        <h2 className="mb-4 text-xl font-semibold">Agregar nuevo miembro</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -61,7 +61,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>Nombres</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -74,7 +74,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>Apellidos</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -88,7 +88,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
               name="birth_date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Birth Date</FormLabel>
+                  <FormLabel>Fecha de Nacimiento</FormLabel>
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
@@ -101,7 +101,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone</FormLabel>
+                  <FormLabel>Teléfono</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -114,7 +114,7 @@ export function FamilyMemberForm({ beneficiaryId }: FamilyMemberFormProps) {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>Dirección</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

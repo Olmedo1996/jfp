@@ -113,19 +113,17 @@ export function FamilyMemberList({ beneficiaryId }: FamilyMemberListProps) {
 
   return (
     <div className="rounded-lg border p-6">
-      <h2 className="mb-4 text-xl font-semibold">Family Members</h2>
+      <h2 className="mb-4 text-xl font-semibold">Miembros de la Familia</h2>
       <div className="overflow-x-auto">
         <Form {...form}>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="bg-sidebar-accent sticky left-0 md:bg-transparent">
-                  Actions
-                </TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Birth Date</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Address</TableHead>
+                <TableHead className="bg-sidebar-accent sticky left-0 md:bg-transparent"></TableHead>
+                <TableHead>Nombre</TableHead>
+                <TableHead>Fecha de Nacimiento</TableHead>
+                <TableHead>Teléfono</TableHead>
+                <TableHead>Dirección</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
