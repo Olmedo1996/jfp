@@ -58,7 +58,11 @@ export function ActionsCell({ beneficiary }: ActionsCellProps) {
               router.push(`/beneficiaries/${beneficiary.id}/family`)
             }
           >{`Familiares`}</DropdownMenuItem>
-
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(`/beneficiaries/${beneficiary.id}/documents`)
+            }
+          >{`Documentos`}</DropdownMenuItem>
           <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DeleteBeneficiaryButton
