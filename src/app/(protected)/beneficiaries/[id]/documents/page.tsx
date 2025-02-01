@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { formatDate, parseBackendDate } from '../../../../../utils/dateUtils';
 
+import DrawerDialog from '@/components/responsive-dialog/drawer-dialog';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -64,14 +65,23 @@ export default async function DocumentsPage({ params }: PageProps) {
             <SelectContent>
               <SelectItem value="latest">Sort By: Latest</SelectItem>
               <SelectItem value="oldest">Sort By: Oldest</SelectItem>
-              <SelectItem value="name">Sort By: Name</SelectItem>
+              <SelectItem value="name" className="">
+                Sort By: Name
+              </SelectItem>
             </SelectContent>
           </Select>
-
-          <Button size="sm" className="flex-none">
-            <Plus className="mr-2 size-4" />
-            New
-          </Button>
+          <DrawerDialog
+            dialogTitle="New Document"
+            classNameDialogContent="sm:max-w-screen-md"
+            dialogButtonLabel={
+              <>
+                <Plus className="mr-2 size-4" />
+                Nuevo
+              </>
+            }
+          >
+            <>Hola</>
+          </DrawerDialog>
         </div>
       </div>
 
