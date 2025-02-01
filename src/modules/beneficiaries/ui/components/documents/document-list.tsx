@@ -9,10 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Document } from '@/modules/beneficiaries/core/interfaces/beneficiaries-documents';
+import { ApiDocumentsResponse } from '@/modules/documents/core/interfaces/documents-service.interface';
 
 interface DocumentListProps {
-  documents: Document[];
+  documents: ApiDocumentsResponse;
 }
 
 export function DocumentList({ documents }: DocumentListProps) {
@@ -25,8 +25,8 @@ export function DocumentList({ documents }: DocumentListProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {documents.map((doc) => (
-          <TableRow key={doc.name}>
+        {documents?.results.map((doc) => (
+          <TableRow key={doc.id}>
             <TableCell>
               <div className="flex items-center gap-2">
                 <FileText className="text-muted-foreground size-4" />
@@ -36,11 +36,11 @@ export function DocumentList({ documents }: DocumentListProps) {
             <TableCell className="text-right">
               <div className="flex items-center justify-end gap-2">
                 <span className="text-muted-foreground">
-                  {doc.uploadedBy.name}
+                  {doc.uploaded_by_name}
                 </span>
                 <Avatar className="size-6">
-                  <AvatarImage src={doc.uploadedBy.avatar} />
-                  <AvatarFallback>{doc.uploadedBy.name[0]}</AvatarFallback>
+                  <AvatarImage src={doc.uploaded_by_name} />
+                  <AvatarFallback>{doc.uploaded_by_name[0]}</AvatarFallback>
                 </Avatar>
               </div>
             </TableCell>

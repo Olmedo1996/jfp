@@ -14,13 +14,10 @@ import {
 import { type CarouselApi } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { FolderCard } from '@/modules/beneficiaries/ui/components/documents/folder-card';
+import { ApiDocumentsFolderResponse } from '@/modules/documents/core/interfaces/documents-folder-service.interface';
 
 interface FoldersContainerProps {
-  folders: {
-    name: string;
-    fileCount: number;
-    size: string;
-  }[];
+  folders: ApiDocumentsFolderResponse;
 }
 
 const FoldersContainer = ({ folders }: FoldersContainerProps) => {
@@ -89,17 +86,29 @@ const FoldersContainer = ({ folders }: FoldersContainerProps) => {
           <div className="from-background absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l to-transparent" />
         )}
         <CarouselContent className="-ml-4">
-          {folders.map((folder) => (
-            <CarouselItem
-              key={folder.name}
-              className={cn(
-                'pl-4',
-                'basis-1/2 md:basis-[250px] lg:basis-[300px]'
-              )}
-            >
-              <FolderCard {...folder} />
-            </CarouselItem>
-          ))}
+          {folders?.results.map((folder) => {
+            const name = folder.name;
+            const fileCount = folder.file_count;
+            const size = folder.total_size_display;
+            const color = folder.color;
+
+            return (
+              <CarouselItem
+                key={folder.name}
+                className={cn(
+                  'pl-4',
+                  'basis-1/2 md:basis-[250px] lg:basis-[300px]'
+                )}
+              >
+                <FolderCard
+                  name={name}
+                  fileCount={fileCount}
+                  size={size}
+                  color={color}
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         {/* Ocultamos los botones nativos del Carousel */}
         <div className="hidden">
