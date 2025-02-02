@@ -25,7 +25,6 @@
   "nextjs_starter_template_description": "A Next.js starter template, packed with features like TypeScript, Tailwind CSS, Next-auth, Eslint, Stripe, Paraglide, testing tools and more. Jumpstart your project with efficiency and style.",
   "get_started": "Get Started",
   "github": "Github",
-  "activities": "Activities",
   "attendances": "Attendances",
 
   "loading": "Loading...",
@@ -96,5 +95,19 @@
   "beneficiaries_header_notes": "Notes",
   "beneficiaries_header_education_level": "Education Level",
   "beneficiaries_header_gender": "Gender",
-  "beneficiaries_search_placeholder": "Search beneficiary..."
+  "beneficiaries_search_placeholder": "Search beneficiary...",
+
+  "new_activity": "New activity",
+  "activities": "Activities",
+  "edit_activity": "Edit activity",
+  "activities_title": "Activities",
+  "activities_header_start_date": "Start Date",
+  "activities_header_actions": "Actions",
+  "activities_header_end_date": "End Date",
+  "activities_header_notes": "Notes",
+  "activities_header_beneficiary": "Beneficiary",
+  "activities_header_business": "Business",
+  "activities_header_tutor": "Tutor",
+  "activities_header_activity_status": "Status",
+  "activities_search_placeholder": "Search activity..."
 }
