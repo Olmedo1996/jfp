@@ -69,7 +69,7 @@ export function PersonalInformationForm() {
               <FormLabel>Género</FormLabel>
               <FormControl>
                 <InfiniteSelect
-                  apiEndpoint="genders"
+                  apiEndpoint="genders/"
                   placeholder="Seleccione un género"
                   searchPlaceholder="Buscar Género"
                   value={field.value}
@@ -90,7 +90,7 @@ export function PersonalInformationForm() {
               <FormLabel>Nivel de Educación</FormLabel>
               <FormControl>
                 <InfiniteSelect
-                  apiEndpoint="educations"
+                  apiEndpoint="educations/"
                   placeholder="Seleccione un nivel de educación"
                   searchPlaceholder="Buscar Nivel de Educación"
                   value={field.value}

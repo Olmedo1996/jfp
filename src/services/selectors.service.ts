@@ -18,7 +18,7 @@ export const selectorsService = {
     params: ApiGenericSelectorsRequestParams
   ): Promise<ApiGenericSelectorResponse> {
     const { endpoint, ...rest } = params;
-    const response = await api.get<ApiGenericSelectorResponse>(`${endpoint}/`, {
+    const response = await api.get<ApiGenericSelectorResponse>(`${endpoint}`, {
       params: rest,
     });
     return response.data;

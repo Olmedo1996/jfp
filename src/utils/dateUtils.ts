@@ -2,7 +2,7 @@ import { format, parseISO } from 'date-fns';
 
 export const DATE_FORMATS = {
   ISO: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX",
-  SIMPLE_DATE: 'yyyy-MM-dd',
+  SIMPLE_DATE_BACKEND: 'yyyy-MM-dd',
   US_SHORT: 'MM/dd/yyyy',
   EU_SHORT: 'dd/MM/yyyy',
   TEXT_EN: 'MMM d, yyyy',

@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -55,7 +56,7 @@ export default function DrawerDialog({
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={setOpen} modal>
         <DialogTrigger asChild>
           <Button variant={variantButton}>{dialogButtonLabel}</Button>
         </DialogTrigger>
@@ -75,12 +76,14 @@ export default function DrawerDialog({
       <DrawerTrigger asChild>
         <Button variant={variantButton}>{dialogButtonLabel}</Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="max-h-[80vh]">
         <DrawerHeader className="text-left">
           <DrawerTitle>{dialogTitle}</DrawerTitle>
           <DrawerDescription>{dialogDescription}</DrawerDescription>
         </DrawerHeader>
-        {children}
+        <ScrollArea className="max-h-[60vh] overflow-auto p-4">
+          {children}
+        </ScrollArea>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">{cancelButtonLabel}</Button>

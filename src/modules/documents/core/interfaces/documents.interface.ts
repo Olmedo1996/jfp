@@ -1,15 +1,9 @@
-export interface Folder {
+export interface ICreateDocument {
   name: string;
-  fileCount: number;
-  size: string;
-}
-
-export interface Document {
-  name: string;
-  date: string;
-  size: string;
-  uploadedBy: {
-    name: string;
-    avatar: string;
-  };
+  description?: string;
+  document_type: number;
+  folder?: number;
+  file: File;
+  expiration_date?: string;
+  beneficiary: number;
 }

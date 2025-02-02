@@ -1,9 +1,8 @@
-import { FileText, Filter, Plus } from 'lucide-react';
+import { FileText, Filter } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 import { formatDate, parseBackendDate } from '../../../../../utils/dateUtils';
 
-import DrawerDialog from '@/components/responsive-dialog/drawer-dialog';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -16,6 +15,7 @@ import { beneficiariesService } from '@/modules/beneficiaries/services/beneficia
 import { DocumentList } from '@/modules/beneficiaries/ui/components/documents/document-list';
 import FoldersContainer from '@/modules/beneficiaries/ui/components/documents/folders-container';
 import { documentsServerSideService } from '@/modules/documents/services/documents-server.service';
+import NewDocument from '@/modules/documents/ui/components/form/document-new';
 interface PageProps {
   params: {
     id: string;
@@ -70,18 +70,7 @@ export default async function DocumentsPage({ params }: PageProps) {
               </SelectItem>
             </SelectContent>
           </Select>
-          <DrawerDialog
-            dialogTitle="New Document"
-            classNameDialogContent="sm:max-w-screen-md"
-            dialogButtonLabel={
-              <>
-                <Plus className="mr-2 size-4" />
-                Nuevo
-              </>
-            }
-          >
-            <>Hola</>
-          </DrawerDialog>
+          <NewDocument beneficiary={beneficiary} />
         </div>
       </div>
 

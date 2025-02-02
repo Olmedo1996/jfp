@@ -62,10 +62,15 @@ export const beneficiariesService = {
   },
 
   async get(id: BeneficiaryResult['id']): Promise<BeneficiaryResult> {
-    const response = await serverApi.get<BeneficiaryResult>(
-      `beneficiaries/${id}/`,
-      {}
-    );
-    return response.data;
+    try {
+      const response = await serverApi.get<BeneficiaryResult>(
+        `beneficiaries/${id}/`,
+        {}
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error getting beneficiary:', error);
+      throw error;
+    }
   },
 };
