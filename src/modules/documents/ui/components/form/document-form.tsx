@@ -5,7 +5,8 @@ import { CalendarIcon, Upload } from 'lucide-react';
 
 import useCreateDocument from '../../hooks/use-create-document';
 
-import { InfiniteSelect } from '@/components/selector/infinite-select';
+import { AsyncCreateSelect } from '@/components/selector/async-create-select';
+import { AsyncInfiniteSelect } from '@/components/selector/sigle-async-select';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -86,10 +87,10 @@ const DocumentForm = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Tipo de documento</FormLabel>
-                  <InfiniteSelect
+                  <AsyncInfiniteSelect
                     apiEndpoint="documents/selector/"
                     placeholder="Selecciona un tipo de documento"
-                    searchPlaceholder="Buscar Tipo de Documento"
+                    noOptionsMessage="No hay tipos de documentos disponibles"
                     value={field.value}
                     onChange={field.onChange}
                     pageSize={20}
@@ -107,20 +108,20 @@ const DocumentForm = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Carpeta (Opcional)</FormLabel>
-                  <InfiniteSelect
+                  <AsyncCreateSelect
                     apiEndpoint={`documents/folders/selector/?beneficiary=${beneficiary.id}`}
-                    placeholder="Selecciona una carpeta"
-                    searchPlaceholder="Buscar Carpeta"
+                    createEndpoint={`documents/folders/create/?beneficiary=${beneficiary.id}`}
                     value={field.value}
                     onChange={field.onChange}
-                    pageSize={20}
-                    ordering="-created_at"
+                    placeholder="Select or create a folder"
+                    noOptionsMessage="No folders available"
+                    className="w-full"
+                    createLabel="Create folder"
                   />
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             {/* Fecha de expiración */}
             <FormField
               control={form.control}

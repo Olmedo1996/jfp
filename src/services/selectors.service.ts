@@ -13,6 +13,11 @@ export interface ApiGenericSelectorsRequestParams extends GenericRequestParams {
 
 export type ApiGenericSelectorResponse = IResponseApiListViewGet<SelectOption>;
 
+export interface CreateItemParams<TData> {
+  endpoint: string;
+  data: TData;
+}
+
 export const selectorsService = {
   async listView(
     params: ApiGenericSelectorsRequestParams
@@ -21,6 +26,14 @@ export const selectorsService = {
     const response = await api.get<ApiGenericSelectorResponse>(`${endpoint}`, {
       params: rest,
     });
+    return response.data;
+  },
+
+  async createItem<TData>(
+    params: CreateItemParams<TData>
+  ): Promise<SelectOption> {
+    const { endpoint, data } = params;
+    const response = await api.post<SelectOption>(`${endpoint}`, data);
     return response.data;
   },
 };
