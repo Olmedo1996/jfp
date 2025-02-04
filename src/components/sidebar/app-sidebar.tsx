@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Apple, Briefcase, CalendarPlus, Users } from 'lucide-react';
+import { Apple, BookUser, Briefcase, CalendarPlus, Users } from 'lucide-react';
 
 import JfpIcon from '../custom-icon/jfp-icon';
 
@@ -141,6 +141,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         name: m.businesses(),
         url: '/businesses',
         icon: Briefcase,
+      },
+      {
+        name: m.branches(),
+        url: '/branches',
+        icon: Briefcase,
+      },
+      {
+        name: m.contacts(),
+        url: '/contacts',
+        icon: BookUser,
       },
       {
         name: m.activities(),

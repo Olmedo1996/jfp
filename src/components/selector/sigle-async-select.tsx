@@ -48,7 +48,7 @@ export function AsyncInfiniteSelect({
         }
         return undefined;
       },
-      enabled: menuIsOpen, // Solo habilita la consulta cuando el menú está abierto
+      // enabled: menuIsOpen, // Solo habilita la consulta cuando el menú está abierto
     });
 
   // Cargar opciones iniciales o basadas en la búsqueda
