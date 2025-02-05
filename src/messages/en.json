@@ -109,5 +109,32 @@
   "activities_header_business": "Business",
   "activities_header_tutor": "Tutor",
   "activities_header_activity_status": "Status",
-  "activities_search_placeholder": "Search activity..."
+  "activities_search_placeholder": "Search activity...",
+
+  "new_branch": "New branch",
+  "branches": "Branches",
+  "edit_branch": "Edit branch",
+  "branches_title": "branches",
+  "branches_header_name": "Branch",
+  "branches_header_actions": "Actions",
+  "branches_header_address": "Address",
+  "branches_header_phone": "Phone",
+  "branches_header_code": "Branch Code",
+  "branches_header_business": "Business",
+  "branches_header_status": "Status",
+  "branches_search_placeholder": "Search branch...",
+
+  "new_contact": "New contact",
+  "contacts": "Contacts",
+  "edit_contact": "Edit contact",
+  "contacts_title": "branches",
+  "contacts_header_first_name": "First Name",
+  "contacts_header_actions": "Actions",
+  "contacts_header_last_name": "Last Name",
+  "contacts_header_email": "Email",
+  "contacts_header_job_title": "Job Title",
+  "contacts_header_primary_contact": "Primary Contact",
+  "contacts_header_branch": "Branch",
+  "contacts_header_business": "Business",
+  "contacts_search_placeholder": "Search contact..."
 }

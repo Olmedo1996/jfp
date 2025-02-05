@@ -108,5 +108,32 @@
   "activities_header_business": "Empresa",
   "activities_header_tutor": "Tutor",
   "activities_header_activity_status": "Status",
-  "activities_search_placeholder": "Buscar atividade..."
+  "activities_search_placeholder": "Buscar atividade...",
+
+  "new_branch": "Nova filial",
+  "branches": "Filiais",
+  "edit_branch": "Editar filial",
+  "branches_title": "filiais",
+  "branches_header_name": "Filial",
+  "branches_header_actions": "Ações",
+  "branches_header_address": "Endereço",
+  "branches_header_phone": "Telefone",
+  "branches_header_code": "Código da Filial",
+  "branches_header_business": "Empresa",
+  "branches_header_status": "Status",
+  "branches_search_placeholder": "Buscar filial...",
+
+  "new_contact": "Novo contato",
+  "contacts": "Contatos",
+  "edit_contact": "Editar contato",
+  "contacts_title": "filiais",
+  "contacts_header_first_name": "Primeiro Nome",
+  "contacts_header_actions": "Ações",
+  "contacts_header_last_name": "Sobrenome",
+  "contacts_header_email": "E-mail",
+  "contacts_header_job_title": "Cargo",
+  "contacts_header_primary_contact": "Contato Principal",
+  "contacts_header_branch": "Filial",
+  "contacts_header_business": "Empresa",
+  "contacts_search_placeholder": "Buscar contato..."
 }
