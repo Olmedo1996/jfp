@@ -6,6 +6,7 @@ import {
 import {
   ApiDocumentsRequestParams,
   ApiDocumentsResponse,
+  DocumentRecentResult,
   DocumentResult,
 } from '../core/interfaces/documents-service.interface';
 
@@ -55,6 +56,18 @@ class DocumentsService {
   ): Promise<ApiDocumentsFolderResponse> {
     const response = await api.get<ApiDocumentsFolderResponse>(
       'documents/folders/',
+      {
+        params,
+      }
+    );
+    return response.data;
+  }
+
+  async listRecent(
+    params?: ApiDocumentsFolderRequestParams
+  ): Promise<DocumentRecentResult[]> {
+    const response = await api.get<DocumentRecentResult[]>(
+      `documents/recent/`,
       {
         params,
       }

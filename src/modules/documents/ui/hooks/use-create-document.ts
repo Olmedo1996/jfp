@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { ICreateDocument } from '../../core/interfaces/documents.interface';
 import { DocumentModel } from '../../core/models/documents.model';
@@ -15,6 +16,7 @@ import { showSuccessToast } from '@/utils/toast-messages';
 
 const useCreateDocument = (beneficiaryId: number) => {
   // const router = useRouter();
+  const queryClient = useQueryClient();
 
   const methods = useForm<DocumentModel>({
     resolver: zodResolver(documentSchema),
@@ -51,6 +53,20 @@ const useCreateDocument = (beneficiaryId: number) => {
 
     if (response) {
       showSuccessToast('Documento agregado al beneficiario', 'create');
+
+      if (folder?.value) {
+        await queryClient.invalidateQueries({
+          queryKey: ['folders', beneficiaryId],
+        });
+      }
+
+      await queryClient.invalidateQueries({
+        queryKey: ['documents', beneficiaryId],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ['documents-recent', beneficiaryId],
+      });
 
       if (action === 'save') {
         // router.push(EBeneficiaryRoute.list);
