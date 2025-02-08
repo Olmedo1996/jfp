@@ -11,6 +11,10 @@ export interface ActivityResult {
   beneficiary: number;
   created_at: Date;
   updated_at: Date;
+  activity_status_data: string;
+  beneficiary_data: string;
+  start_date: string;
+  tutor_full_name: string;
 }
 
 export type ApiBusinessResponse = IResponseApiListViewGet<ActivityResult>;
