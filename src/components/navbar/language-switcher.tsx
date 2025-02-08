@@ -1,5 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
+import { Locale, setDefaultOptions } from 'date-fns';
+import { enUS, es, pt } from 'date-fns/locale';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -20,15 +24,28 @@ const LanguageLabel: Record<AvailableLanguageTag, string> = {
   br: 'Português',
 };
 
+// Mapeo de locales de date-fns
+const DateLocales: Record<AvailableLanguageTag, Locale> = {
+  en: enUS,
+  es: es,
+  br: pt,
+};
+
 export const LanguageSwitcher = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const currentLanguage = languageTag();
+
+  // Efecto para actualizar el locale de date-fns cuando cambia el idioma
+  useEffect(() => {
+    setDefaultOptions({ locale: DateLocales[currentLanguage] });
+  }, [currentLanguage]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon">
-          {languageTag().toUpperCase()}
+          {currentLanguage.toUpperCase()}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -46,3 +63,5 @@ export const LanguageSwitcher = () => {
     </DropdownMenu>
   );
 };
+
+export default LanguageSwitcher;
