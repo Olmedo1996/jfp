@@ -27,6 +27,7 @@ interface AsyncCreateSelectProps {
   pageSize?: number;
   ordering?: string;
   createLabel?: string;
+  isDisabled?: boolean;
 }
 
 interface CreateFolderData {
@@ -44,6 +45,7 @@ export function AsyncCreateSelect({
   pageSize = 10,
   ordering,
   createLabel = 'Create new...',
+  isDisabled = false,
 }: AsyncCreateSelectProps) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const queryClient = useQueryClient();
@@ -156,9 +158,13 @@ export function AsyncCreateSelect({
         control: (base, state) => ({
           ...base,
           minHeight: '40px',
-          backgroundColor: 'hsl(var(--background))',
+          cursor: isDisabled ? 'not-allowed' : 'default',
+          backgroundColor: isDisabled
+            ? 'hsl(var(--accent))'
+            : 'hsl(var(--background))',
           border: '1px solid hsl(var(--input))',
           borderRadius: 'calc(var(--radius) - 2px)',
+          transition: 'none',
           boxShadow: state.isFocused ? '0 0 0 2px hsl(var(--ring))' : 'none',
           '&:hover': {
             borderColor: 'hsl(var(--ring))',
@@ -199,22 +205,27 @@ export function AsyncCreateSelect({
         option: (base, state) => ({
           ...base,
           backgroundColor: state.isSelected
-            ? 'hsl(var(--primary))'
+            ? 'hsl(var(--accent))'
             : state.isFocused
               ? 'hsl(var(--accent))'
               : 'transparent',
-          color: state.isSelected
-            ? 'hsl(var(--primary-foreground))'
-            : 'hsl(var(--popover-foreground))',
+          color: 'hsl(var(--popover-foreground))',
+          // if you want to change the color of the selected option
+          // state.isSelected
+          // ? 'hsl(var(--popover-foreground))'
+          // : 'hsl(var(--popover-foreground))',
           cursor: 'pointer',
           padding: '8px 12px',
           borderRadius: 'calc(var(--radius) - 2px)',
           fontSize: '14px',
-          transition: 'background-color 150ms ease',
+          transition: 'none',
+          // transition: 'background-color 150ms ease',
           '&:hover': {
-            backgroundColor: state.isSelected
-              ? 'hsl(var(--primary))'
-              : 'hsl(var(--accent))',
+            backgroundColor: 'hsl(var(--accent))',
+            // if you want to change the color of the selected option
+            // state.isSelected
+            //   ? 'hsl(var(--primary))'
+            //   : 'hsl(var(--accent))',
           },
         }),
         singleValue: (base) => ({
