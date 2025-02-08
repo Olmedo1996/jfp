@@ -1,13 +1,11 @@
-import React from 'react';
+import { ContactsForm } from '@/modules/contacts/ui/components/contacts-form';
 
-import { BusinessesForm } from '@/modules/businesses/ui/components/businesses-form';
-
-const NewBusiness = () => {
+const NewContact = () => {
   return (
     <>
-      <BusinessesForm />
+      <ContactsForm />
     </>
   );
 };
 
-export default NewBusiness;
+export default NewContact;

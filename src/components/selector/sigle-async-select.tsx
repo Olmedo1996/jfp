@@ -15,6 +15,7 @@ interface AsyncInfiniteSelectProps {
   className?: string;
   pageSize?: number;
   ordering?: string;
+  isDisabled?: boolean;
 }
 
 export function AsyncInfiniteSelect({
@@ -26,6 +27,7 @@ export function AsyncInfiniteSelect({
   className,
   pageSize = 10,
   ordering,
+  isDisabled = false,
 }: AsyncInfiniteSelectProps) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -48,7 +50,7 @@ export function AsyncInfiniteSelect({
         }
         return undefined;
       },
-      // enabled: menuIsOpen, // Solo habilita la consulta cuando el menú está abierto
+      enabled: !isDisabled, // Solo habilita la consulta cuando el menú está abierto
     });
 
   // Cargar opciones iniciales o basadas en la búsqueda
@@ -100,6 +102,7 @@ export function AsyncInfiniteSelect({
       onMenuOpen={() => setMenuIsOpen(true)} // Abrir menú
       onMenuClose={() => setMenuIsOpen(false)} // Cerrar menú
       maxMenuHeight={200} // Ajustar la altura del menú
+      isDisabled={isDisabled}
       styles={{
         control: (base) => ({
           ...base,
