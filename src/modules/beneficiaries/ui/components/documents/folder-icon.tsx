@@ -1,4 +1,5 @@
 'use client';
+'use client';
 
 import { FC } from 'react';
 
@@ -13,7 +14,17 @@ export const FolderIcon: FC<FolderIconProps> = ({
   size = 64,
   isOpen = false,
 }) => {
-  const folderColor = color;
+  const isGradient =
+    color.startsWith('linear-gradient') || color.startsWith('radial-gradient');
+
+  const folderStyle = isGradient
+    ? { backgroundImage: color }
+    : { backgroundColor: color };
+
+  const darkerFolderStyle = isGradient
+    ? { backgroundImage: color } // No hay una manera directa de hacer un gradiente más oscuro
+    : { backgroundColor: `${color}CC` };
+
   const paperColor = '#ffffff';
   const secondPaper = '#ededed';
   const thirdPaper = '#c9c9c9';
@@ -30,7 +41,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
       <div
         className="relative size-full"
         style={{
-          backgroundColor: `${folderColor}CC`, // Añade transparencia
+          ...darkerFolderStyle, // Aplicar el color más oscuro
           borderRadius: '0px 5px 5px 5px',
         }}
       >
@@ -40,7 +51,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
           style={{
             width: size * 0.3,
             height: size * 0.1,
-            backgroundColor: `${folderColor}CC`,
+            ...darkerFolderStyle,
             borderRadius: '5px 5px 0 0',
           }}
         />
@@ -51,7 +62,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
           style={{
             width: '70%',
             height: '80%',
-            backgroundColor: `${thirdPaper}`,
+            backgroundColor: thirdPaper,
             borderRadius: '5px',
             transform: isOpen
               ? 'translate(-50%, -10%)'
@@ -63,7 +74,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
           style={{
             width: '80%',
             height: '70%',
-            backgroundColor: `${secondPaper}`,
+            backgroundColor: secondPaper,
             borderRadius: '5px',
             transform: isOpen
               ? 'translate(-50%, -20%)'
@@ -87,7 +98,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
         <div
           className="absolute size-full origin-bottom transition-all duration-300 ease-in-out"
           style={{
-            backgroundColor: folderColor,
+            ...folderStyle,
             borderRadius: '5px',
             transform: isOpen ? 'rotateX(-45deg)' : 'rotateX(0deg)',
           }}
@@ -95,7 +106,7 @@ export const FolderIcon: FC<FolderIconProps> = ({
         <div
           className="absolute size-full origin-bottom transition-all duration-300 ease-in-out"
           style={{
-            backgroundColor: folderColor,
+            ...folderStyle,
             borderRadius: '5px',
             transform: isOpen ? 'rotateX(45deg)' : 'rotateX(0deg)',
           }}

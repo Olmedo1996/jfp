@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { FolderIcon } from './folder-icon';
+import { MenuFolderOption } from './menu-folder-option';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
@@ -22,17 +23,19 @@ export function FolderCard({ name, fileCount, size, color }: FolderCardProps) {
       className={cn(
         'hover:bg-accent/50 cursor-pointer transition-colors',
         'flex flex-col justify-between',
-        'min-w-[200px] max-w-[350px]', // Límites de ancho
-        'max-h-[180px] min-h-[120px]', // Límites de altura
-        'size-full' // Ocupar el espacio disponible dentro de los límites
+        'min-w-[200px] max-w-[350px]',
+        'max-h-[180px] min-h-[120px]',
+        'relative size-full' // Agregado 'relative' para posicionamiento del botón
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Dropdown Menu */}
+      <MenuFolderOption />
       <CardContent
         className={cn(
-          'p-3 sm:p-4 lg:p-6', // Padding responsive
-          'flex flex-col gap-2 sm:gap-3 lg:gap-4' // Espaciado interno responsive
+          'p-3 sm:p-4 lg:p-6',
+          'flex flex-col gap-2 sm:gap-3 lg:gap-4'
         )}
       >
         <div className="flex flex-col gap-4 sm:gap-2">
@@ -45,18 +48,15 @@ export function FolderCard({ name, fileCount, size, color }: FolderCardProps) {
             <FolderIcon color={color} isOpen={isHovered} />
           </div>
 
-          {/* Nombre de la carpeta */}
           <h3
             className={cn(
               'truncate font-semibold',
-              // 'text-xs sm:text-sm lg:text-base',
               'line-clamp-2 sm:line-clamp-1'
             )}
           >
             {name}
           </h3>
 
-          {/* Información de archivos */}
           <p
             className={cn(
               'text-muted-foreground',
