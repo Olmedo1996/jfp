@@ -1,8 +1,11 @@
 export interface ICreateBusiness {
   name: string;
   ruc_ci: string;
-  phone: string;
-  address: string;
-  description: string;
-  is_active: boolean;
+  description?: string;
+}
+
+export interface IUpdateBusiness {
+  name: string;
+  ruc_ci: string;
+  description?: string;
 }

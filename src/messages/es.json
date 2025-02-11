@@ -71,7 +71,7 @@
   "businesses_table_ruc_ci": "RUC/CI",
   "businesses_phone": "Teléfono",
   "businesses_address": "Dirección",
-  "businesses_description": "Descripción",
+  "businesses_description": "Descripción | Observación",
   "businesses_is_active": "Estado",
   "businesses_specialization": "Especialización",
   "businesses_search_placeholder": "Buscar empresa...",
