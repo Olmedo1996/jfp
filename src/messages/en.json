@@ -72,7 +72,7 @@
   "businesses_table_ruc_ci": "RUC/CI",
   "businesses_phone": "Phone",
   "businesses_address": "Address",
-  "businesses_description": "Description",
+  "businesses_description": "Description | Observation",
   "businesses_is_active": "Status",
   "businesses_specialization": "Specialization",
   "businesses_search_placeholder": "Search business...",

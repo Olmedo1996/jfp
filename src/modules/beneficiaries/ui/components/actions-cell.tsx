@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
 
+import { BeneficiaryResult } from '../../core/interfaces/beneficiaries-service.interface';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -12,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useRouter } from '@/lib/i18n';
-import { BeneficiaryResult } from '@/modules/beneficiaries/core/interfaces/beneficiaries-service.interface';
 import { DeleteBeneficiaryButton } from '@/modules/beneficiaries/ui/components/delete-beneficiary-button';
 import * as m from '@/paraglide/messages';
 

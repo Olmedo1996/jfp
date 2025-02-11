@@ -8,20 +8,24 @@ import { businessSchema } from '../../../core/schemas/business.schema';
 import { businessService } from '../../../services/business.service';
 
 import { useRouter } from '@/lib/i18n';
+import { IUpdateBusiness } from '@/modules/businesses/core/interfaces/business.interface';
 import { TSaveAction } from '@/types/form.types';
 import { showSuccessToast } from '@/utils/toast-messages';
 
-const useCreateBusiness = () => {
+interface UseUpdateBusinessProps {
+  initialValues: BusinessModel;
+  businessId: number;
+}
+
+const useUpdateBusiness = ({
+  initialValues,
+  businessId,
+}: UseUpdateBusinessProps) => {
   const router = useRouter();
 
   const methods = useForm<BusinessModel>({
     resolver: zodResolver(businessSchema),
-    defaultValues: {
-      is_active: true,
-      description: '',
-      name: '',
-      ruc_ci: '',
-    },
+    defaultValues: initialValues,
   });
 
   const handleSubmit = async (
@@ -29,9 +33,13 @@ const useCreateBusiness = () => {
     action: TSaveAction = 'save'
   ) => {
     try {
-      const result = await businessService.create(data);
+      const dataToUpdate: IUpdateBusiness = {
+        ...data,
+      };
+
+      const result = await businessService.update(businessId, dataToUpdate);
       if (result) {
-        showSuccessToast('Empresa creada', 'create');
+        showSuccessToast('Empresa actualizada', 'update');
 
         if (action === 'save') {
           router.push(EBusinessRoute.list);
@@ -48,4 +56,4 @@ const useCreateBusiness = () => {
   return { methods, handleSubmit };
 };
 
-export default useCreateBusiness;
+export default useUpdateBusiness;

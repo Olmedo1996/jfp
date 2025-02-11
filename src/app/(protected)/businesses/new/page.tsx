@@ -1,11 +1,9 @@
-import React from 'react';
-
-import { BusinessesForm } from '@/modules/businesses/ui/components/businesses-form';
+import BusinessCreateForm from '@/modules/businesses/ui/components/business-create-form';
 
 const NewBusiness = () => {
   return (
     <>
-      <BusinessesForm />
+      <BusinessCreateForm />
     </>
   );
 };
