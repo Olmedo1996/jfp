@@ -86,6 +86,7 @@
     "@inlang/paraglide-js": "1.11.3",
     "@playwright/test": "^1.48.1",
     "@tanstack/eslint-plugin-query": "^5.62.16",
+    "@tanstack/react-query-devtools": "^5.66.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.13",

@@ -2,6 +2,7 @@ import { ICreateDocument } from '../core/interfaces/documents.interface';
 import {
   ApiDocumentsFolderRequestParams,
   ApiDocumentsFolderResponse,
+  DocumentFolderResult,
 } from '../core/interfaces/documents-folder-service.interface';
 import {
   ApiDocumentsRequestParams,
@@ -71,6 +72,17 @@ class DocumentsService {
       {
         params,
       }
+    );
+    return response.data;
+  }
+
+  async updateFolderColor(
+    folderId: number,
+    color: string
+  ): Promise<DocumentFolderResult> {
+    const response = await api.patch<DocumentFolderResult>(
+      `documents/folders/${folderId}/`,
+      { color }
     );
     return response.data;
   }

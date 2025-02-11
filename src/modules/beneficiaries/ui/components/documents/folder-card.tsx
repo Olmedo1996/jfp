@@ -9,13 +9,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
 interface FolderCardProps {
+  folderId: number;
   name: string;
   fileCount: number;
   size: string;
   color?: string;
 }
 
-export function FolderCard({ name, fileCount, size, color }: FolderCardProps) {
+export function FolderCard({
+  folderId,
+  name,
+  fileCount,
+  size,
+  color,
+}: FolderCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -31,7 +38,7 @@ export function FolderCard({ name, fileCount, size, color }: FolderCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Dropdown Menu */}
-      <MenuFolderOption />
+      <MenuFolderOption folderId={folderId} initialColor={color || '#B4D455'} />
       <CardContent
         className={cn(
           'p-3 sm:p-4 lg:p-6',

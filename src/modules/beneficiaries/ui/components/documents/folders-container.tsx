@@ -111,6 +111,7 @@ const FoldersContainer = ({
                   )}
                 >
                   <FolderCard
+                    folderId={folder.id}
                     name={name}
                     fileCount={fileCount}
                     size={size}

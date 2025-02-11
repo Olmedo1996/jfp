@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MoreVertical } from 'lucide-react';
 
 import { FolderColorSelector } from '@/components/folder-color-selector';
@@ -12,10 +13,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export function MenuFolderOption() {
+export function MenuFolderOption({
+  folderId,
+  initialColor,
+}: {
+  folderId: number;
+  initialColor: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="absolute right-2 top-2 z-10">
-      <DropdownMenu>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenuTrigger className="hover:bg-accent flex size-8 items-center justify-center rounded-md">
           <MoreVertical className="size-4" />
         </DropdownMenuTrigger>
@@ -27,7 +36,10 @@ export function MenuFolderOption() {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <FolderColorSelector />
+                <FolderColorSelector
+                  folderId={folderId}
+                  initialColor={initialColor}
+                />
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
