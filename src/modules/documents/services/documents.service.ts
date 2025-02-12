@@ -3,6 +3,7 @@ import {
   ApiDocumentsFolderRequestParams,
   ApiDocumentsFolderResponse,
   DocumentFolderResult,
+  UpdatePartialDocumentFolder,
 } from '../core/interfaces/documents-folder-service.interface';
 import {
   ApiDocumentsRequestParams,
@@ -76,13 +77,13 @@ class DocumentsService {
     return response.data;
   }
 
-  async updateFolderColor(
+  async updatePartialFolder(
     folderId: number,
-    color: string
+    params: UpdatePartialDocumentFolder
   ): Promise<DocumentFolderResult> {
     const response = await api.patch<DocumentFolderResult>(
       `documents/folders/${folderId}/`,
-      { color }
+      { ...params }
     );
     return response.data;
   }

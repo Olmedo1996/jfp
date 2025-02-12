@@ -1,12 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { X } from 'lucide-react';
+import { useParams } from 'next/navigation';
 
 import { FolderIcon } from './folder-icon';
 import { MenuFolderOption } from './menu-folder-option';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { ApiDocumentsFolderResponse } from '@/modules/documents/core/interfaces/documents-folder-service.interface';
+import { documentsService } from '@/modules/documents/services/documents.service';
 
 interface FolderCardProps {
   folderId: number;
@@ -24,6 +31,47 @@ export function FolderCard({
   color,
 }: FolderCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [folderName, setFolderName] = useState(name);
+  const params = useParams();
+  const beneficiaryId = Number(params.id);
+  const queryClient = useQueryClient();
+
+  const { mutate: updateName } = useMutation({
+    mutationFn: (newName: string) =>
+      documentsService.updatePartialFolder(folderId, { name: newName }),
+    onSuccess: (updatedFolder) => {
+      queryClient.setQueryData(
+        ['folders', beneficiaryId],
+        (oldData: ApiDocumentsFolderResponse) => {
+          const newResult = oldData.results.map((folder) =>
+            folder.id === folderId
+              ? { ...folder, name: updatedFolder.name }
+              : folder
+          );
+
+          return {
+            ...oldData,
+            results: newResult,
+          };
+        }
+      );
+    },
+  });
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      updateName(folderName);
+    } else if (event.key === 'Escape') {
+      setIsEditing(false);
+      setFolderName(name);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setFolderName(name);
+  };
 
   return (
     <Card
@@ -32,13 +80,17 @@ export function FolderCard({
         'flex flex-col justify-between',
         'min-w-[200px] max-w-[350px]',
         'max-h-[180px] min-h-[120px]',
-        'relative size-full' // Agregado 'relative' para posicionamiento del botón
+        'relative size-full'
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Dropdown Menu */}
-      <MenuFolderOption folderId={folderId} initialColor={color || '#B4D455'} />
+      <MenuFolderOption
+        folderId={folderId}
+        initialColor={color || '#B4D455'}
+        onRename={() => setIsEditing(true)}
+        isEditing={isEditing}
+      />
       <CardContent
         className={cn(
           'p-3 sm:p-4 lg:p-6',
@@ -55,14 +107,34 @@ export function FolderCard({
             <FolderIcon color={color} isOpen={isHovered} />
           </div>
 
-          <h3
-            className={cn(
-              'truncate font-semibold',
-              'line-clamp-2 sm:line-clamp-1'
-            )}
-          >
-            {name}
-          </h3>
+          {isEditing ? (
+            <div className="relative">
+              <Input
+                type="text"
+                value={folderName}
+                onChange={(e) => setFolderName(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="input"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-0 top-0"
+                onClick={handleCancelEdit}
+              >
+                <X className="size-4" />
+              </Button>
+            </div>
+          ) : (
+            <h3
+              className={cn(
+                'truncate font-semibold',
+                'line-clamp-2 sm:line-clamp-1'
+              )}
+            >
+              {folderName}
+            </h3>
+          )}
 
           <p
             className={cn(

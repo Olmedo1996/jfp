@@ -23,3 +23,9 @@ export type ApiDocumentsFolderResponse =
 
 export type ApiDocumentsFolderRequestParams = GenericRequestParams &
   ExtraRequestParam;
+
+export type UpdatePartialDocumentFolder = {
+  name?: string;
+  description?: string;
+  color?: string;
+};

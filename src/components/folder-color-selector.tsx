@@ -21,7 +21,7 @@ export const FolderColorSelector = ({
 
   const { mutate: updateColor } = useMutation({
     mutationFn: (newColor: string) =>
-      documentsService.updateFolderColor(folderId, newColor),
+      documentsService.updatePartialFolder(folderId, { color: newColor }),
     onSuccess: (updatedFolder) => {
       queryClient.setQueryData(
         ['folders', beneficiaryId],
