@@ -65,6 +65,7 @@
 
   "business": "Empresa",
   "new_business": "Nueva empresa",
+  "edit_business": "Editar empresa",
   "businesses": "Empresas",
   "businesses_title": "Empresas",
   "businesses_table_name": "Nombre",

@@ -1,34 +1,35 @@
 'use client';
+
 import { useState } from 'react';
 
-import { EBusinessRoute } from '../../constants';
-import { BusinessResult } from '../../core/interfaces/business-service.interface';
-import { BusinessModel } from '../../core/models/business.model';
-import useUpdateBusiness from '../hooks/form/use-update-business';
-import { BusinessesForm } from './businesses-form';
+import { EBranchRoute } from '../../constants';
+import { BranchResult } from '../../core/interfaces/branch-service.interface';
+import { BranchModel } from '../../core/models/branch.model';
+import useUpdateBranch from '../hooks/form/use-update-branch';
+import { BranchesForm } from './branches-form';
 
 import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
 import * as m from '@/paraglide/messages';
+
 type SaveAction = 'save' | 'save-and-continue';
 
-interface UseUpdateBusinessProps {
-  businessId: number;
-  initialValues: BusinessResult;
+interface UseUpdateBranchProps {
+  branchId: number;
+  initialValues: BranchResult;
 }
-
-const UpdateBusinessForm = ({
-  businessId,
+const UpdateBranchForm = ({
+  branchId,
   initialValues,
-}: UseUpdateBusinessProps) => {
-  const { methods, handleSubmit } = useUpdateBusiness({
-    businessId,
+}: UseUpdateBranchProps) => {
+  const { methods, handleSubmit } = useUpdateBranch({
+    branchId,
     initialValues,
   });
   const [saveAction, setSaveAction] = useState<SaveAction>('save');
 
-  function onSubmit(values: BusinessModel) {
+  function onSubmit(values: BranchModel) {
     handleSubmit(values, saveAction);
   }
 
@@ -39,14 +40,14 @@ const UpdateBusinessForm = ({
           <Card>
             <CardHeader>
               <SaveHeaderForm
-                title={m.edit_business()}
-                backUrl={EBusinessRoute.list}
+                title={m.edit_branch()}
+                backUrl={EBranchRoute.list}
                 saveAndContinue={true}
                 onSaveTypeChange={setSaveAction}
               />
             </CardHeader>
             <CardContent>
-              <BusinessesForm />
+              <BranchesForm />
             </CardContent>
           </Card>
         </form>
@@ -55,4 +56,4 @@ const UpdateBusinessForm = ({
   );
 };
 
-export default UpdateBusinessForm;
+export default UpdateBranchForm;

@@ -1,5 +1,6 @@
 import { GenericRequestParams } from '@/interface/request-api-params';
 import { IResponseApiListViewGet } from '@/interface/response-api-get';
+import { ISelectOption } from '@/interface/select-option';
 
 export interface BranchResult {
   id: number;
@@ -8,7 +9,7 @@ export interface BranchResult {
   phone: string;
   address: string;
   is_active: boolean;
-  business: number;
+  business_selector: ISelectOption<number>;
   created_at: Date;
   updated_at: Date;
 }
