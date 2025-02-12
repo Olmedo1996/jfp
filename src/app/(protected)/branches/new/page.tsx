@@ -1,11 +1,9 @@
-import React from 'react';
-
-import { BranchesForm } from '@/modules/branches/ui/components/branches-form';
+import { BranchesCreateForm } from '@/modules/branches/ui/components/branches-update-form';
 
 const NewBranches = () => {
   return (
     <>
-      <BranchesForm />
+      <BranchesCreateForm />
     </>
   );
 };

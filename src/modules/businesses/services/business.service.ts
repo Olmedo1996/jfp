@@ -40,7 +40,7 @@ export const businessService = {
       );
       return response.data;
     } catch (error) {
-      console.error('Error getting beneficiary:', error);
+      console.error('Error getting business:', error);
       throw error;
     }
   },

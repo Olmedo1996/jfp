@@ -17,5 +17,5 @@ export const branchSchema = z.object({
   phone: z.string().min(1).max(15),
   address: z.string().min(1).max(250),
   is_active: z.boolean(),
-  business: selectOptionSchema,
+  business_selector: selectOptionSchema,
 });

@@ -5,26 +5,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { EBranchRoute } from '../../../constants';
 
 import { useRouter } from '@/lib/i18n';
-import { ICreateBranch } from '@/modules/branches/core/interfaces/branch.interface';
+import { IUpdateBranch } from '@/modules/branches/core/interfaces/branch.interface';
 import { BranchModel } from '@/modules/branches/core/models/branch.model';
 import { branchSchema } from '@/modules/branches/core/schemas/branch.schema';
 import { branchService } from '@/modules/branches/services/branch.service';
 import { TSaveAction } from '@/types/form.types';
 import { showSuccessToast } from '@/utils/toast-messages';
 
-const useCreateBranch = () => {
+interface UseUpdateBranchProps {
+  initialValues: BranchModel;
+  branchId: number;
+}
+
+const useUpdateBranch = ({
+  initialValues,
+  branchId: branchId,
+}: UseUpdateBranchProps) => {
   const router = useRouter();
 
   const methods = useForm<BranchModel>({
     resolver: zodResolver(branchSchema),
-    defaultValues: {
-      name: '',
-      code: '',
-      phone: '',
-      address: '',
-      is_active: true,
-      business_selector: undefined,
-    },
+    defaultValues: initialValues,
   });
 
   const handleSubmit = async (
@@ -32,14 +33,14 @@ const useCreateBranch = () => {
     action: TSaveAction = 'save'
   ) => {
     try {
-      const { business_selector, ...rest } = data;
-      const dataToSave: ICreateBranch = {
-        ...rest,
-        business: business_selector?.value,
+      const dataToUpdate: IUpdateBranch = {
+        ...data,
+        business: data.business_selector?.value || 0,
       };
-      const result = await branchService.create(dataToSave);
+
+      const result = await branchService.update(branchId, dataToUpdate);
       if (result) {
-        showSuccessToast('Sucursal creada', 'create');
+        showSuccessToast('Sucursal actualizada', 'update');
 
         if (action === 'save') {
           router.push(EBranchRoute.list);
@@ -56,4 +57,4 @@ const useCreateBranch = () => {
   return { methods, handleSubmit };
 };
 
-export default useCreateBranch;
+export default useUpdateBranch;
