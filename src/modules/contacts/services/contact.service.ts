@@ -26,4 +26,13 @@ export const contactService = {
     });
     return response.data;
   },
+
+  async delete(id: number): Promise<void> {
+    try {
+      await api.delete(`contacts/${id}/`);
+    } catch (error) {
+      console.error('Error deleting contact:', error);
+      throw error;
+    }
+  },
 };

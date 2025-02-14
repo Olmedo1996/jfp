@@ -1,9 +1,9 @@
-import { ContactsForm } from '@/modules/contacts/ui/components/contacts-form';
+import { ContactsCreateForm } from '@/modules/contacts/ui/components/contacts-create-form';
 
 const NewContact = () => {
   return (
     <>
-      <ContactsForm />
+      <ContactsCreateForm />
     </>
   );
 };

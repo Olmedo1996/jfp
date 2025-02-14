@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
 
-import { BranchResult } from '../../core/interfaces/branch-service.interface';
-import { DeleteBranchButton } from './delete-branch-button';
+import { ContactResult } from '../../core/interfaces/contact-service.interface';
+import { DeleteContactButton } from './delete-branch-button';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -17,10 +17,10 @@ import { useRouter } from '@/lib/i18n';
 import * as m from '@/paraglide/messages';
 
 interface ActionsCellProps {
-  branch: BranchResult;
+  contact: ContactResult;
 }
 
-export function ActionsCell({ branch }: ActionsCellProps) {
+export function ActionsCell({ contact }: ActionsCellProps) {
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -40,13 +40,13 @@ export function ActionsCell({ branch }: ActionsCellProps) {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/branches/edit/${branch.id}`)}
+            onClick={() => router.push(`/contacts/edit/${contact.id}`)}
           >
             {m.edit()}
           </DropdownMenuItem>
-          <DeleteBranchButton
-            id={branch.id}
-            fullName={branch.name || ''}
+          <DeleteContactButton
+            id={contact.id}
+            fullName={contact.first_name || contact.last_name}
             onOpenChange={setIsDropdownOpen}
           />
         </DropdownMenuContent>
