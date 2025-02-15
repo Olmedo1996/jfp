@@ -6,6 +6,7 @@ type Props = {
   };
 };
 
+export const dynamic = 'force-dynamic';
 const Page = (props: Props) => {
   return (
     <div>

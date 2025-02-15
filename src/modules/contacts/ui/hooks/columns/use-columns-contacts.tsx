@@ -8,7 +8,11 @@ import * as m from '@/paraglide/messages';
 export function useColumnsContacts(): ColumnDef<ContactResult>[] {
   return [
     {
-      accessorKey: 'branch',
+      accessorKey: 'business_data',
+      header: m.contacts_header_business(),
+    },
+    {
+      accessorKey: 'branch_data',
       header: m.contacts_header_branch(),
     },
     {

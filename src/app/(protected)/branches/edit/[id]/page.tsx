@@ -8,6 +8,7 @@ interface EditBranchProps {
   };
 }
 
+export const dynamic = 'force-dynamic';
 async function EditBranch({ params }: EditBranchProps) {
   const branchId = params.id ? Number(params.id) : 0;
 

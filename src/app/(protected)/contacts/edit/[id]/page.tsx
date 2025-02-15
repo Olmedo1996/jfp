@@ -1,24 +1,29 @@
 // beneficiaries/edit/[id]/page.tsx
-import { branchService } from '@/modules/branches/services/branch.service';
-import UpdateBranchForm from '@/modules/branches/ui/components/branches-update-form';
+import { contactService } from '@/modules/contacts/services/contact.service';
+import UpdateContactForm from '@/modules/contacts/ui/components/contacts-edit-form';
 
-interface EditBranchProps {
+interface EditContactProps {
   params: {
     id: string;
   };
 }
 
-async function EditBranch({ params }: EditBranchProps) {
-  const branchId = params.id ? Number(params.id) : 0;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-  const branch = await branchService.get(branchId);
+async function EditContact({ params }: EditContactProps) {
+  const contactId = params.id ? Number(params.id) : 0;
+
+  const contact = await contactService.get(contactId);
 
   // Transformar los datos para que coincidan con la estructura del formulario
   const initialValues = {
-    ...branch,
+    ...contact,
   };
   console.log(initialValues);
-  return <UpdateBranchForm initialValues={initialValues} branchId={branchId} />;
+  return (
+    <UpdateContactForm initialValues={initialValues} contactId={contactId} />
+  );
 }
 
-export default EditBranch;
+export default EditContact;

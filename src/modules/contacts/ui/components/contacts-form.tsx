@@ -23,7 +23,7 @@ export function ContactsForm() {
     <>
       <FormField
         control={control}
-        name="business"
+        name="business_selector"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Empresa</FormLabel>
@@ -42,19 +42,19 @@ export function ContactsForm() {
       />
       <FormField
         control={control}
-        name="branch"
+        name="branch_selector"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Sucursal</FormLabel>
             <AsyncInfiniteSelect
-              apiEndpoint={`branches/selector/?business=${watch('business')?.value}`}
+              apiEndpoint={`branches/selector/?business=${watch('business_selector')?.value}`}
               placeholder="Selecciona un tipo de documento"
               noOptionsMessage="No hay tipos de documentos disponibles"
               value={field.value}
               onChange={field.onChange}
               pageSize={20}
               ordering="created_at"
-              isDisabled={!watch('business')?.value}
+              isDisabled={!watch('business_selector')?.value}
             />
             <FormMessage />
           </FormItem>
