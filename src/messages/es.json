@@ -136,5 +136,10 @@
   "contacts_header_primary_contact": "Contacto Principal",
   "contacts_header_branch": "Sucursal",
   "contacts_header_business": "Empresa",
-  "contacts_search_placeholder": "Buscar contacto..."
+  "contacts_search_placeholder": "Buscar contacto...",
+
+  "transfers": "Traslados",
+  "transfers_search_placeholder": "Buscar traslado...",
+  "transfer_approve": "Aprobar",
+  "transfer_reject": "Rechazar"
 }

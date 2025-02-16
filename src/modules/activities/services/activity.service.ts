@@ -26,4 +26,16 @@ export const activityService = {
     });
     return response.data;
   },
+
+  async listTransfer(
+    params?: ApiBusinessRequestParams
+  ): Promise<ApiBusinessResponse> {
+    const response = await api.get<ApiBusinessResponse>(
+      `activities/transfers/`,
+      {
+        params,
+      }
+    );
+    return response.data;
+  },
 };

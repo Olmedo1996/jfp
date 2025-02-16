@@ -137,5 +137,10 @@
   "contacts_header_primary_contact": "Primary Contact",
   "contacts_header_branch": "Branch",
   "contacts_header_business": "Business",
-  "contacts_search_placeholder": "Search contact..."
+  "contacts_search_placeholder": "Search contact...",
+
+  "transfers": "Transfers",
+  "transfers_search_placeholder": "Search transfer...",
+  "transfer_approve": "Approve",
+  "transfer_reject": "Reject"
 }

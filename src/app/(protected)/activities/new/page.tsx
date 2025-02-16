@@ -1,13 +1,11 @@
-import React from 'react';
+import { ActivitiesNewForm } from '@/modules/activities/ui/components/activities-new-form';
 
-import { BusinessesForm } from '@/modules/businesses/ui/components/businesses-form';
-
-const NewBusiness = () => {
+const NewActivity = () => {
   return (
     <>
-      <BusinessesForm />
+      <ActivitiesNewForm />
     </>
   );
 };
 
-export default NewBusiness;
+export default NewActivity;

@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
+
+import { ApproveTransferButton } from '../../components/approve-transfer-button';
+import { RejectTransferButton } from '../../components/reject-transfer-button';
 
 import TruncatedCell from '@/components/tables/truncated-cell';
 import { Badge } from '@/components/ui/badge';
@@ -7,17 +11,16 @@ import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
 import { ActivityResult } from '@/modules/activities/core/interfaces/activity-service.interface';
 import * as m from '@/paraglide/messages';
 import { formatDate, parseBackendDate } from '@/utils/dateUtils';
-export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
-  const router = useRouter();
+export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
+  // const router = useRouter();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   return [
     {
       accessorKey: 'beneficiary',
@@ -78,10 +81,14 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
       header: '',
       cell: ({ row }) => {
         const tutor = row.original;
-
+        console.log(tutor);
         return (
           <div className="flex gap-2">
-            <DropdownMenu>
+            <DropdownMenu
+              open={isDropdownOpen}
+              onOpenChange={setIsDropdownOpen}
+              modal={false}
+            >
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="size-8 p-0">
                   <span className="sr-only">Open menu</span>
@@ -90,13 +97,17 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
-                <DropdownMenuItem
-                  onClick={() => router.push(`/activities/edit/${tutor.id}`)}
-                >
-                  {m.edit()}
-                </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem>
+                <ApproveTransferButton
+                  id={row.original.id}
+                  fullName={row.original.beneficiary_data || ''}
+                  onOpenChange={setIsDropdownOpen}
+                />
+                <RejectTransferButton
+                  id={row.original.id}
+                  fullName={row.original.beneficiary_data || ''}
+                  onOpenChange={setIsDropdownOpen}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
