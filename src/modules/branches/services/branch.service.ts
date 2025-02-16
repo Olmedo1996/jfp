@@ -59,4 +59,13 @@ export const branchService = {
       throw error;
     }
   },
+
+  async delete(id: number): Promise<void> {
+    try {
+      await api.delete(`branches/${id}/`);
+    } catch (error) {
+      console.error('Error deleting branch:', error);
+      throw error;
+    }
+  },
 };

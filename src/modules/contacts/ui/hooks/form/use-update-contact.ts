@@ -1,51 +1,45 @@
 // useCreateBusiness.ts
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { EContactRoute } from '../../../constants';
-
 import { useRouter } from '@/lib/i18n';
-import { ICreateContact } from '@/modules/contacts/core/interfaces/contact.interface';
+import { EContactRoute } from '@/modules/contacts/constants';
+import { IUpdateContact } from '@/modules/contacts/core/interfaces/contact.interface';
 import { ContactModel } from '@/modules/contacts/core/models/contact.model';
 import { contactSchema } from '@/modules/contacts/core/schemas/contact.schema';
 import { contactService } from '@/modules/contacts/services/contact.service';
 import { TSaveAction } from '@/types/form.types';
 import { showSuccessToast } from '@/utils/toast-messages';
 
-const useCreateContact = () => {
+interface UseUpdateContactProps {
+  initialValues: ContactModel;
+  contactId: number;
+}
+
+const useUpdateContact = ({
+  initialValues,
+  contactId: contactId,
+}: UseUpdateContactProps) => {
   const router = useRouter();
 
   const methods = useForm<ContactModel>({
     resolver: zodResolver(contactSchema),
-    defaultValues: {
-      first_name: '',
-      last_name: '',
-      phone: '',
-      job_title: '',
-      is_primary_contact: true,
-      branch_selector: null,
-      business_selector: null,
-    },
+    defaultValues: initialValues,
   });
-
-  const { watch, setValue } = methods;
-
-  const business = watch('business_selector');
 
   const handleSubmit = async (
     data: ContactModel,
     action: TSaveAction = 'save'
   ) => {
     try {
-      const { branch_selector, ...rest } = data;
-      const dataToSave: ICreateContact = {
-        ...rest,
-        branch: branch_selector?.value || 0,
+      const dataToUpdate: IUpdateContact = {
+        ...data,
+        branch: data.branch_selector?.value || 0,
       };
-      const result = await contactService.create(dataToSave);
+
+      const result = await contactService.update(contactId, dataToUpdate);
       if (result) {
-        showSuccessToast('Contacto creada', 'create');
+        showSuccessToast('Sucursal actualizada', 'update');
 
         if (action === 'save') {
           router.push(EContactRoute.list);
@@ -53,19 +47,14 @@ const useCreateContact = () => {
           // Limpiar el formulario para una nueva entrada
           methods.reset();
         }
+        router.refresh();
       }
     } catch (error) {
       console.error('Unexpected error:', error);
     }
   };
 
-  useEffect(() => {
-    if (business || business === null) {
-      setValue('branch_selector', null);
-    }
-  }, [business, setValue]);
-
   return { methods, handleSubmit };
 };
 
-export default useCreateContact;
+export default useUpdateContact;

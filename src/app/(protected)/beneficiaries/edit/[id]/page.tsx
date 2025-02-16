@@ -8,6 +8,7 @@ interface EditBeneficiaryProps {
   };
 }
 
+export const dynamic = 'force-dynamic';
 async function EditBeneficiary({ params }: EditBeneficiaryProps) {
   const beneficiaryId = params.id ? Number(params.id) : 0;
 

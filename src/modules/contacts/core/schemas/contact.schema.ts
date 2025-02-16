@@ -20,6 +20,6 @@ export const contactSchema = z.object({
   job_title: z.string().min(1, { message: messageRequired }).max(100),
   is_primary_contact: z.boolean(),
   email: z.string().min(1, { message: messageRequired }).email(),
-  branch: selectOptionSchema,
-  business: selectOptionSchema,
+  branch_selector: selectOptionSchema,
+  business_selector: selectOptionSchema,
 });

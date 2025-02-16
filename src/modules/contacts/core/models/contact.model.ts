@@ -7,6 +7,6 @@ export type ContactModel = {
   job_title: string;
   is_primary_contact: boolean;
   email: string;
-  branch: ISelectOption<number> | null;
-  business: ISelectOption<number> | null;
+  branch_selector: ISelectOption<number> | null;
+  business_selector: ISelectOption<number> | null;
 };

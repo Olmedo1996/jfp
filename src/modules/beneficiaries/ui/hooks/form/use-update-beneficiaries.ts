@@ -53,6 +53,7 @@ const useUpdateBeneficiary = ({
         // Limpiar el formulario para una nueva entrada
         methods.reset();
       }
+      router.refresh();
     }
   };
 

@@ -48,6 +48,7 @@ const useUpdateBranch = ({
           // Limpiar el formulario para una nueva entrada
           methods.reset();
         }
+        router.refresh();
       }
     } catch (error) {
       console.error('Unexpected error:', error);

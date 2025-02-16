@@ -8,6 +8,7 @@ interface EditBusinessProps {
   };
 }
 
+export const dynamic = 'force-dynamic';
 async function EditBusiness({ params }: EditBusinessProps) {
   const businessId = params.id ? Number(params.id) : 0;
 
