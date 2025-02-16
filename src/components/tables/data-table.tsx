@@ -102,16 +102,6 @@ export function DataTable<TData, TValue>({
     sortDescFirst: false,
   });
 
-  if (isLoading) {
-    return (
-      <DataTableSkeletonLoading<TData>
-        table={table}
-        columnsLength={columns.length}
-        rowsToShow={5}
-      />
-    );
-  }
-
   return (
     <div className="flex flex-col rounded-md border">
       <div className="flex flex-col space-y-2 p-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 md:space-y-0 md:p-4">
@@ -152,53 +142,61 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
       <div className="flex-1 overflow-hidden">
-        <ScrollArea className="relative grid size-full h-[calc(100vh-16rem)] grid-cols-1 overflow-auto">
-          <Table>
-            <TableHeader className="bg-secondary sticky top-0">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
+        {!isLoading ? (
+          <ScrollArea className="relative grid size-full h-[calc(100vh-16rem)] grid-cols-1 overflow-auto">
+            <Table>
+              <TableHeader className="bg-secondary sticky top-0">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
                     ))}
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    {m.table_not_found()}
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <ScrollBar orientation="horizontal" />
-          <ScrollBar orientation="vertical" />
-        </ScrollArea>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows.length > 0 ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      {m.table_not_found()}
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <ScrollBar orientation="horizontal" />
+            <ScrollBar orientation="vertical" />
+          </ScrollArea>
+        ) : (
+          <DataTableSkeletonLoading<TData>
+            table={table}
+            columnsLength={columns.length}
+            rowsToShow={5}
+          />
+        )}
       </div>
     </div>
   );
