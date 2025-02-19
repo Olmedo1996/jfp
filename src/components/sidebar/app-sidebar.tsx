@@ -1,9 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { Apple, BookUser, Briefcase, CalendarPlus, Users } from 'lucide-react';
+import { Apple, Briefcase, CalendarPlus, Replace, Users } from 'lucide-react';
 
 import JfpIcon from '../custom-icon/jfp-icon';
+import { NavMain } from '../navbar/nav-main';
 
 import { NavProjects } from '@/components/navbar/nav-projects';
 import { NavUser } from '@/components/navbar/nav-user';
@@ -138,24 +139,51 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: Apple,
       },
       {
-        name: m.businesses(),
-        url: '/businesses',
-        icon: Briefcase,
-      },
-      {
-        name: m.branches(),
-        url: '/branches',
-        icon: Briefcase,
-      },
-      {
-        name: m.contacts(),
-        url: '/contacts',
-        icon: BookUser,
-      },
-      {
         name: m.activities(),
         url: '/activities',
         icon: CalendarPlus,
+      },
+      {
+        name: m.transfers(),
+        url: '/transfers',
+        icon: Replace,
+      },
+      // {
+      //   name: m.businesses(),
+      //   url: '/businesses',
+      //   icon: Briefcase,
+      // },
+      // {
+      //   name: m.branches(),
+      //   url: '/branches',
+      //   icon: Briefcase,
+      // },
+      // {
+      //   name: m.contacts(),
+      //   url: '/contacts',
+      //   icon: BookUser,
+      // },
+    ],
+    navMain: [
+      {
+        title: 'Comercios',
+        url: '#',
+        icon: Briefcase,
+        isActive: true,
+        items: [
+          {
+            title: m.businesses(),
+            url: '/businesses',
+          },
+          {
+            title: m.branches(),
+            url: '/branches',
+          },
+          {
+            title: m.contacts(),
+            url: '/contacts',
+          },
+        ],
       },
     ],
   };
@@ -166,8 +194,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        {/* <NavMain items={data.navMain} /> */}
         <NavProjects projects={data.projects} />
+        <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
