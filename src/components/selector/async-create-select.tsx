@@ -69,7 +69,7 @@ export function AsyncCreateSelect({
         }
         return undefined;
       },
-      enabled: menuIsOpen,
+      enabled: menuIsOpen && !isDisabled,
     });
 
   // Mutación para crear un nuevo elemento
@@ -149,6 +149,7 @@ export function AsyncCreateSelect({
       }
       isSearchable
       isClearable
+      isDisabled={isDisabled}
       onMenuOpen={() => setMenuIsOpen(true)}
       onMenuClose={() => setMenuIsOpen(false)}
       maxMenuHeight={200}

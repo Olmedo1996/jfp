@@ -4,9 +4,16 @@ import { Plus } from 'lucide-react';
 import DocumentForm from './document-form';
 
 import DrawerDialog from '@/components/responsive-dialog/drawer-dialog';
+import { ISelectOption } from '@/interface/select-option';
 import { BeneficiaryResult } from '@/modules/beneficiaries/core/interfaces/beneficiaries-service.interface';
 
-const NewDocument = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
+const NewDocument = ({
+  beneficiary,
+  folder,
+}: {
+  beneficiary: BeneficiaryResult;
+  folder?: ISelectOption<number>;
+}) => {
   return (
     <DrawerDialog
       dialogTitle="Nuevo documento"
@@ -18,7 +25,7 @@ const NewDocument = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
         </>
       }
     >
-      <DocumentForm beneficiary={beneficiary} />
+      <DocumentForm beneficiary={beneficiary} folder={folder} />
     </DrawerDialog>
   );
 };

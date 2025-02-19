@@ -12,6 +12,7 @@ import {
   DocumentResult,
 } from '../core/interfaces/documents-service.interface';
 
+import { GenericRequestParams } from '@/interface/request-api-params';
 import { api } from '@/lib/api';
 
 class DocumentsService {
@@ -84,6 +85,17 @@ class DocumentsService {
     const response = await api.patch<DocumentFolderResult>(
       `documents/folders/${folderId}/`,
       { ...params }
+    );
+    return response.data;
+  }
+
+  async listDocumentsInFolder(
+    folderId: number,
+    params?: GenericRequestParams
+  ): Promise<ApiDocumentsResponse> {
+    const response = await api.get<ApiDocumentsResponse>(
+      `documents/folders/${folderId}/documents/`,
+      { params }
     );
     return response.data;
   }

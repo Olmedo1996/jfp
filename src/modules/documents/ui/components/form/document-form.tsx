@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { CalendarIcon, Upload } from 'lucide-react';
 
@@ -24,18 +25,32 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Textarea } from '@/components/ui/textarea';
+import { ISelectOption } from '@/interface/select-option';
 import { cn } from '@/lib/utils';
 import { BeneficiaryResult } from '@/modules/beneficiaries/core/interfaces/beneficiaries-service.interface';
 import { DocumentModel } from '@/modules/documents/core/models/documents.model';
 
-const DocumentForm = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
+const DocumentForm = ({
+  beneficiary,
+  folder,
+}: {
+  beneficiary: BeneficiaryResult;
+  folder?: ISelectOption<number>;
+}) => {
   const { methods, handleSubmit } = useCreateDocument(beneficiary.id);
 
   const form = methods;
+  const { setValue } = form;
 
   function onSubmit(values: DocumentModel) {
     handleSubmit(values);
   }
+
+  useEffect(() => {
+    if (folder) {
+      setValue('folder', folder);
+    }
+  }, [folder, setValue]);
 
   return (
     <div>
@@ -117,6 +132,7 @@ const DocumentForm = ({ beneficiary }: { beneficiary: BeneficiaryResult }) => {
                     noOptionsMessage="No folders available"
                     className="w-full"
                     createLabel="Create folder"
+                    isDisabled={!!folder}
                   />
                   <FormMessage />
                 </FormItem>
