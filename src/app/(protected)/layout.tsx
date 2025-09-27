@@ -6,6 +6,7 @@ import Providers from '../provider';
 
 import CustomBreadcrumb from '@/components/breadcrumb-app/breadcrumb';
 import { LanguageSwitcher } from '@/components/navbar/language-switcher';
+import { HeaderLoadingBar } from '@/components/progressbar/header-loading-bar';
 import { AppSidebar } from '@/components/sidebar/app-sidebar';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Separator } from '@/components/ui/separator';
@@ -21,6 +22,7 @@ const ProtectedLayout = async ({ children }: PropsWithChildren) => {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
+          <HeaderLoadingBar />
           <header className="sticky flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
             <div className="flex w-full items-center justify-between gap-2">
               <div className="flex items-center gap-2 px-4">

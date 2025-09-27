@@ -2,10 +2,11 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 
+import { CustomLink } from '../custom-link/custom-link';
+
 import { DataTable } from '@/components/tables/data-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useRouter } from '@/lib/i18n';
 import * as m from '@/paraglide/messages';
 import { PaginatedResponse } from '@/types/table.types';
 
@@ -40,7 +41,6 @@ export function GenericTable<TData>({
   title,
   searchPlaceholder = m.table_search(),
 }: GenericTableProps<TData>) {
-  const router = useRouter();
   const pageCount = data ? Math.ceil(data.count / pageSize) : 0;
 
   if (error)
@@ -59,9 +59,9 @@ export function GenericTable<TData>({
             />
           )}
           {createUrl && (
-            <Button onClick={() => router.push(createUrl)}>
-              {m.table_create_new()}
-            </Button>
+            <CustomLink href={createUrl} className="w-full md:w-auto">
+              <Button>{m.table_create_new()}</Button>
+            </CustomLink>
           )}
         </div>
       </div>

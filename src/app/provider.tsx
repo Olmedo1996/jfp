@@ -2,6 +2,7 @@
 import React from 'react';
 import { SessionProvider } from 'next-auth/react';
 
+import { TransitionProvider } from '@/context/tansition-context';
 import AuthProvider from '@/modules/auth/ui/components/auth-provider';
 
 type ProvidersProps = {
@@ -12,7 +13,9 @@ const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
       <SessionProvider refetchOnWindowFocus={false} refetchInterval={30}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <TransitionProvider>{children}</TransitionProvider>
+        </AuthProvider>
       </SessionProvider>
     </>
   );

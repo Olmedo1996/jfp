@@ -8,6 +8,8 @@ import {
   Trash2,
 } from 'lucide-react';
 
+import { CustomLink } from '../custom-link/custom-link';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +26,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { Link } from '@/lib/i18n';
 
 export function NavProjects({
   projects,
@@ -44,10 +45,10 @@ export function NavProjects({
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <Link href={item.url}>
+              <CustomLink href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
-              </Link>
+              </CustomLink>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

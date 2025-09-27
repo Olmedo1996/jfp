@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { CustomLink } from '../custom-link/custom-link';
+
 import { Button } from '@/components/ui/button';
-import { Link } from '@/lib/i18n';
 import * as m from '@/paraglide/messages';
 
 type SaveAction = 'save' | 'save-and-continue';
@@ -37,9 +38,11 @@ const SaveHeaderForm = ({
           <p className="text-muted-foreground text-sm">{description}</p>
         </div>
         <div className="flex gap-2">
-          <Button asChild variant={'secondary'} disabled={loading}>
-            <Link href={backUrl}>{cancelButtonLabel || m.cancel()}</Link>
-          </Button>
+          <CustomLink href={backUrl} goBack className="w-full md:w-auto">
+            <Button variant={'secondary'} disabled={loading}>
+              {cancelButtonLabel || m.cancel()}
+            </Button>
+          </CustomLink>
           {!hideSaveButton && (
             <Button
               type="submit"

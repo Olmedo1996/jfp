@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Apple, Briefcase, CalendarPlus, Replace, Users } from 'lucide-react';
 
 import JfpIcon from '../custom-icon/jfp-icon';
-import { NavMain } from '../navbar/nav-main';
+import { NavBusinesses } from '../navbar/nav-businesses';
 
 import { NavProjects } from '@/components/navbar/nav-projects';
 import { NavUser } from '@/components/navbar/nav-user';
@@ -195,7 +195,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavProjects projects={data.projects} />
-        <NavMain items={data.navMain} />
+        <NavBusinesses items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
