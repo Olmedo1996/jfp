@@ -31,7 +31,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { useRouter } from '@/lib/i18n';
 
 export function NavUser({
   user,
@@ -45,22 +44,36 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const session = useSession();
-  const router = useRouter();
+  const { data: session } = useSession();
 
   const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
+
     try {
       setIsLoading(true);
-      await signOut({ redirect: false, callbackUrl: '/login' });
-      await router.push('/login');
+      // NextAuth se encarga de limpiar todo automáticamente
+      await signOut({
+        callbackUrl: '/login',
+        redirect: true,
+      });
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error('Error durante el logout:', error);
     } finally {
       setIsLoading(false);
       setIsDropdownOpen(false);
     }
   };
+
+  const getUserInitials = () => {
+    return (
+      session?.user?.name
+        ?.split(' ')
+        ?.map((n) => n[0])
+        ?.join('')
+        ?.toUpperCase() || 'U'
+    );
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -77,23 +90,17 @@ export function NavUser({
               <Avatar className="size-8 rounded-lg">
                 <AvatarImage
                   src={user.avatar}
-                  alt={session.data?.user?.name ?? ''}
+                  alt={session?.user?.name ?? ''}
                 />
                 <AvatarFallback className="rounded-lg">
-                  {session.data?.user?.name
-                    ?.split(' ')
-                    ?.map((n) => n[0])
-                    ?.join('')
-                    ?.toUpperCase()}
+                  {getUserInitials()}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {session.data?.user?.name}
+                  {session?.user?.name}
                 </span>
-                <span className="truncate text-xs">
-                  {session.data?.user?.email}
-                </span>
+                <span className="truncate text-xs">{session?.user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -109,19 +116,15 @@ export function NavUser({
                 <Avatar className="size-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className="rounded-lg">
-                    {session.data?.user?.name
-                      ?.split(' ')
-                      ?.map((n) => n[0])
-                      ?.join('')
-                      ?.toUpperCase()}
+                    {getUserInitials()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {session.data?.user?.name}
+                    {session?.user?.name}
                   </span>
                   <span className="truncate text-xs">
-                    {session.data?.user?.email}
+                    {session?.user?.email}
                   </span>
                 </div>
               </div>
@@ -130,11 +133,11 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck className="text-muted-foreground mr-2 size-5" />
-                Account
+                Cuenta
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell className="text-muted-foreground mr-2 size-5" />
-                Notifications
+                Notificaciones
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -142,7 +145,7 @@ export function NavUser({
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                   <LogOut className="text-muted-foreground mr-2 size-5" />
-                  Log out
+                  Cerrar sesión
                 </DropdownMenuItem>
               </AlertDialogTrigger>
               <AlertDialogContent>

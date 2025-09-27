@@ -9,7 +9,6 @@ import {
 } from '../core/interfaces/branch-service.interface';
 
 import { api } from '@/lib/api';
-import { serverApi } from '@/lib/server-api';
 
 export const branchService = {
   async create(data: ICreateBranch): Promise<ICreateBranch> {
@@ -38,7 +37,7 @@ export const branchService = {
    */
   async get(id: BranchResult['id']): Promise<BranchResult> {
     try {
-      const response = await serverApi.get<BranchResult>(`branches/${id}/`, {});
+      const response = await api.get<BranchResult>(`branches/${id}/`, {});
       return response.data;
     } catch (error) {
       console.error('Error getting branch:', error);

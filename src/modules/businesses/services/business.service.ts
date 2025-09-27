@@ -9,7 +9,6 @@ import {
 } from '../core/interfaces/business-service.interface';
 
 import { api } from '@/lib/api';
-import { serverApi } from '@/lib/server-api';
 
 export const businessService = {
   async create(data: ICreateBusiness): Promise<ICreateBusiness> {
@@ -34,10 +33,7 @@ export const businessService = {
 
   async get(id: BusinessResult['id']): Promise<BusinessResult> {
     try {
-      const response = await serverApi.get<BusinessResult>(
-        `businesses/${id}/`,
-        {}
-      );
+      const response = await api.get<BusinessResult>(`businesses/${id}/`, {});
       return response.data;
     } catch (error) {
       console.error('Error getting business:', error);

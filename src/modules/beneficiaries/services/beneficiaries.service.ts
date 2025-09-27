@@ -4,7 +4,6 @@ import {
 } from '../core/interfaces/beneficiaries.interface';
 
 import { api } from '@/lib/api';
-import { serverApi } from '@/lib/server-api';
 import {
   ApiBeneficiariesRequestParams,
   ApiBeneficiariesResponse,
@@ -63,7 +62,7 @@ export const beneficiariesService = {
 
   async get(id: BeneficiaryResult['id']): Promise<BeneficiaryResult> {
     try {
-      const response = await serverApi.get<BeneficiaryResult>(
+      const response = await api.get<BeneficiaryResult>(
         `beneficiaries/${id}/`,
         {}
       );

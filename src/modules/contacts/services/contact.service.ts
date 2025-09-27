@@ -9,7 +9,6 @@ import {
 } from '../core/interfaces/contact-service.interface';
 
 import { api } from '@/lib/api';
-import { serverApi } from '@/lib/server-api';
 
 export const contactService = {
   async create(data: ICreateContact): Promise<ICreateContact> {
@@ -57,10 +56,7 @@ export const contactService = {
 
   async get(id: ContactResult['id']): Promise<ContactResult> {
     try {
-      const response = await serverApi.get<ContactResult>(
-        `contacts/${id}/`,
-        {}
-      );
+      const response = await api.get<ContactResult>(`contacts/${id}/`, {});
       return response.data;
     } catch (error) {
       console.error('Error getting contact:', error);

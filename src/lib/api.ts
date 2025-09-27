@@ -1,75 +1,42 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import axios from 'axios';
 
-import { handleApiError } from '@/utils/error-handler';
+import {
+  baseApiInterceptor,
+  externalApiErrorResponseInterceptor,
+  internalApiErrorResponseInterceptor,
+  internalApiInterceptor,
+} from '@/modules/auth/utils/api-interceptors';
 
-interface Tokens {
-  access: string;
-  refresh: string;
-}
+// API para comunicación con el backend externo (Django/FastAPI/etc.)
+const baseApi = axios.create({
+  baseURL: 'http://localhost:8000/api/v1/',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: false,
+});
 
-const createAxiosInstance = (tokens?: Tokens) => {
-  const api = axios.create({
-    baseURL: 'http://localhost:8000/api/v1/',
-    withCredentials: true,
-  });
+// API para comunicación interna con NextJS (API routes)
+const internalApi = axios.create({
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-  api.interceptors.request.use(
-    async (config) => {
-      const accessToken = tokens?.access || getCookie('access_token');
-      if (accessToken) {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
+// Configurar interceptores para baseApi (comunicación con backend externo)
+baseApi.interceptors.request.use(baseApiInterceptor);
+baseApi.interceptors.response.use(
+  (response) => response,
+  externalApiErrorResponseInterceptor
+);
 
-  api.interceptors.response.use(
-    (response) => response,
-    async (error: AxiosError) => {
-      const originalRequest = error.config as AxiosRequestConfig & {
-        _retry?: boolean;
-      };
+// Configurar interceptores para internalApi (comunicación interna NextJS)
+internalApi.interceptors.request.use(internalApiInterceptor);
+internalApi.interceptors.response.use(
+  (response) => response,
+  internalApiErrorResponseInterceptor
+);
 
-      // Solo intentamos refresh token si es error 401 y no es un retry
-      if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-
-        try {
-          const refreshToken = getCookie('refresh_token');
-          if (!refreshToken) {
-            throw new Error('No refresh token available');
-          }
-
-          const response = await axios.post<Tokens>(
-            `${api.defaults.baseURL}auth/refresh/`,
-            { refresh: refreshToken }
-          );
-
-          const { access, refresh } = response.data;
-          setCookie('access_token', access);
-          setCookie('refresh_token', refresh);
-
-          if (originalRequest.headers) {
-            originalRequest.headers['Authorization'] = `Bearer ${access}`;
-          }
-
-          return api(originalRequest);
-        } catch (refreshError) {
-          deleteCookie('access_token');
-          deleteCookie('refresh_token');
-          // window.location.href = '/login';
-          return Promise.reject(refreshError);
-        }
-      }
-
-      handleApiError(error);
-      return Promise.reject(error);
-    }
-  );
-
-  return api;
-};
-
-export const api = createAxiosInstance();
+// Exportar las instancias configuradas
+export { baseApi as api, internalApi };
