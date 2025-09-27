@@ -1,15 +1,15 @@
-// modules/beneficiaries/ui/hooks/form/use-update-beneficiaries.ts
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useRouter } from '@/lib/i18n';
+import { updateBeneficiaryAction } from '@/modules/beneficiaries/actions/beneficiaries.actions';
 import { EBeneficiaryRoute } from '@/modules/beneficiaries/constants';
 import { IUpdateBeneficiary } from '@/modules/beneficiaries/core/interfaces/beneficiaries.interface';
 import { BeneficiaryModel } from '@/modules/beneficiaries/core/models/beneficiary.model';
 import { beneficiarySchema } from '@/modules/beneficiaries/core/schemas/beneficiary.schema';
-import { beneficiariesService } from '@/modules/beneficiaries/services/beneficiaries.service';
 import { TSaveAction } from '@/types/form.types';
-import { showSuccessToast } from '@/utils/toast-messages';
+import { showErrorToast, showSuccessToast } from '@/utils/toast-messages';
 
 interface UseUpdateBeneficiaryProps {
   initialValues: BeneficiaryModel;
@@ -21,6 +21,7 @@ const useUpdateBeneficiary = ({
   beneficiaryId,
 }: UseUpdateBeneficiaryProps) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const methods = useForm<BeneficiaryModel>({
     resolver: zodResolver(beneficiarySchema),
@@ -32,32 +33,30 @@ const useUpdateBeneficiary = ({
     action: TSaveAction = 'save'
   ) => {
     const { gender, education_level, ...rest } = data;
-
     const dataToUpdate: IUpdateBeneficiary = {
       gender: gender?.value,
       education_level: education_level?.value,
       ...rest,
     };
 
-    const response = await beneficiariesService.update(
-      beneficiaryId,
-      dataToUpdate
-    );
+    startTransition(async () => {
+      const result = await updateBeneficiaryAction(beneficiaryId, dataToUpdate);
 
-    if (response) {
-      showSuccessToast('Beneficiario actualizado', 'update');
-
-      if (action === 'save') {
-        router.push(EBeneficiaryRoute.list);
+      if (result.success) {
+        showSuccessToast('Beneficiario actualizado', 'update');
+        if (action === 'save') {
+          router.push(EBeneficiaryRoute.list);
+        } else {
+          methods.reset();
+        }
+        router.refresh();
       } else {
-        // Limpiar el formulario para una nueva entrada
-        methods.reset();
+        showErrorToast(result.error || 'Error al actualizar beneficiario');
       }
-      router.refresh();
-    }
+    });
   };
 
-  return { methods, handleSubmit };
+  return { methods, handleSubmit, isPending };
 };
 
 export default useUpdateBeneficiary;
