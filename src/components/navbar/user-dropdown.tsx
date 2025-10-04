@@ -1,13 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import Image from 'next/image';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 
 import { Icons } from '@/components/icons';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,22 +13,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { env } from '@/env.mjs';
 import * as m from '@/paraglide/messages';
 
 export const UserDropdown = ({ session: { user } }: { session: Session }) => {
-  const [isPending, setIsPending] = useState(false);
+  // const [isPending, setIsPending] = useState(false);
 
-  const handleCreateCheckoutSession = async () => {
-    setIsPending(true);
+  // const handleCreateCheckoutSession = async () => {
+  //   setIsPending(true);
 
-    const res = await fetch('/api/stripe/checkout-session');
-    const checkoutSession = await res.json().then(({ session }) => session);
-    const stripe = await loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    await stripe!.redirectToCheckout({
-      sessionId: checkoutSession.id,
-    });
-  };
+  //   // const res = await fetch('/api/stripe/checkout-session');
+  //   // const checkoutSession = await res.json().then(({ session }) => session);
+  //   // const stripe = await loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+  //   // await stripe!.redirectToCheckout({
+  //   //   sessionId: checkoutSession.id,
+  //   // });
+  // };
 
   return (
     <DropdownMenu>
@@ -56,7 +52,7 @@ export const UserDropdown = ({ session: { user } }: { session: Session }) => {
             height={100}
           />
           <h2 className="py-2 text-lg font-bold">{user?.name}</h2>
-          <Button
+          {/* <Button
             onClick={handleCreateCheckoutSession}
             disabled={user?.isActive || isPending}
             className="w-64"
@@ -71,7 +67,7 @@ export const UserDropdown = ({ session: { user } }: { session: Session }) => {
                 {m.upgrade_to_pro_cta()}
               </>
             )}
-          </Button>
+          </Button> */}
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>

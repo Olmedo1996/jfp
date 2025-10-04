@@ -62,6 +62,7 @@ export const authOptions: NextAuthOptions = {
             lastName: data.tutor.user.last_name,
             accessToken: data.access,
             refreshToken: data.refresh,
+            image: data.tutor.user?.profile_image_url,
           };
         } catch (error) {
           console.error('Login error:', error);

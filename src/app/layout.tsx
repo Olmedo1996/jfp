@@ -27,9 +27,9 @@ export const generateMetadata = (): Metadata => ({
     shortcut: '/jfp.svg',
     apple: '/jfp.svg',
   },
-  verification: {
-    google: siteConfig.googleSiteVerificationId(),
-  },
+  // verification: {
+  //   google: siteConfig.googleSiteVerificationId(),
+  // },
   openGraph: {
     url: siteConfig.url(),
     title: siteConfig.title(),
