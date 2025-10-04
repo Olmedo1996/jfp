@@ -165,7 +165,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
     navMain: [
       {
-        title: 'Comercios',
+        title: 'Empresas',
         url: '#',
         icon: Briefcase,
         isActive: true,

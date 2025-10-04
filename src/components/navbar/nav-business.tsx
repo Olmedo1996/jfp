@@ -7,7 +7,8 @@ import {
   MoreHorizontal,
   Trash2,
 } from 'lucide-react';
-import { Link } from 'next/navigation';
+
+import { CustomLink } from '../custom-link/custom-link';
 
 import {
   DropdownMenu,
@@ -44,10 +45,10 @@ export function NavBusiness({
         {businessOptions.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <Link href={item.url}>
+              <CustomLink href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
-              </Link>
+              </CustomLink>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
