@@ -2,10 +2,10 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { EContactRoute } from '../../../constants';
 
-import { useRouter } from '@/lib/i18n';
 import { ICreateContact } from '@/modules/contacts/core/interfaces/contact.interface';
 import { ContactModel } from '@/modules/contacts/core/models/contact.model';
 import { contactSchema } from '@/modules/contacts/core/schemas/contact.schema';

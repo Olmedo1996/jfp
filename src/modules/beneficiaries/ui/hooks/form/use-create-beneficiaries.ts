@@ -1,8 +1,8 @@
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
-import { useRouter } from '@/lib/i18n';
 import { createBeneficiaryAction } from '@/modules/beneficiaries/actions/beneficiaries.actions';
 import { EBeneficiaryRoute } from '@/modules/beneficiaries/constants';
 import { ICreateBeneficiary } from '@/modules/beneficiaries/core/interfaces/beneficiaries.interface';

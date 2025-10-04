@@ -7,7 +7,6 @@ import { CustomLink } from '../custom-link/custom-link';
 import { DataTable } from '@/components/tables/data-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import * as m from '@/paraglide/messages';
 import { PaginatedResponse } from '@/types/table.types';
 
 interface GenericTableProps<TData> {
@@ -39,7 +38,7 @@ export function GenericTable<TData>({
   pageSize = 10,
   createUrl,
   title,
-  searchPlaceholder = m.table_search(),
+  searchPlaceholder = 'Buscar...',
 }: GenericTableProps<TData>) {
   const pageCount = data ? Math.ceil(data.count / pageSize) : 0;
 
@@ -60,7 +59,7 @@ export function GenericTable<TData>({
           )}
           {createUrl && (
             <CustomLink href={createUrl} className="w-full md:w-auto">
-              <Button>{m.table_create_new()}</Button>
+              <Button>{'Nuevo'}</Button>
             </CustomLink>
           )}
         </div>

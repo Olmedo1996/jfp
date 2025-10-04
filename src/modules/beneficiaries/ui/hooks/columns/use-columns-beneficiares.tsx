@@ -5,9 +5,8 @@ import { ActionsCell } from '../../components/actions-cell';
 
 import TruncatedCell from '@/components/tables/truncated-cell';
 import { Button } from '@/components/ui/button';
-// import { useRouter } from '@/lib/i18n';
+// import { useRouter } from 'next/navigation';
 import { BeneficiaryResult } from '@/modules/beneficiaries/core/interfaces/beneficiaries-service.interface';
-import * as m from '@/paraglide/messages';
 
 export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
   // const router = useRouter();
@@ -21,7 +20,7 @@ export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {m.beneficiaries_header_full_name()}
+            {'Nombre'}
             <ArrowUpDown />
           </Button>
         );
@@ -29,20 +28,20 @@ export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
     },
     {
       accessorKey: 'phone',
-      header: m.beneficiaries_header_phone(),
+      header: 'Teléfono',
     },
     {
       accessorKey: 'email',
-      header: m.beneficiaries_header_email(),
+      header: 'Email',
     },
     {
       accessorKey: 'children_count',
       size: 50,
-      header: m.beneficiaries_header_children_count(),
+      header: 'Num. hijos',
     },
     {
       accessorKey: 'birth_date',
-      header: m.beneficiaries_header_birth_date(),
+      header: 'Fecha de Nacimiento',
       cell: ({ row }) => {
         const beneficiary = row.original;
 
@@ -52,7 +51,7 @@ export function useColumnsBeneficiaries(): ColumnDef<BeneficiaryResult>[] {
     {
       accessorKey: 'notes',
       size: 100,
-      header: m.beneficiaries_header_notes(),
+      header: 'Notas',
       cell: ({ row }) => <TruncatedCell content={row.original.notes} />,
     },
     {

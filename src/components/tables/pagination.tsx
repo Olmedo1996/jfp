@@ -9,7 +9,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import * as m from '@/paraglide/messages';
 
 interface CustomPaginationProps {
   currentPage: number;
@@ -69,7 +68,7 @@ export function CustomPagination({
           <PaginationItem>
             <PaginationPrevious
               onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
-              content={m.table_previous()}
+              content={'Anterior'}
               className={
                 currentPage <= 1
                   ? 'pointer-events-none opacity-50'
@@ -100,7 +99,7 @@ export function CustomPagination({
 
           <PaginationItem>
             <PaginationNext
-              content={m.table_next()}
+              content={'Siguiente'}
               onClick={() =>
                 currentPage < totalPages && onPageChange(currentPage + 1)
               }

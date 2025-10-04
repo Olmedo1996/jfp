@@ -7,6 +7,7 @@ import {
   MoreHorizontal,
   Trash2,
 } from 'lucide-react';
+import { Link } from 'next/navigation';
 
 import {
   DropdownMenu,
@@ -24,7 +25,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { Link } from '@/lib/i18n';
 
 export function NavBusiness({
   businessOptions,

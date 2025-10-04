@@ -1,6 +1,7 @@
 // modules/beneficiaries/ui/components/actions-cell.tsx
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { BeneficiaryResult } from '../../core/interfaces/beneficiaries-service.interface';
 
@@ -13,9 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
 import { DeleteBeneficiaryButton } from '@/modules/beneficiaries/ui/components/delete-beneficiary-button';
-import * as m from '@/paraglide/messages';
 
 interface ActionsCellProps {
   beneficiary: BeneficiaryResult;
@@ -39,11 +38,11 @@ export function ActionsCell({ beneficiary }: ActionsCellProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+          <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => router.push(`/beneficiaries/edit/${beneficiary.id}`)}
           >
-            {m.edit()}
+            {'Editar'}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
@@ -64,7 +63,7 @@ export function ActionsCell({ beneficiary }: ActionsCellProps) {
               router.push(`/beneficiaries/${beneficiary.id}/documents`)
             }
           >{`Documentos`}</DropdownMenuItem>
-          <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
+          <DropdownMenuItem>{'Ver detalles'}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DeleteBeneficiaryButton
             id={beneficiary.id}

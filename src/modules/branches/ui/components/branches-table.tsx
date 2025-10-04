@@ -5,7 +5,6 @@ import { useColumnsBranches } from '../hooks/columns/use-columns-branches';
 import { useBranchTable } from '../hooks/table/use-branch-table';
 
 import { GenericTable } from '@/components/tables/generic-table';
-import * as m from '@/paraglide/messages';
 
 export function BranchTable() {
   const columns = useColumnsBranches();
@@ -31,8 +30,8 @@ export function BranchTable() {
       currentPage={params.page}
       pageSize={params.pageSize}
       createUrl={EBranchRoute.new}
-      title={m.branches()}
-      searchPlaceholder={m.branches_search_placeholder()}
+      title={'Sucursales'}
+      searchPlaceholder={'Buscar sucursales...'}
     />
   );
 }

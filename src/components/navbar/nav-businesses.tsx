@@ -2,6 +2,8 @@
 
 import { ChevronRight, type LucideIcon } from 'lucide-react';
 
+import { CustomLink } from '../custom-link/custom-link';
+
 import {
   Collapsible,
   CollapsibleContent,
@@ -55,9 +57,13 @@ export function NavBusinesses({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
+                        {/* <a href={subItem.url}>
                           <span>{subItem.title}</span>
-                        </a>
+                        </a> */}
+                        <CustomLink href={subItem.url}>
+                          {/* <item.icon /> */}
+                          <span>{subItem.title}</span>
+                        </CustomLink>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

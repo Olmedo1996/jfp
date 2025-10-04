@@ -13,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import * as m from '@/paraglide/messages';
 
 export const UserDropdown = ({ session: { user } }: { session: Session }) => {
   // const [isPending, setIsPending] = useState(false);
@@ -41,7 +40,7 @@ export const UserDropdown = ({ session: { user } }: { session: Session }) => {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>{m.my_account()}</DropdownMenuLabel>
+        <DropdownMenuLabel>{'Mi cuenta'}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <div className="flex flex-col items-center justify-center p-2">
           <Image
@@ -71,7 +70,7 @@ export const UserDropdown = ({ session: { user } }: { session: Session }) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>
-          <Icons.logOut className="mr-2 size-4" /> <span>{m.log_out()}</span>
+          <Icons.logOut className="mr-2 size-4" /> <span>{'Salir'}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

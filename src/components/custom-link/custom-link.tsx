@@ -1,7 +1,7 @@
 import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useTransitionContext } from '@/context/tansition-context';
-import { useRouter } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 type CustomLinkProps = LinkProps & {

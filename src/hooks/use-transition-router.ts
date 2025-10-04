@@ -1,5 +1,6 @@
+import { useRouter } from 'next/navigation';
+
 import { useTransitionContext } from '@/context/tansition-context';
-import { useRouter } from '@/lib/i18n';
 
 export const useTransitionRouter = () => {
   const router = useRouter();

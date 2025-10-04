@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
 
 import { CustomLink } from '../custom-link/custom-link';
 
 import { Button } from '@/components/ui/button';
-import * as m from '@/paraglide/messages';
 
 type SaveAction = 'save' | 'save-and-continue';
 
@@ -40,7 +41,7 @@ const SaveHeaderForm = ({
         <div className="flex gap-2">
           <CustomLink href={backUrl} goBack className="w-full md:w-auto">
             <Button variant={'secondary'} disabled={loading}>
-              {cancelButtonLabel || m.cancel()}
+              {cancelButtonLabel || 'Cancelar'}
             </Button>
           </CustomLink>
           {!hideSaveButton && (
@@ -49,7 +50,7 @@ const SaveHeaderForm = ({
               disabled={loading}
               onClick={() => onSaveTypeChange?.('save')}
             >
-              {saveButtonLabel || m.save()}
+              {saveButtonLabel || 'Guardar'}
             </Button>
           )}
           {saveAndContinue && (
@@ -58,7 +59,7 @@ const SaveHeaderForm = ({
               disabled={loading}
               onClick={() => onSaveTypeChange?.('save-and-continue')}
             >
-              {m.save_and_continue()}
+              {'Guardar y Continuar'}
             </Button>
           )}
         </div>

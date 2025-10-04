@@ -11,7 +11,6 @@ import { ContactsForm } from './contacts-form';
 import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import * as m from '@/paraglide/messages';
 
 type SaveAction = 'save' | 'save-and-continue';
 
@@ -41,7 +40,7 @@ const UpdateContactForm = ({
           <Card>
             <CardHeader>
               <SaveHeaderForm
-                title={m.edit_contact()}
+                title={'Editar Contacto'}
                 backUrl={EContactRoute.list}
                 saveAndContinue={true}
                 onSaveTypeChange={setSaveAction}

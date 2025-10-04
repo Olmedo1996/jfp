@@ -5,7 +5,6 @@ import { PropsWithChildren } from 'react';
 import Providers from '../provider';
 
 import CustomBreadcrumb from '@/components/breadcrumb-app/breadcrumb';
-import { LanguageSwitcher } from '@/components/navbar/language-switcher';
 import { HeaderLoadingBar } from '@/components/progressbar/header-loading-bar';
 import { AppSidebar } from '@/components/sidebar/app-sidebar';
 import { ThemeSwitcher } from '@/components/theme-switcher';
@@ -32,7 +31,6 @@ const ProtectedLayout = async ({ children }: PropsWithChildren) => {
               </div>
               <div className="flex items-center gap-2 px-4">
                 <ThemeSwitcher className="" />
-                <LanguageSwitcher />
               </div>
             </div>
           </header>

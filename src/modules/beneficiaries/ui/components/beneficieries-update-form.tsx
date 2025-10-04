@@ -10,7 +10,6 @@ import { BeneficiaryModel } from '@/modules/beneficiaries/core/models/beneficiar
 import { AdditionalInformationForm } from '@/modules/beneficiaries/ui/components/forms/additional-information-form';
 import { ContactDetailsForm } from '@/modules/beneficiaries/ui/components/forms/contact-details-form';
 import { PersonalInformationForm } from '@/modules/beneficiaries/ui/components/forms/personal-information-form';
-import * as m from '@/paraglide/messages';
 
 interface UseUpdateBeneficiaryProps {
   initialValues: BeneficiaryModel;
@@ -36,7 +35,7 @@ export function UpdateBeneficiariesForm({
         <Card>
           <CardHeader>
             <SaveHeaderForm
-              title={m.edit_beneficiary()}
+              title={'Editar Beneficiario'}
               backUrl={EBeneficiaryRoute.list}
             />
           </CardHeader>

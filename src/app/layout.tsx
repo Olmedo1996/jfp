@@ -1,7 +1,6 @@
 import '@/styles/globals.css';
 
-import { PropsWithChildren } from 'react';
-import { LanguageProvider } from '@inlang/paraglide-next';
+// import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 
 /* import { Footer } from '@/components/footer'; */
@@ -11,7 +10,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { siteConfig } from '@/lib/constant';
 import { fonts } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
-import { languageTag } from '@/paraglide/runtime.js';
 
 export const generateMetadata = (): Metadata => ({
   metadataBase: new URL(siteConfig.url()),
@@ -30,38 +28,36 @@ export const generateMetadata = (): Metadata => ({
   // verification: {
   //   google: siteConfig.googleSiteVerificationId(),
   // },
-  openGraph: {
-    url: siteConfig.url(),
-    title: siteConfig.title(),
-    description: siteConfig.description(),
-    siteName: siteConfig.title(),
-    images: '/opengraph-image.png',
-    type: 'website',
-    locale: languageTag(),
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.title(),
-    description: siteConfig.description(),
-    images: '/opengraph-image.png',
-  },
+  // openGraph: {
+  //   url: siteConfig.url(),
+  //   title: siteConfig.title(),
+  //   description: siteConfig.description(),
+  //   siteName: siteConfig.title(),
+  //   images: '/opengraph-image.png',
+  //   type: 'website',
+  //   locale: languageTag(),
+  // },
+  // twitter: {
+  //   card: 'summary_large_image',
+  //   title: siteConfig.title(),
+  //   description: siteConfig.description(),
+  //   images: '/opengraph-image.png',
+  // },
 });
 
-const RootLayout = ({ children }: PropsWithChildren) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <LanguageProvider>
-      <html lang={languageTag()} suppressHydrationWarning>
-        <body className={cn('min-h-screen font-sans', fonts)}>
-          <TanstackProvider>
-            <ThemeProvider attribute="class">
-              {children}
-              {/* <Footer /> */}
-              <Toaster />
-            </ThemeProvider>
-          </TanstackProvider>
-        </body>
-      </html>
-    </LanguageProvider>
+    <html lang={'es'} suppressHydrationWarning>
+      <body className={cn('min-h-screen font-sans', fonts)}>
+        <TanstackProvider>
+          <ThemeProvider attribute="class">
+            {children}
+            {/* <Footer /> */}
+            <Toaster />
+          </ThemeProvider>
+        </TanstackProvider>
+      </body>
+    </html>
   );
 };
 

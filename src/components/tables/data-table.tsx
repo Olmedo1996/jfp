@@ -28,7 +28,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import * as m from '@/paraglide/messages';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -118,14 +117,14 @@ export function DataTable<TData, TValue>({
               <SelectContent side="top">
                 {[10, 20, 30, 40, 50].map((size) => (
                   <SelectItem key={size} value={`${size}`}>
-                    {size} {m.table_per_page()}
+                    {size} {'por página'}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
           <span className="text-sm text-gray-500 ">
-            {m.table_page()} {currentPage} {m.table_of()} {pageCount}
+            {'Página'} {currentPage} {'de'} {pageCount}
           </span>
         </div>
 
@@ -181,7 +180,7 @@ export function DataTable<TData, TValue>({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      {m.table_not_found()}
+                      {'No se encontraron resultados'}
                     </TableCell>
                   </TableRow>
                 )}

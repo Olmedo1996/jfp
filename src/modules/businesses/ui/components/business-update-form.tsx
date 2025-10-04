@@ -10,7 +10,7 @@ import { BusinessesForm } from './businesses-form';
 import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import * as m from '@/paraglide/messages';
+
 type SaveAction = 'save' | 'save-and-continue';
 
 interface UseUpdateBusinessProps {
@@ -39,7 +39,7 @@ const UpdateBusinessForm = ({
           <Card>
             <CardHeader>
               <SaveHeaderForm
-                title={m.edit_business()}
+                title={'Editar Comercio'}
                 backUrl={EBusinessRoute.list}
                 saveAndContinue={true}
                 onSaveTypeChange={setSaveAction}

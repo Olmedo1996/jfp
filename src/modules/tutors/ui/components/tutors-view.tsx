@@ -4,7 +4,6 @@ import { useColumnsTutors } from '../hooks/columns/use-columns-tutors';
 import { useTutorsTable } from '../hooks/table/use-tutors-table';
 
 import { ResponsiveDataView } from '@/components/data-view/responsive-data-view';
-import * as m from '@/paraglide/messages';
 
 export function TutorsView() {
   const columns = useColumnsTutors();
@@ -35,8 +34,8 @@ export function TutorsView() {
         pageSize={params.pageSize || 10}
         pageCount={Math.ceil((data?.count || 0) / (params.pageSize || 10))}
         createUrl="/tutors/new"
-        title={m.tutors_title()}
-        searchPlaceholder={m.tutors_search_placeholder()}
+        title={'Tutores'}
+        searchPlaceholder={'Buscar tutores...'}
       />
     </div>
   );

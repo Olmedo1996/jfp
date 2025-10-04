@@ -1,10 +1,10 @@
 // useCreateBusiness.ts
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { EBranchRoute } from '../../../constants';
 
-import { useRouter } from '@/lib/i18n';
 import { IUpdateBranch } from '@/modules/branches/core/interfaces/branch.interface';
 import { BranchModel } from '@/modules/branches/core/models/branch.model';
 import { branchSchema } from '@/modules/branches/core/schemas/branch.schema';

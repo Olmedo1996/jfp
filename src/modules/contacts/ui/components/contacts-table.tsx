@@ -5,7 +5,6 @@ import { useColumnsContacts } from '../hooks/columns/use-columns-contacts';
 import { useContactTable } from '../hooks/table/use-contact-table';
 
 import { GenericTable } from '@/components/tables/generic-table';
-import * as m from '@/paraglide/messages';
 
 export function ContactTable() {
   const columns = useColumnsContacts();
@@ -31,8 +30,8 @@ export function ContactTable() {
       currentPage={params.page}
       pageSize={params.pageSize}
       createUrl={EContactRoute.new}
-      title={m.contacts()}
-      searchPlaceholder={m.contacts_search_placeholder()}
+      title={'Contactos'}
+      searchPlaceholder={'Buscar contactos...'}
     />
   );
 }

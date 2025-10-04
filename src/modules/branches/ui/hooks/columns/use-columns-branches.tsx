@@ -4,32 +4,32 @@ import { ActionsCell } from '../../components/action-cell';
 
 import { Badge } from '@/components/ui/badge';
 import { BranchResult } from '@/modules/branches/core/interfaces/branch-service.interface';
-import * as m from '@/paraglide/messages';
+
 export function useColumnsBranches(): ColumnDef<BranchResult>[] {
   return [
     {
       accessorKey: 'business_data',
-      header: m.branches_header_business(),
+      header: 'Empresa',
     },
     {
       accessorKey: 'name',
-      header: m.branches_header_name(),
+      header: 'Nombre',
     },
     {
       accessorKey: 'code',
-      header: m.branches_header_code(),
+      header: 'Código',
     },
     {
       accessorKey: 'address',
-      header: m.businesses_address(),
+      header: 'Dirección',
     },
     {
       accessorKey: 'phone',
-      header: m.businesses_phone(),
+      header: 'Teléfono',
     },
     {
       accessorKey: 'is_active',
-      header: m.businesses_is_active,
+      header: 'Estado',
       cell: ({ row }) => {
         const active = row.original.is_active ? 'activo' : 'inactivo';
         const variant = row.original.is_active ? 'success' : 'destructive';

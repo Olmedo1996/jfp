@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 import { loginSchema, LoginSchemaType } from '../core/schema/login.schema';
-
-import { useRouter } from '@/lib/i18n';
 
 export const useAuth = () => {
   const router = useRouter();

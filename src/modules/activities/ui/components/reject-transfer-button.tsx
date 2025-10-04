@@ -14,7 +14,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import * as m from '@/paraglide/messages';
 
 interface RejectTransferButtonProps {
   id: number;
@@ -45,7 +44,7 @@ export function RejectTransferButton({
             setIsAlertOpen(true);
           }}
         >
-          {m.transfer_reject()}
+          {'Rechazar traslado'}
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>

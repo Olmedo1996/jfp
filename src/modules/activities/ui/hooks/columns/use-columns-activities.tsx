@@ -1,5 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import TruncatedCell from '@/components/tables/truncated-cell';
 import { Badge } from '@/components/ui/badge';
@@ -12,16 +13,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
 import { ActivityResult } from '@/modules/activities/core/interfaces/activity-service.interface';
-import * as m from '@/paraglide/messages';
 import { formatDate, parseBackendDate } from '@/utils/dateUtils';
 export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
   const router = useRouter();
+
   return [
     {
       accessorKey: 'beneficiary',
-      header: m.activities_header_beneficiary(),
+      header: 'Beneficiario',
       cell: ({ row }) => {
         const activity = row.original;
         return <TruncatedCell content={activity.beneficiary_data} />;
@@ -29,11 +29,11 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'business_data',
-      header: m.activities_header_business(),
+      header: 'Empresa',
     },
     {
       accessorKey: 'tutor',
-      header: m.activities_header_tutor(),
+      header: 'Tutor',
       cell: ({ row }) => {
         const activity = row.original;
         return <TruncatedCell content={activity.tutor_full_name} />;
@@ -41,7 +41,7 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'start_date',
-      header: m.activities_header_start_date(),
+      header: 'Fecha de inicio',
       cell: ({ row }) => {
         const activity = row.original;
         const startDate = parseBackendDate(activity.start_date || '');
@@ -52,7 +52,7 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'end_date',
-      header: m.activities_header_end_date(),
+      header: 'Fecha de fin',
       cell: ({ row }) => {
         const activity = row.original;
         const endDate = parseBackendDate(activity.end_date || '');
@@ -63,7 +63,7 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'activity_status_data',
-      header: m.activities_header_activity_status,
+      header: 'Estado',
       cell: ({ row }) => {
         // const variant = row.original.activity_status
         //   ? 'success'
@@ -89,14 +89,14 @@ export function useColumnsActivities(): ColumnDef<ActivityResult>[] {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+                <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
                 <DropdownMenuItem
                   onClick={() => router.push(`/activities/edit/${tutor.id}`)}
                 >
-                  {m.edit()}
+                  {'Editar'}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem>
+                <DropdownMenuItem>{'Eliminar'}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

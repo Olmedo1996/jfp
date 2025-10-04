@@ -9,7 +9,6 @@ import { ContactsForm } from './contacts-form';
 
 import SaveHeaderForm from '@/components/forms/save-header-form';
 import { Form } from '@/components/ui/form';
-import * as m from '@/paraglide/messages';
 
 type SaveAction = 'save' | 'save-and-continue';
 
@@ -26,7 +25,7 @@ export function ContactsCreateForm() {
       <Form {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-8">
           <SaveHeaderForm
-            title={m.new_contact()}
+            title={'Nuevo Contacto'}
             backUrl={EContactRoute.list}
             saveAndContinue={true}
             onSaveTypeChange={setSaveAction}

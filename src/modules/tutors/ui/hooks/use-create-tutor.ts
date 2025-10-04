@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
-import { useRouter } from '@/lib/i18n';
 import { TutorModel } from '@/modules/tutors//core/models/tutor.model';
 import { ETutorsRoute } from '@/modules/tutors/constants';
 import { ICreateTutor } from '@/modules/tutors/core/interfaces/tutor.interface';

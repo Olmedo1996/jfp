@@ -5,7 +5,6 @@ import { useColumnsActivities } from '../hooks/columns/use-columns-activities';
 import { useActivityTable } from '../hooks/table/use-activity-table';
 
 import { GenericTable } from '@/components/tables/generic-table';
-import * as m from '@/paraglide/messages';
 
 export function ActivityTable() {
   const columns = useColumnsActivities();
@@ -31,8 +30,8 @@ export function ActivityTable() {
       currentPage={params.page}
       pageSize={params.pageSize}
       createUrl={EActivityRoute.new}
-      title={m.activities()}
-      searchPlaceholder={m.activities_search_placeholder()}
+      title={'Actividades'}
+      searchPlaceholder={'Buscar actividad...'}
     />
   );
 }

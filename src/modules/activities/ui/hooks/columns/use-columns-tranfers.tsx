@@ -16,15 +16,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ActivityResult } from '@/modules/activities/core/interfaces/activity-service.interface';
-import * as m from '@/paraglide/messages';
 import { formatDate, parseBackendDate } from '@/utils/dateUtils';
+
 export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
   // const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   return [
     {
       accessorKey: 'beneficiary',
-      header: m.activities_header_beneficiary(),
+      header: 'Beneficiario',
       cell: ({ row }) => {
         const activity = row.original;
         return <TruncatedCell content={activity.beneficiary_data} />;
@@ -32,11 +32,11 @@ export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'business_data',
-      header: m.activities_header_business(),
+      header: 'Empresa',
     },
     {
       accessorKey: 'tutor',
-      header: m.activities_header_tutor(),
+      header: 'Tutor',
       cell: ({ row }) => {
         const activity = row.original;
         return <TruncatedCell content={activity.tutor_full_name} />;
@@ -44,7 +44,7 @@ export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'start_date',
-      header: m.activities_header_start_date(),
+      header: 'Fecha de inicio',
       cell: ({ row }) => {
         const activity = row.original;
         const startDate = parseBackendDate(activity.start_date || '');
@@ -55,7 +55,7 @@ export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'end_date',
-      header: m.activities_header_end_date(),
+      header: 'Fecha de fin',
       cell: ({ row }) => {
         const activity = row.original;
         const endDate = parseBackendDate(activity.end_date || '');
@@ -66,7 +66,7 @@ export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
     },
     {
       accessorKey: 'activity_status_data',
-      header: m.activities_header_activity_status,
+      header: 'Estado',
       cell: ({ row }) => {
         // const variant = row.original.activity_status
         //   ? 'success'
@@ -96,7 +96,7 @@ export function useColumnsTransfers(): ColumnDef<ActivityResult>[] {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+                <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <ApproveTransferButton
                   id={row.original.id}

@@ -1,4 +1,7 @@
-const { paraglide } = require('@inlang/paraglide-next/plugin');
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -11,10 +14,4 @@ const nextConfig = {
   },
 };
 
-module.exports = paraglide({
-  paraglide: {
-    project: './project.inlang',
-    outdir: './src/paraglide',
-  },
-  ...nextConfig,
-});
+module.exports = withNextIntl(nextConfig);

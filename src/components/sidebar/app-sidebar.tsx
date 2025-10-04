@@ -16,7 +16,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import * as m from '@/paraglide/messages';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // This is sample data.
@@ -128,23 +127,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // ],
     projects: [
       {
-        name: m.beneficiaries(),
+        name: 'Beneficiarios',
         url: '/beneficiaries',
         icon: Users,
         isActive: true,
       },
       {
-        name: m.tutors(),
+        name: 'Tutores',
         url: '/tutors',
         icon: Apple,
       },
       {
-        name: m.activities(),
+        name: 'Actividades',
         url: '/activities',
         icon: CalendarPlus,
       },
       {
-        name: m.transfers(),
+        name: 'Traslados',
         url: '/transfers',
         icon: Replace,
       },
@@ -172,15 +171,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: true,
         items: [
           {
-            title: m.businesses(),
+            title: 'Comercios',
             url: '/businesses',
           },
           {
-            title: m.branches(),
+            title: 'Sucursales',
             url: '/branches',
           },
           {
-            title: m.contacts(),
+            title: 'Contactos',
             url: '/contacts',
           },
         ],

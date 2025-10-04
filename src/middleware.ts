@@ -2,13 +2,9 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 import { API_AUTH_ROUTES, AUTH_ROUTES, PUBLIC_ROUTES } from '@/auth/constants';
-import { middleware as paraglide } from '@/lib/i18n';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // Aplicar middleware de i18n primero
-  const i18nResponse = paraglide(request);
 
   // Verificar si es una ruta de API de autenticación
   const isApiAuthRoute = API_AUTH_ROUTES.some((route: string) =>
@@ -16,7 +12,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isApiAuthRoute) {
-    return i18nResponse;
+    return NextResponse.next();
   }
 
   // Verificar si es una ruta pública
@@ -25,7 +21,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isPublicRoute) {
-    return i18nResponse;
+    return NextResponse.next();
   }
 
   // Verificar token de autenticación
@@ -37,21 +33,11 @@ export async function middleware(request: NextRequest) {
   if (!token) {
     const loginUrl = new URL(AUTH_ROUTES.LOGIN, request.url);
     loginUrl.searchParams.set('callbackUrl', pathname);
-
-    const response = NextResponse.redirect(loginUrl);
-
-    // Preservar headers de i18n
-    if (i18nResponse?.headers) {
-      i18nResponse.headers.forEach((value, key) => {
-        response.headers.set(key, value);
-      });
-    }
-
-    return response;
+    return NextResponse.redirect(loginUrl);
   }
 
   // Usuario autenticado, continuar con la request
-  return i18nResponse;
+  return NextResponse.next();
 }
 
 export const config = {

@@ -1,6 +1,7 @@
 // modules/beneficiaries/ui/components/actions-cell.tsx
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { BusinessResult } from '../../core/interfaces/business-service.interface';
 import { DeleteBusinessButton } from './delete-business-button';
@@ -13,8 +14,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
-import * as m from '@/paraglide/messages';
 
 interface ActionsCellProps {
   business: BusinessResult;
@@ -38,11 +37,11 @@ export function ActionsCell({ business }: ActionsCellProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+          <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => router.push(`/businesses/edit/${business.id}`)}
           >
-            {m.edit()}
+            {'Editar'}
           </DropdownMenuItem>
           {/* <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem> */}
           <DeleteBusinessButton

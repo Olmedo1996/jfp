@@ -1,5 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -10,10 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
 import { ETutorsRoute } from '@/modules/tutors/constants';
 import { TutorResult } from '@/modules/tutors/core/interfaces/tutor-service.interface';
-import * as m from '@/paraglide/messages';
+
 export function useColumnsTutors(): ColumnDef<TutorResult>[] {
   const router = useRouter();
   return [
@@ -27,7 +27,7 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {m.tutors_full_name()}
+            {'Nombre y Apellido'}
             <ArrowUpDown />
           </Button>
         );
@@ -42,7 +42,7 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            {m.tutors_dni()}
+            {'DNI/CI'}
             <ArrowUpDown />
           </Button>
         );
@@ -50,15 +50,15 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
     },
     {
       accessorKey: 'phone',
-      header: m.tutors_phone(),
+      header: 'Teléfono',
     },
     {
       accessorKey: 'user.email',
-      header: m.tutors_table_email(),
+      header: 'Email',
     },
     {
       accessorKey: 'specialization',
-      header: m.tutors_specialization(),
+      header: 'Especialización',
     },
     {
       id: 'actions',
@@ -76,28 +76,28 @@ export function useColumnsTutors(): ColumnDef<TutorResult>[] {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+                <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
                 <DropdownMenuItem
                   onClick={() =>
                     router.push(`${ETutorsRoute.edit}/${tutor.id}`)
                   }
                 >
-                  {m.edit()}
+                  {'Editar'}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() =>
                     navigator.clipboard.writeText(JSON.stringify(tutor))
                   }
                 >
-                  {m.tutors_copy_data()}
+                  {'Copiar datos del tutor'}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.tutors_view_detail()}</DropdownMenuItem>
+                <DropdownMenuItem>{'Ver detalles del tutor'}</DropdownMenuItem>
                 <DropdownMenuItem>
-                  {m.tutors_view_beneficiary_assignment()}
+                  {'Ver beneficiarios asignados'}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>{m.delete_data()}</DropdownMenuItem>
+                <DropdownMenuItem>{'Eliminar'}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

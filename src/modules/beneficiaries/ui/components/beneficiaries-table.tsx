@@ -5,7 +5,6 @@ import { EBeneficiaryRoute } from '../../constants';
 import { GenericTable } from '@/components/tables/generic-table';
 import { useColumnsBeneficiaries } from '@/modules/beneficiaries/ui/hooks/columns/use-columns-beneficiares';
 import { useBeneficiariesTable } from '@/modules/beneficiaries/ui/hooks/table/use-beneficiaries-table';
-import * as m from '@/paraglide/messages';
 
 const BeneficiariesTable = () => {
   const columns = useColumnsBeneficiaries();
@@ -33,8 +32,8 @@ const BeneficiariesTable = () => {
       currentPage={params.page}
       pageSize={params.pageSize}
       createUrl={EBeneficiaryRoute.new}
-      title={m.beneficiaries()}
-      searchPlaceholder={m.tutors_search_placeholder()}
+      title={'Beneficiarios'}
+      searchPlaceholder={'Buscar beneficiarios...'}
     />
   );
 };

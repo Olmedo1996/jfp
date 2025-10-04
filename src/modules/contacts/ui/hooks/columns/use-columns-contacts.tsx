@@ -4,40 +4,40 @@ import { ActionsCell } from '../../components/action-cell';
 
 import { Badge } from '@/components/ui/badge';
 import { ContactResult } from '@/modules/contacts/core/interfaces/contact-service.interface';
-import * as m from '@/paraglide/messages';
+
 export function useColumnsContacts(): ColumnDef<ContactResult>[] {
   return [
     {
       accessorKey: 'business_data',
-      header: m.contacts_header_business(),
+      header: 'Empresa',
     },
     {
       accessorKey: 'branch_data',
-      header: m.contacts_header_branch(),
+      header: 'Sucursal',
     },
     {
       accessorKey: 'first_name',
-      header: m.contacts_header_first_name(),
+      header: 'Nombre',
     },
     {
       accessorKey: 'last_name',
-      header: m.contacts_header_last_name(),
+      header: 'Apellido',
     },
     {
       accessorKey: 'job_title',
-      header: m.contacts_header_job_title(),
+      header: 'Cargo',
     },
     {
       accessorKey: 'email',
-      header: m.contacts_header_email(),
+      header: 'Email',
     },
     {
       accessorKey: 'phone',
-      header: m.businesses_phone(),
+      header: 'Teléfono',
     },
     {
       accessorKey: 'is_primary_contact',
-      header: m.contacts_header_primary_contact,
+      header: 'Contacto Principal',
       cell: ({ row }) => {
         const active = row.original.is_primary_contact ? 'activo' : 'inactivo';
         const variant = row.original.is_primary_contact

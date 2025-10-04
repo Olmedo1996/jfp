@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
+
+import { CustomLink } from '../custom-link/custom-link';
 
 import {
   Breadcrumb,
@@ -10,7 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Link, usePathname } from '@/lib/i18n';
 
 const CustomBreadcrumb = () => {
   const pathname = usePathname();
@@ -56,9 +58,9 @@ const CustomBreadcrumb = () => {
                 <BreadcrumbItem>
                   {isClickable ? (
                     <BreadcrumbLink asChild={true}>
-                      <Link href={href}>
+                      <CustomLink href={href}>
                         {mapPathSegment[segment] || segment}
-                      </Link>
+                      </CustomLink>
                     </BreadcrumbLink>
                   ) : (
                     <span>{mapPathSegment[segment] || segment}</span>

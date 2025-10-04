@@ -14,8 +14,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import * as m from '@/paraglide/messages';
-
 interface DeleteBranchButtonProps {
   id: number;
   fullName: string;
@@ -45,7 +43,7 @@ export function DeleteBranchButton({
             setIsAlertOpen(true);
           }}
         >
-          {m.delete_data()}
+          {'Eliminar'}
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>

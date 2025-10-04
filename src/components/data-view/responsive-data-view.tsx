@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { DataCards } from '@/components/data-view/data-cards';
 import { DataTable } from '@/components/tables/data-table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { usePathname, useRouter } from '@/lib/i18n';
 import { DataViewProps } from '@/types/data-view.types';
 
 export function ResponsiveDataView<TData, TValue>({

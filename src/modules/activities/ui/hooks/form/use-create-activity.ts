@@ -1,13 +1,13 @@
 // useCreateBusiness.ts
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { EActivityRoute } from '../../../constants';
 import { ActivityModel } from '../../../core/models/activity.model';
 import { activitySchema } from '../../../core/schemas/activity.schema';
 import { activityService } from '../../../services/activity.service';
 
-import { useRouter } from '@/lib/i18n';
 import { TSaveAction } from '@/types/form.types';
 import { showSuccessToast } from '@/utils/toast-messages';
 

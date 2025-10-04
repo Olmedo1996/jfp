@@ -1,6 +1,7 @@
 // modules/beneficiaries/ui/components/actions-cell.tsx
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { BranchResult } from '../../core/interfaces/branch-service.interface';
 import { DeleteBranchButton } from './delete-branch-button';
@@ -13,8 +14,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useRouter } from '@/lib/i18n';
-import * as m from '@/paraglide/messages';
 
 interface ActionsCellProps {
   branch: BranchResult;
@@ -38,11 +37,11 @@ export function ActionsCell({ branch }: ActionsCellProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{m.actions()}</DropdownMenuLabel>
+          <DropdownMenuLabel>{'Acciones'}</DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() => router.push(`/branches/edit/${branch.id}`)}
           >
-            {m.edit()}
+            {'Editar'}
           </DropdownMenuItem>
           <DeleteBranchButton
             id={branch.id}

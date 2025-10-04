@@ -14,7 +14,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import * as m from '@/paraglide/messages';
 
 interface DeleteContactButtonProps {
   id: number;
@@ -45,7 +44,7 @@ export function DeleteContactButton({
             setIsAlertOpen(true);
           }}
         >
-          {m.delete_data()}
+          {'Eliminar'}
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>

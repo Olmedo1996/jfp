@@ -1,8 +1,8 @@
 // useCreateBusiness.ts
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
-import { useRouter } from '@/lib/i18n';
 import { EContactRoute } from '@/modules/contacts/constants';
 import { IUpdateContact } from '@/modules/contacts/core/interfaces/contact.interface';
 import { ContactModel } from '@/modules/contacts/core/models/contact.model';

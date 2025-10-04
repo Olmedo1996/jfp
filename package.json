@@ -16,8 +16,7 @@
     "test:watch": "jest --watchAll",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "prepare": "husky",
-    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide"
+    "prepare": "husky"
   },
   "husky": {
     "hooks": {
@@ -32,7 +31,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
-    "@inlang/paraglide-next": "0.6.0",
     "@radix-ui/react-alert-dialog": "^1.1.4",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-collapsible": "^1.1.1",
@@ -65,6 +63,7 @@
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
     "next-auth": "^4.24.8",
+    "next-intl": "^4.3.9",
     "next-themes": "^0.3.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
@@ -79,7 +78,6 @@
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
-    "@inlang/paraglide-js": "1.11.3",
     "@playwright/test": "^1.48.1",
     "@tanstack/eslint-plugin-query": "^5.62.16",
     "@tanstack/react-query-devtools": "^5.66.0",

@@ -4,7 +4,6 @@ import { useColumnsTransfers } from '../hooks/columns/use-columns-tranfers';
 import { useTransferTable } from '../hooks/table/use-transfer-table';
 
 import { GenericTable } from '@/components/tables/generic-table';
-import * as m from '@/paraglide/messages';
 
 export function TransferTable() {
   const columns = useColumnsTransfers();
@@ -29,8 +28,8 @@ export function TransferTable() {
       onPageSizeChange={handlePageSizeChange}
       currentPage={params.page}
       pageSize={params.pageSize}
-      title={m.transfers()}
-      searchPlaceholder={m.activities_search_placeholder()}
+      title={'Traslados'}
+      searchPlaceholder={'Buscar traslado...'}
     />
   );
 }

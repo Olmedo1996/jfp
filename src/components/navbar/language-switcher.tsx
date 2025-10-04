@@ -1,24 +1,24 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Locale, setDefaultOptions } from 'date-fns';
-import { enUS, es, pt } from 'date-fns/locale';
+/* import { Locale } from 'date-fns';
+import { enUS, es, pt } from 'date-fns/locale'; */
 
-import { Button } from '@/components/ui/button';
+import { ComponentProps } from 'react';
+import Link from 'next/link';
+import { useLocale } from 'next-intl';
+
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { usePathname, useRouter } from '@/lib/i18n';
-import {
-  AvailableLanguageTag,
-  availableLanguageTags,
-  languageTag,
-} from '@/paraglide/runtime';
+import { cn } from '@/lib/utils';
 
-const LanguageLabel: Record<AvailableLanguageTag, string> = {
+const availableLanguageTags = ['es', 'en', 'br'];
+
+/* const LanguageLabel: Record<AvailableLanguageTag, Locale> = {
   en: 'English',
   es: 'Español',
   br: 'Português',
@@ -29,34 +29,33 @@ const DateLocales: Record<AvailableLanguageTag, Locale> = {
   en: enUS,
   es: es,
   br: pt,
+}; */
+
+type LangSwitcherProps = {
+  className?: ComponentProps<typeof Link>['className'];
 };
-
-export const LanguageSwitcher = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const currentLanguage = languageTag();
-
-  // Efecto para actualizar el locale de date-fns cuando cambia el idioma
-  useEffect(() => {
-    setDefaultOptions({ locale: DateLocales[currentLanguage] });
-  }, [currentLanguage]);
+export const LanguageSwitcher = ({ className }: LangSwitcherProps) => {
+  const locale = useLocale();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon">
-          {currentLanguage.toUpperCase()}
+          {locale.toUpperCase()}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {availableLanguageTags.map((locale) => (
-          <DropdownMenuItem
-            key={locale}
-            onClick={() => {
-              router.push(pathname, { locale });
-            }}
-          >
-            {LanguageLabel[locale]}
+          <DropdownMenuItem key={locale}>
+            <Link
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'icon' }),
+                className
+              )}
+              href={`/${locale}`}
+            >
+              {locale.toUpperCase()}
+            </Link>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

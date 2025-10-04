@@ -9,7 +9,6 @@ import { AdditionalInformationForm } from '@/modules/beneficiaries/ui/components
 import { ContactDetailsForm } from '@/modules/beneficiaries/ui/components/forms/contact-details-form';
 import { PersonalInformationForm } from '@/modules/beneficiaries/ui/components/forms/personal-information-form';
 import useCreateBeneficiary from '@/modules/beneficiaries/ui/hooks/form/use-create-beneficiaries';
-import * as m from '@/paraglide/messages';
 
 export function CreateBeneficiariesForm() {
   const { methods, handleSubmit } = useCreateBeneficiary();
@@ -24,7 +23,7 @@ export function CreateBeneficiariesForm() {
         <Card>
           <CardHeader>
             <SaveHeaderForm
-              title={m.new_beneficiary()}
+              title={'Nuevo beneficiario'}
               backUrl={EBeneficiaryRoute.list}
             />
           </CardHeader>
