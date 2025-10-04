@@ -1,5 +1,6 @@
 import type { AxiosError } from 'axios';
 import type { InternalAxiosRequestConfig } from 'axios';
+import { signOut } from 'next-auth/react';
 
 import { getApiToken, getApiTokenClient } from './token-helper';
 
@@ -101,15 +102,28 @@ export const internalApiErrorResponseInterceptor = (error: AxiosError) => {
  * Interceptor de manejo de errores para API externa
  * Maneja errores específicos del backend externo
  */
-export const externalApiErrorResponseInterceptor = (error: AxiosError) => {
+export const externalApiErrorResponseInterceptor = async (
+  error: AxiosError
+) => {
   if (error.response) {
     const status = error.response.status;
 
     switch (status) {
       case 401:
-        console.error('Authentication failed - token may be expired');
+        console.error('Authentication failed - token expired or invalid');
         if (isClientSide()) {
-          window.location.href = `${AUTH_ROUTES.LOGIN}?expired=true`;
+          // Forzar logout y redirección al login
+          console.log('Forcing logout due to 401 error...');
+          try {
+            await signOut({
+              callbackUrl: `${AUTH_ROUTES.LOGIN}?expired=true`,
+              redirect: true,
+            });
+          } catch (signOutError) {
+            console.error('Error during forced logout:', signOutError);
+            // Fallback: redirección manual
+            window.location.href = `${AUTH_ROUTES.LOGIN}?expired=true`;
+          }
         }
         break;
 

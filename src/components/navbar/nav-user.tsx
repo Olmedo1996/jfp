@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -46,6 +46,29 @@ export function NavUser({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { data: session } = useSession();
 
+  // Manejar errores de sesión automáticamente
+  useEffect(() => {
+    if (session?.error) {
+      console.log('Session error detected:', session.error);
+
+      // Errores que requieren logout inmediato
+      const criticalErrors = [
+        'RefreshAccessTokenError',
+        'MaxRefreshAttemptsReached',
+        'TokenExpiredTooLong',
+        'TokenDecodingError',
+      ];
+
+      if (criticalErrors.includes(session.error)) {
+        console.log('Critical session error, forcing logout...');
+        signOut({
+          callbackUrl: '/login?expired=true',
+          redirect: true,
+        });
+      }
+    }
+  }, [session?.error]);
+
   const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -73,6 +96,33 @@ export function NavUser({
         ?.toUpperCase() || 'U'
     );
   };
+
+  // Si hay error crítico, mostrar estado de carga
+  if (
+    session?.error &&
+    [
+      'RefreshAccessTokenError',
+      'MaxRefreshAttemptsReached',
+      'TokenExpiredTooLong',
+    ].includes(session.error)
+  ) {
+    return (
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton size="lg" disabled>
+            <div className="flex items-center gap-2">
+              <div className="bg-muted size-8 animate-pulse rounded-lg" />
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="text-muted-foreground">
+                  Cerrando sesión...
+                </span>
+              </div>
+            </div>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    );
+  }
 
   return (
     <SidebarMenu>

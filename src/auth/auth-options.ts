@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import { NextAuthOptions } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -6,7 +7,6 @@ import { AUTH_ROUTES, TOKEN_CONFIG } from './constants';
 
 import { authService } from '@/modules/auth/services/auth.service';
 
-// Función para refrescar el token de acceso
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
   try {
     if (!token.refreshToken) {
@@ -15,18 +15,15 @@ const refreshAccessToken = async (token: JWT): Promise<JWT> => {
 
     const refreshed = await authService.refresh(token.refreshToken);
 
-    if (!refreshed.access) {
-      throw new Error('No access token received');
-    }
-
     return {
       ...token,
       accessToken: refreshed.access,
-      refreshToken: refreshed.refresh || token.refreshToken,
+      refreshToken: refreshed.refresh ?? token.refreshToken,
       error: undefined,
     };
   } catch (error) {
     console.error('Error refreshing token:', error);
+
     return {
       ...token,
       error: 'RefreshAccessTokenError',
@@ -44,7 +41,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
-          throw new Error('Missing credentials');
+          return null;
         }
 
         try {
@@ -54,7 +51,7 @@ export const authOptions: NextAuthOptions = {
           );
 
           if (!data?.access || !data?.tutor) {
-            throw new Error('Invalid response from server');
+            return null;
           }
 
           return {
@@ -68,40 +65,34 @@ export const authOptions: NextAuthOptions = {
           };
         } catch (error) {
           console.error('Login error:', error);
-          throw new Error('Authentication failed');
+          return null;
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      // Inicio de sesión inicial
-      if (user) {
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        const decodedToken = jwtDecode(user?.accessToken ?? '');
         return {
           ...token,
           accessToken: user.accessToken,
           refreshToken: user.refreshToken,
+          accessTokenExpires: (decodedToken?.exp || 0) * 1000,
+          user: user,
         };
       }
 
-      // Verificar si el token está próximo a expirar
-      const now = Date.now();
-      const tokenIssuedAt = token.iat ? Number(token.iat) * 1000 : now;
-      const tokenAge = now - tokenIssuedAt;
-      const expirationTime = Number(TOKEN_CONFIG.EXPIRATION_TIME);
-      const refreshThreshold = Number(TOKEN_CONFIG.REFRESH_THRESHOLD);
-
-      // Si el token está próximo a expirar, intentar refrescar
-      if (tokenAge > expirationTime - refreshThreshold) {
-        return refreshAccessToken(token);
+      if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
+        return token;
       }
 
-      return token;
+      return refreshAccessToken(token);
     },
+
     async session({ session, token }) {
       if (token.error) {
         session.error = token.error;
-        return session;
       }
 
       session.user = {
@@ -121,5 +112,4 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: TOKEN_CONFIG.MAX_AGE,
   },
-  debug: process.env.NODE_ENV === 'development',
 };

@@ -17,7 +17,7 @@ export const TOKEN_CONFIG = {
   // Tiempo de expiración del token JWT (24 horas)
   MAX_AGE: 24 * 60 * 60, // 24 horas en segundos
   // Umbral para refrescar el token (5 minutos antes de expirar)
-  REFRESH_THRESHOLD: 5 * 60 * 1000, // 5 minutos en milisegundos
+  REFRESH_THRESHOLD: 1 * 60 * 1000, // 5 minutos en milisegundos
   // Tiempo de expiración estimado del token (24 horas)
   EXPIRATION_TIME: 24 * 60 * 60 * 1000, // 24 horas en milisegundos
 } as const;
